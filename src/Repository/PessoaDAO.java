@@ -1,14 +1,14 @@
 package Repository;
-import Model.Pessoa;
+import Model.UsuarioCliente;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PessoaDAO {
-    static List<Pessoa> pessoas = new ArrayList<>();
-    public static void salvar(Pessoa pessoa) {
+    static List<UsuarioCliente> pessoas = new ArrayList<>();
+    public static void salvar(UsuarioCliente pessoa) {
         pessoas.add(pessoa);
     }
-    public static List<Pessoa> buscaTodos() {
+    public static List<UsuarioCliente> buscaTodos() {
             return pessoas;
         }
 }

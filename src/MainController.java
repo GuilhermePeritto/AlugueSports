@@ -1,4 +1,4 @@
-import Model.Pessoa;
+import Model.UsuarioCliente;
 import Repository.PessoaDAO;
 
 import javax.swing.*;
@@ -52,7 +52,7 @@ public class MainController {
         String telefone = JOptionPane.showInputDialog(null, "Digite o telefone do cliente");
         String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do cliente");
         String rg = JOptionPane.showInputDialog(null, "Digite o rg do cliente");
-        Pessoa pessoa = new Pessoa(codigo,nome, telefone, cpf, rg);
+        UsuarioCliente pessoa = new UsuarioCliente(codigo,nome, telefone, cpf, rg);
         PessoaDAO.salvar(pessoa);
         chamaMenuPrincipal();
     }
