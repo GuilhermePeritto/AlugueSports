@@ -22,7 +22,15 @@ public class Pais {
     }
 
     public void setNomePais(String nomePais) {
-        NomePais = nomePais;
+        NomePais = nomePais ;
+    }
+
+    @Override
+    public String toString() {
+        return "Pais{" +
+                "Codigo=" + Codigo +
+                ", NomePais='" + NomePais + '\'' +
+                '}';
     }
 }
 
