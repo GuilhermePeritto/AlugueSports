@@ -1,7 +1,10 @@
 import Model.UsuarioCliente;
-import Repository.PessoaDAO;
-
+import Repository.UsuarioClienteDAO;
 import javax.swing.*;
+import java.awt.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class MainController {
     public static void chamaMenuPrincipal() {
@@ -17,7 +20,7 @@ public class MainController {
 
                 break;
             case 2: //Relatorios
-                JOptionPane.showMessageDialog(null, PessoaDAO.buscaTodos());
+                JOptionPane.showMessageDialog(null, UsuarioClienteDAO.buscaTodos());
                 chamaMenuPrincipal();
                 break;
             case 3: //SAIR
@@ -27,7 +30,7 @@ public class MainController {
     }
 
     private static void chamaMenuCadastros() {
-        String[] opcoesMenuCadastro = {"Pessoa", "*******", "******", "Voltar"};
+        String[] opcoesMenuCadastro = {"Usuario/Cliente", "*******", "******", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Cadastros",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuCadastro, opcoesMenuCadastro[0]);
@@ -52,8 +55,12 @@ public class MainController {
         String telefone = JOptionPane.showInputDialog(null, "Digite o telefone do cliente");
         String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do cliente");
         String rg = JOptionPane.showInputDialog(null, "Digite o rg do cliente");
-        UsuarioCliente pessoa = new UsuarioCliente(codigo,nome, telefone, cpf, rg);
-        PessoaDAO.salvar(pessoa);
+        JCheckBox jCheckBox = new JCheckBox("Cliente");
+        int result = JOptionPane.showOptionDialog(null, jCheckBox, "É cliente?",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
+        Boolean cliente = jCheckBox.isSelected();
+        UsuarioCliente pessoa = new UsuarioCliente(codigo,nome, telefone, cpf, rg, cliente);
+        UsuarioClienteDAO.salvar(pessoa);
         chamaMenuPrincipal();
     }
 }

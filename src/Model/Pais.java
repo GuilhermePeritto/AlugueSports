@@ -1,8 +1,8 @@
 package Model;
 
 public class Pais {
-    Integer Codigo;
-    String NomePais;
+    private Integer Codigo;
+    private String NomePais;
 
     public Pais(Integer codigo, String nomePais) {
         Codigo = codigo;
