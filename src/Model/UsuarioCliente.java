@@ -1,18 +1,21 @@
 package Model;
 
-public class Pessoa {
+public class UsuarioCliente {
     private Integer codigo;
     private String nome;
     private String telefone;
     private String cpf;
     private String rg;
 
-    public Pessoa(Integer codigo, String nome, String telefone, String cpf, String rg) {
+    private Boolean cliente;
+
+    public UsuarioCliente(Integer codigo, String nome, String telefone, String cpf, String rg) {
         this.codigo = codigo;
         this.nome = nome;
         this.telefone = telefone;
         this.cpf = cpf;
         this.rg = rg;
+        this.cliente = cliente;
     }
 
     public Integer getCodigo() {
@@ -55,14 +58,23 @@ public class Pessoa {
         this.rg = rg;
     }
 
+    public Boolean getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Boolean cliente) {
+        this.cliente = cliente;
+    }
+
     @Override
     public String toString() {
-        return "Pessoa{" +
+        return "UsuarioCliente{" +
                 "codigo=" + codigo +
                 ", nome='" + nome + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", rg='" + rg + '\'' +
+                ", cliente=" + cliente +
                 '}';
     }
 }
