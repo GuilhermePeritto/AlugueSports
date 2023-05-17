@@ -6,10 +6,9 @@ public class UsuarioCliente {
     private String telefone;
     private String cpf;
     private String rg;
-
     private Boolean cliente;
 
-    public UsuarioCliente(Integer codigo, String nome, String telefone, String cpf, String rg) {
+    public UsuarioCliente(Integer codigo, String nome, String telefone, String cpf, String rg, Boolean cliente) {
         this.codigo = codigo;
         this.nome = nome;
         this.telefone = telefone;
