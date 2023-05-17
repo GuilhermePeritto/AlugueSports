@@ -27,7 +27,7 @@ public class MainController {
     }
 
     private static void chamaMenuCadastros() {
-        String[] opcoesMenuCadastro = {"Pessoa", "*******", "******", "Voltar"};
+        String[] opcoesMenuCadastro = {"Pessoa", "Material", "Test-Josiel", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Cadastros",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuCadastro, opcoesMenuCadastro[0]);
