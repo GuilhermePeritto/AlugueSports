@@ -27,7 +27,7 @@ public class MainController {
     }
 
     private static void chamaMenuCadastros() {
-        String[] opcoesMenuCadastro = {"Pessoa", "*******", "******", "Voltar"};
+            String[] opcoesMenuCadastro = {"Pessoa", "Usuário - Cliente", "******", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
                 "Menu Cadastros",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenuCadastro, opcoesMenuCadastro[0]);
@@ -56,4 +56,6 @@ public class MainController {
         PessoaDAO.salvar(pessoa);
         chamaMenuPrincipal();
     }
+
+
 }
