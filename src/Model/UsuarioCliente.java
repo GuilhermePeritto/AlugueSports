@@ -1,4 +1,4 @@
-package Repository;
+package Model;
 
 import Model.Pessoa;
 
