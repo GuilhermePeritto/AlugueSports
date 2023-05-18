@@ -1,20 +1,20 @@
 package Model;
 
 public class Esporte {
-    private Integer codigo;
+    private Integer codigoEsporte;
     private String nomeEsporte;
 
     public Esporte(Integer codigo, String nomeEsporte) {
-        this.codigo = codigo;
+        this.codigoEsporte = codigo;
         this.nomeEsporte = nomeEsporte;
     }
 
     public Integer getCodigo() {
-        return codigo;
+        return codigoEsporte;
     }
 
     public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+        this.codigoEsporte = codigo;
     }
 
     public String getNomeEsporte() {
@@ -28,7 +28,7 @@ public class Esporte {
     @Override
     public String toString() {
         return "Esporte{" +
-                "codigo=" + codigo +
+                "codigo=" + codigoEsporte +
                 ", nomeEsporte='" + nomeEsporte + '\'' +
                 '}';
     }
