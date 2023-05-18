@@ -1,7 +1,7 @@
 package Model;
 
 public class UsuarioCliente {
-    private Integer codigo;
+    private Integer codigoUsuarioCliente;
     private String nome;
     private String telefone;
     private String cpf;
@@ -9,7 +9,7 @@ public class UsuarioCliente {
     private Boolean cliente;
 
     public UsuarioCliente(Integer codigo, String nome, String telefone, String cpf, String rg, Boolean cliente) {
-        this.codigo = codigo;
+        this.codigoUsuarioCliente = codigo;
         this.nome = nome;
         this.telefone = telefone;
         this.cpf = cpf;
@@ -18,11 +18,11 @@ public class UsuarioCliente {
     }
 
     public Integer getCodigo() {
-        return codigo;
+        return codigoUsuarioCliente;
     }
 
     public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+        this.codigoUsuarioCliente = codigo;
     }
 
     public String getNome() {
@@ -68,7 +68,7 @@ public class UsuarioCliente {
     @Override
     public String toString() {
         return "UsuarioCliente{" +
-                "codigo=" + codigo +
+                "codigo=" + codigoUsuarioCliente +
                 ", nome='" + nome + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", cpf='" + cpf + '\'' +

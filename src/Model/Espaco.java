@@ -1,22 +1,22 @@
 package Model;
 
 public class Espaco {
-    private Integer codigo;
+    private Integer codigoEspaco;
     private String nomeEspaco;
     private Esporte esporte;
 
     public Espaco(Integer codigo, String nomeEspaco, Esporte esporte) {
-        this.codigo = codigo;
+        this.codigoEspaco = codigo;
         this.nomeEspaco = nomeEspaco;
         this.esporte = esporte;
     }
 
     public Integer getCodigo() {
-        return codigo;
+        return codigoEspaco;
     }
 
     public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+        this.codigoEspaco = codigo;
     }
 
     public String getNomeEspaco() {
@@ -38,7 +38,7 @@ public class Espaco {
     @Override
     public String toString() {
         return "Espaco{" +
-                "codigo=" + codigo +
+                "codigo=" + codigoEspaco +
                 ", nomeEspaco='" + nomeEspaco + '\'' +
                 ", esporte=" + esporte +
                 '}';

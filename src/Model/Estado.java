@@ -1,20 +1,20 @@
 package Model;
 
 public class Estado {
-    private Integer codigo;
+    private Integer codigoEstado;
     private String nomeEstado;
     private char Sigla;
     private Pais pais;
 
     public Estado(Integer codigo, String nomeEstado, char sigla, Pais pais) {
-        this.codigo = codigo;
+        this.codigoEstado = codigo;
         this.nomeEstado = nomeEstado;
         Sigla = sigla;
         this.pais = pais;
     }
 
     public Integer getCodigo() {
-        return codigo;
+        return codigoEstado;
     }
 
     public String getNomeEstado() {
@@ -30,7 +30,7 @@ public class Estado {
     }
 
     public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+        this.codigoEstado = codigo;
     }
 
     public void setNomeEstado(String nomeEstado) {
@@ -48,7 +48,7 @@ public class Estado {
     @Override
     public String toString() {
         return "Estado{" +
-                "codigo=" + codigo +
+                "codigo=" + codigoEstado +
                 ", nomeEstado='" + nomeEstado + '\'' +
                 ", Sigla=" + Sigla +
                 ", pais=" + pais +
