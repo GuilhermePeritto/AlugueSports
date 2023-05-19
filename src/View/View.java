@@ -33,10 +33,10 @@ public class View {
 
         switch (menuCadastro) {
             case 0: //Usuario
-                ViewController.cadastroDePessoas();
+                ViewController.cadastroUsuarioCliente();
                 break;
             case 1: //Esporte
-                ViewController.cadastroDeEsporte();
+                ViewController.cadastroEsporte();
                 break;
             case 2: //******
                 break;
