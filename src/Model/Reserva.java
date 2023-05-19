@@ -8,14 +8,15 @@ public class Reserva {
     private LocalDate dataSolicitacao;
     private LocalDate dataAlocacao;
     private UsuarioCliente usuarioCliente;
-    //private StatusReserva statusReserva; objeto será importado da Classe Enum
+    private EnumStatusReserva enumStatusReserva;
 
 
-    public Reserva(Integer codigo, LocalDate dataSolicitacao, LocalDate dataAlocacao, UsuarioCliente usuarioCliente) {
+    public Reserva(Integer codigo, LocalDate dataSolicitacao, LocalDate dataAlocacao, UsuarioCliente usuarioCliente, EnumStatusReserva enumStatusReserva) {
         this.codigo = codigo;
         this.dataSolicitacao = dataSolicitacao;
         this.dataAlocacao = dataAlocacao;
         this.usuarioCliente = usuarioCliente;
+        this.enumStatusReserva = enumStatusReserva;
     }
 
     public Integer getCodigo() {
@@ -50,6 +51,10 @@ public class Reserva {
         this.usuarioCliente = usuarioCliente;
     }
 
+    public EnumStatusReserva getEnumStatusReserva() {
+        return enumStatusReserva;
+    }
+
     @Override
     public String toString() {
         return "Reserva{" +
@@ -57,6 +62,7 @@ public class Reserva {
                 ", dataSolicitacao=" + dataSolicitacao +
                 ", dataAlocacao=" + dataAlocacao +
                 ", usuarioCliente=" + usuarioCliente +
+                ", enumStatusReserva=" + enumStatusReserva +
                 '}';
     }
 }
