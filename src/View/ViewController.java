@@ -1,17 +1,17 @@
 package View;
 
 import Model.Esporte;
+import Model.Pais;
 import Model.UsuarioCliente;
 import Repository.EsporteDAO;
+import Repository.PaisDAO;
 import Repository.UsuarioClienteDAO;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ViewController extends View {
 
-    public static void cadastroDePessoas() {
+    public static void cadastroUsuarioCliente() {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo"));
         String nome = JOptionPane.showInputDialog(null, "Digite o nome");
         String telefone = JOptionPane.showInputDialog(null, "Digite o telefone");
@@ -26,11 +26,19 @@ public class ViewController extends View {
         chamaMenuPrincipal();
     }
 
-    public static void cadastroDeEsporte() {
+    public static void cadastroEsporte() {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do esporte"));
         String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
         Esporte esporte = new Esporte(codigo, nomeEsporte);
         EsporteDAO.salvar(esporte);
+        chamaMenuPrincipal();
+    }
+
+    public static void cadstroPais(){
+        Integer codigoPais = Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o código do país"));
+        String nomePais = JOptionPane.showInputDialog(null, "Digite o nome do país");
+        Pais pais = new Pais(codigoPais, nomePais);
+        PaisDAO.salvar(pais);
         chamaMenuPrincipal();
     }
 
@@ -42,10 +50,10 @@ public class ViewController extends View {
 
         switch ((String) selection) {
             case "Cliente":
-                cadastroDePessoas();
+                cadastroUsuarioCliente();
                 break;
             case "Esporte":
-                cadastroDeEsporte();
+                cadastroEsporte();
                 break;
             default:
                 chamaMenuPrincipal();
