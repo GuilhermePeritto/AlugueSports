@@ -30,7 +30,6 @@ public class MainController {
                 break;
         }
     }
-
     private static void chamaMenuCadastros() {
         String[] opcoesMenuCadastro = {"Usuario/Cliente", "Esporte", "******", "Voltar"};
         int menuCadastro = JOptionPane.showOptionDialog(null, "Escolha uma opção:",
@@ -51,7 +50,6 @@ public class MainController {
                 break;
         }
     }
-
     private static void cadastroDePessoas() {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo"));
         String nome = JOptionPane.showInputDialog(null, "Digite o nome");
@@ -66,7 +64,6 @@ public class MainController {
         UsuarioClienteDAO.salvar(pessoa);
         chamaMenuPrincipal();
     }
-
     private static void cadastroDeEsporte() {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do esporte"));
         String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
@@ -74,7 +71,4 @@ public class MainController {
         EsporteDAO.salvar(esporte);
         chamaMenuPrincipal();
     }
-
-
-
 }
