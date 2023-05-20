@@ -1,9 +1,11 @@
 package View;
 
 import Model.Esporte;
+import Model.Material;
 import Model.Pais;
 import Model.UsuarioCliente;
 import Repository.EsporteDAO;
+import Repository.MaterialDAO;
 import Repository.PaisDAO;
 import Repository.UsuarioClienteDAO;
 
@@ -34,7 +36,7 @@ public class ViewController extends View {
         chamaMenuPrincipal();
     }
 
-    public static void cadstroPais(){
+    public static void cadastroPais(){
         Integer codigoPais = Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o código do país"));
         String nomePais = JOptionPane.showInputDialog(null, "Digite o nome do país");
         Pais pais = new Pais(codigoPais, nomePais);
@@ -43,7 +45,7 @@ public class ViewController extends View {
     }
 
     public static void listBoxCadastros() {
-        Object[] selectionValues = {"Cliente", "Esporte"};
+        Object[] selectionValues = {"Cliente", "Esporte", "Material"};
         String initialSelection = (String) selectionValues[0];
         Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
                 "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -55,11 +57,20 @@ public class ViewController extends View {
             case "Esporte":
                 cadastroEsporte();
                 break;
+            case "Material":
+                cadastroMaterial();
+                break;
             default:
                 chamaMenuPrincipal();
         }
+    }
 
-
+    public static void cadastroMaterial(){
+        Integer codigoMaterial = Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o código do material"));
+        String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
+        Material material = new Material(codigoMaterial, nomeMaterial);
+        MaterialDAO.salvar(material);
+        chamaMenuPrincipal();
     }
 
 
