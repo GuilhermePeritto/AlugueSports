@@ -3,10 +3,10 @@ package Model;
 public class Estado {
     private Integer codigoEstado;
     private String nomeEstado;
-    private char Sigla;
+    private String Sigla;
     private Pais pais;
 
-    public Estado(Integer codigo, String nomeEstado, char sigla, Pais pais) {
+    public Estado(Integer codigo, String nomeEstado, String sigla, Pais pais) {
         this.codigoEstado = codigo;
         this.nomeEstado = nomeEstado;
         Sigla = sigla;
@@ -21,7 +21,7 @@ public class Estado {
         return nomeEstado;
     }
 
-    public char getSigla() {
+    public String getSigla() {
         return Sigla;
     }
 
@@ -37,7 +37,7 @@ public class Estado {
         this.nomeEstado = nomeEstado;
     }
 
-    public void setSigla(char sigla) {
+    public void setSigla(String sigla) {
         Sigla = sigla;
     }
 

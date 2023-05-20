@@ -5,10 +5,8 @@ import Repository.*;
 
 import javax.swing.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java;
 
 public class ViewController extends View {
 
@@ -60,16 +58,16 @@ public class ViewController extends View {
                 "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
         List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
         Espaco espaco = new Espaco(codigo,nomeEspaco, esporte.get(0));
-        EspacoDAO.salvarEspaco(espaco);
+        EspacoDAO.salvar(espaco);
         chamaMenuPrincipal();
     }
-    public static void cadastroReserva() {
+    public static <EnumStatusReserva> void cadastroReserva() {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da reserva"));
         //DATA RESERVA
         LocalDate dataReserva = LocalDate.now();
         String imputDataReserva = JOptionPane.showInputDialog(null, "Digite a data de reserva");
         try {
-            dataReserva = LocalDate.parse(imputDataReserva,java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            dataReserva = LocalDate.parse(imputDataReserva, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
         }
@@ -85,14 +83,14 @@ public class ViewController extends View {
         Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva?",
                 "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
 
-        EnumStatusReserva statusReserva = EnumStatusReserva.ABERTO;
+        Model.EnumStatusReserva statusReserva = Model.EnumStatusReserva.ABERTO;
         if (selectionStatus.equals("CANCELADO")) {
-            statusReserva = EnumStatusReserva.CANCELADO;
+            statusReserva = Model.EnumStatusReserva.CANCELADO;
         } else if (selectionStatus.equals("FINALIZADO")) {
-            statusReserva = EnumStatusReserva.FINALIZADO;
+            statusReserva = Model.EnumStatusReserva.FINALIZADO;
         }
         Reserva reserva = new Reserva(codigo, LocalDate.now(),dataReserva,usuarioCliente.get(0), statusReserva);
-        ReservaDAO.salvarReserva(reserva);
+        ReservaDAO.salvar(reserva);
         chamaMenuPrincipal();
     }
 
