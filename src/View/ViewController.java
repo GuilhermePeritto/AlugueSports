@@ -4,7 +4,11 @@ import Model.*;
 import Repository.*;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+
+import static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java;
 
 public class ViewController extends View {
 
@@ -59,10 +63,42 @@ public class ViewController extends View {
         EspacoDAO.salvarEspaco(espaco);
         chamaMenuPrincipal();
     }
+    public static void cadastroReserva() {
+        Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da reserva"));
+        //DATA RESERVA
+        LocalDate dataReserva = LocalDate.now();
+        String imputDataReserva = JOptionPane.showInputDialog(null, "Digite a data de reserva");
+        try {
+            dataReserva = LocalDate.parse(imputDataReserva,java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
+        }
+        //USUARIO
+        Object[] selectionValuesUsuarioCliente = UsuarioClienteDAO.findUsuarioClienteInArray();
+        String initialSelectionUsuarioCliente = (String) selectionValuesUsuarioCliente[0];
+        Object selectionUsuarioCliente = JOptionPane.showInputDialog(null, "Selecione o cliente?",
+                "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesUsuarioCliente, initialSelectionUsuarioCliente);
+        List<UsuarioCliente> usuarioCliente = UsuarioClienteDAO.buscarPorNome((String) selectionUsuarioCliente);
+        //FORMA DE PAGAMENTO
+        Object[] selectionStatusReserva = {"ABERTO", "CANCELADO", "FINALIZADO"};
+        String initialSelectionStatusReserva = (String) selectionStatusReserva[0];
+        Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva?",
+                "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
+
+        EnumStatusReserva statusReserva = EnumStatusReserva.ABERTO;
+        if (selectionStatus.equals("CANCELADO")) {
+            statusReserva = EnumStatusReserva.CANCELADO;
+        } else if (selectionStatus.equals("FINALIZADO")) {
+            statusReserva = EnumStatusReserva.FINALIZADO;
+        }
+        Reserva reserva = new Reserva(codigo, LocalDate.now(),dataReserva,usuarioCliente.get(0), statusReserva);
+        ReservaDAO.salvarReserva(reserva);
+        chamaMenuPrincipal();
+    }
 
     public static void listBoxCadastros() {
         try {
-            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Espaço"};
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Espaço", "Reserva"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
                     "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -82,6 +118,9 @@ public class ViewController extends View {
                     break;
                 case "Espaço":
                     cadastroEspaco();
+                    break;
+                case "Reserva":
+                    cadastroReserva();
                     break;
                 default:
                     chamaMenuPrincipal();
