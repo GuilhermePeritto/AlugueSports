@@ -1,8 +1,8 @@
 package Model;
 
 public enum EnumStatusReserva {
-    cancelado,
-    aberto,
-    finalizado;
+    CANCELADO,
+    ABERTO,
+    FINALIZADO;
 
 }
