@@ -36,8 +36,8 @@ public class ViewController extends View {
         chamaMenuPrincipal();
     }
 
-    public static void cadastroPais(){
-        Integer codigoPais = Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o código do país"));
+    public static void cadastroPais() {
+        Integer codigoPais = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do país"));
         String nomePais = JOptionPane.showInputDialog(null, "Digite o nome do país");
         Pais pais = new Pais(codigoPais, nomePais);
         PaisDAO.salvar(pais);
@@ -45,28 +45,32 @@ public class ViewController extends View {
     }
 
     public static void listBoxCadastros() {
-        Object[] selectionValues = {"Cliente", "Esporte", "Material"};
-        String initialSelection = (String) selectionValues[0];
-        Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
-                "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+        try {
+            Object[] selectionValues = {"Cliente", "Esporte", "Material"};
+            String initialSelection = (String) selectionValues[0];
+            Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
+                    "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
 
-        switch ((String) selection) {
-            case "Cliente":
-                cadastroUsuarioCliente();
-                break;
-            case "Esporte":
-                cadastroEsporte();
-                break;
-            case "Material":
-                cadastroMaterial();
-                break;
-            default:
-                chamaMenuPrincipal();
+            switch ((String) selection) {
+                case "Cliente":
+                    cadastroUsuarioCliente();
+                    break;
+                case "Esporte":
+                    cadastroEsporte();
+                    break;
+                case "Material":
+                    cadastroMaterial();
+                    break;
+                default:
+                    chamaMenuPrincipal();
+            }
+        } catch (Exception e) {
+            chamaMenuPrincipal();
         }
     }
 
-    public static void cadastroMaterial(){
-        Integer codigoMaterial = Integer.parseInt(JOptionPane.showInputDialog(null,"Digite o código do material"));
+    public static void cadastroMaterial() {
+        Integer codigoMaterial = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do material"));
         String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
         Material material = new Material(codigoMaterial, nomeMaterial);
         MaterialDAO.salvar(material);
