@@ -1,15 +1,10 @@
 package View;
 
-import Model.Esporte;
-import Model.Material;
-import Model.Pais;
-import Model.UsuarioCliente;
-import Repository.EsporteDAO;
-import Repository.MaterialDAO;
-import Repository.PaisDAO;
-import Repository.UsuarioClienteDAO;
+import Model.*;
+import Repository.*;
 
 import javax.swing.*;
+import java.util.List;
 
 public class ViewController extends View {
 
@@ -44,9 +39,30 @@ public class ViewController extends View {
         chamaMenuPrincipal();
     }
 
+    public static void cadastroMaterial() {
+        Integer codigoMaterial = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do material"));
+        String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
+        Material material = new Material(codigoMaterial, nomeMaterial);
+        MaterialDAO.salvar(material);
+        chamaMenuPrincipal();
+    }
+
+    public static void cadastroEspaco() {
+        Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do espaco"));
+        String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaco");
+        Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
+        String initialSelectionEsporte = (String) selectionValuesEsporte[0];
+        Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione tipo de esporte?",
+                "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
+        List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
+        Espaco espaco = new Espaco(codigo,nomeEspaco, esporte.get(0));
+        EspacoDAO.salvarEspaco(espaco);
+        chamaMenuPrincipal();
+    }
+
     public static void listBoxCadastros() {
         try {
-            Object[] selectionValues = {"Cliente", "Esporte", "Material"};
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Espaço"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
                     "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -61,6 +77,12 @@ public class ViewController extends View {
                 case "Material":
                     cadastroMaterial();
                     break;
+                case "Pais":
+                    cadastroPais();
+                    break;
+                case "Espaço":
+                    cadastroEspaco();
+                    break;
                 default:
                     chamaMenuPrincipal();
             }
@@ -68,14 +90,4 @@ public class ViewController extends View {
             chamaMenuPrincipal();
         }
     }
-
-    public static void cadastroMaterial() {
-        Integer codigoMaterial = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do material"));
-        String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
-        Material material = new Material(codigoMaterial, nomeMaterial);
-        MaterialDAO.salvar(material);
-        chamaMenuPrincipal();
-    }
-
-
 }
