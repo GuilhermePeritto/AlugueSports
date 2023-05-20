@@ -29,6 +29,7 @@ public class View {
                 CarregarValoresIniciais.StartPais();
                 CarregarValoresIniciais.StartEsporte();
                 CarregarValoresIniciais.StartEstado();
+                JOptionPane.showMessageDialog(null, "Cadastros salvos com Sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 chamaMenuPrincipal();
                 break;
         }
