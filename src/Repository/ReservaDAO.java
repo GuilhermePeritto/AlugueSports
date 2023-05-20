@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ReservaDAO {
     static List<Reserva> usuarioReserva = new ArrayList<>();
-    public  static void salvarReserva(Reserva reserva) {
+    public  static void salvar(Reserva reserva) {
         usuarioReserva.add(reserva);
     }
     public static List<Reserva> buscaTodasReserva(){
