@@ -1,10 +1,9 @@
 package Model;
 
 public class Cidade {
-    Integer Codigo;
-
-    String NomeCidade;
-    Estado estado;
+    private Integer Codigo;
+    private String NomeCidade;
+    private Estado estado;
 
     public Cidade(Integer codigo, String nomeCidade, Estado estado) {
         Codigo = codigo;
@@ -23,7 +22,6 @@ public class Cidade {
     public String getNomeCidade() {
         return NomeCidade;
     }
-
 
     public void setNomeCidade(String nomeCidade) {
         NomeCidade = nomeCidade;
