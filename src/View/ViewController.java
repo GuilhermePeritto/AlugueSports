@@ -57,10 +57,11 @@ public class ViewController extends View {
         Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione tipo de esporte?",
                 "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
         List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
-        Espaco espaco = new Espaco(codigo,nomeEspaco, esporte.get(0));
+        Espaco espaco = new Espaco(codigo, nomeEspaco, esporte.get(0));
         EspacoDAO.salvar(espaco);
         chamaMenuPrincipal();
     }
+
     public static <EnumStatusReserva> void cadastroReserva() {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da reserva"));
         //DATA RESERVA
@@ -89,7 +90,7 @@ public class ViewController extends View {
         } else if (selectionStatus.equals("FINALIZADO")) {
             statusReserva = Model.EnumStatusReserva.FINALIZADO;
         }
-        Reserva reserva = new Reserva(codigo, LocalDate.now(),dataReserva,usuarioCliente.get(0), statusReserva);
+        Reserva reserva = new Reserva(codigo, LocalDate.now(), dataReserva, usuarioCliente.get(0), statusReserva);
         ReservaDAO.salvar(reserva);
         chamaMenuPrincipal();
     }
@@ -124,7 +125,21 @@ public class ViewController extends View {
                     chamaMenuPrincipal();
             }
         } catch (Exception e) {
-            chamaMenuPrincipal();
+            confirmacaoDeCancelamento();
         }
     }
+
+    public static void confirmacaoDeCancelamento() {
+        int resposta = JOptionPane.showConfirmDialog(null, "Deseja cancelar o cadastro?", "Confirmação", JOptionPane.YES_NO_OPTION);
+
+        if (resposta == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
+            System.out.println("Cadastro cancelado.");
+            chamaMenuPrincipal();
+        } else {
+            // Código para continuar o cadastro aqui
+            System.out.println("Continuando o cadastro.");
+        }
+    }
+
 }
