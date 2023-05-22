@@ -15,7 +15,7 @@ public class UsuarioClienteDAO {
     public static List<UsuarioCliente> buscarPorNome(String nome) {
         List<UsuarioCliente> usuarioClientesFiltradas = new ArrayList<>();
         for (UsuarioCliente usuarioCliente : usuarioClientes) {
-            if (usuarioCliente.getNome().contains(nome)) {
+            if (usuarioCliente.getNomeUsuarioCliente().contains(nome)) {
                 usuarioClientesFiltradas.add(usuarioCliente);
             }
         }
@@ -27,7 +27,7 @@ public class UsuarioClienteDAO {
         List<String> clienteNomes = new ArrayList<>();
 
         for (UsuarioCliente usuarioCliente : usuarioClientes) {
-            clienteNomes.add(usuarioCliente.getNome());
+            clienteNomes.add(usuarioCliente.getNomeUsuarioCliente());
         }
 
         return clienteNomes.toArray();

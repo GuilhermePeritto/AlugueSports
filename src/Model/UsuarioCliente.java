@@ -2,15 +2,15 @@ package Model;
 
 public class UsuarioCliente {
     private Integer codigoUsuarioCliente;
-    private String nome;
+    private String nomeUsuarioCliente;
     private String telefone;
     private String cpf;
     private String rg;
     private Boolean cliente;
 
-    public UsuarioCliente(Integer codigo, String nome, String telefone, String cpf, String rg, Boolean cliente) {
+    public UsuarioCliente(Integer codigo, String nomeUsuarioCliente, String telefone, String cpf, String rg, Boolean cliente) {
         this.codigoUsuarioCliente = codigo;
-        this.nome = nome;
+        this.nomeUsuarioCliente = nomeUsuarioCliente;
         this.telefone = telefone;
         this.cpf = cpf;
         this.rg = rg;
@@ -25,12 +25,12 @@ public class UsuarioCliente {
         this.codigoUsuarioCliente = codigo;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeUsuarioCliente() {
+        return nomeUsuarioCliente;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeUsuarioCliente(String nomeUsuarioCliente) {
+        this.nomeUsuarioCliente = nomeUsuarioCliente;
     }
 
     public String getTelefone() {
@@ -69,7 +69,7 @@ public class UsuarioCliente {
     public String toString() {
         return "UsuarioCliente{" +
                 "codigo=" + codigoUsuarioCliente +
-                ", nome='" + nome + '\'' +
+                ", nome='" + nomeUsuarioCliente + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", rg='" + rg + '\'' +
