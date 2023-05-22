@@ -3,17 +3,17 @@ package Model;
 public class Estado {
     private Integer codigoEstado;
     private String nomeEstado;
-    private String Sigla;
+    private String sigla;
     private Pais pais;
 
-    public Estado(Integer codigo, String nomeEstado, String sigla, Pais pais) {
-        this.codigoEstado = codigo;
+    public Estado(Integer codigoEstado, String nomeEstado, String sigla, Pais pais) {
+        this.codigoEstado = codigoEstado;
         this.nomeEstado = nomeEstado;
-        Sigla = sigla;
+        sigla = sigla;
         this.pais = pais;
     }
 
-    public Integer getCodigo() {
+    public Integer getCodigoEstado() {
         return codigoEstado;
     }
 
@@ -22,7 +22,7 @@ public class Estado {
     }
 
     public String getSigla() {
-        return Sigla;
+        return sigla;
     }
 
     public Pais getPais() {
@@ -30,7 +30,7 @@ public class Estado {
     }
 
     public void setCodigo(Integer codigo) {
-        this.codigoEstado = codigo;
+        this.codigoEstado = codigoEstado;
     }
 
     public void setNomeEstado(String nomeEstado) {
@@ -38,7 +38,7 @@ public class Estado {
     }
 
     public void setSigla(String sigla) {
-        Sigla = sigla;
+        sigla = sigla;
     }
 
     public void setPais(Pais pais) {
@@ -48,9 +48,9 @@ public class Estado {
     @Override
     public String toString() {
         return "Estado{" +
-                "codigo=" + codigoEstado +
+                "codigoEstado=" + codigoEstado +
                 ", nomeEstado='" + nomeEstado + '\'' +
-                ", Sigla=" + Sigla +
+                ", sigla=" + sigla +
                 ", pais=" + pais +
                 '}';
     }

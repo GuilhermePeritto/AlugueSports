@@ -41,6 +41,20 @@ public class ViewController extends View {
         chamaMenuPrincipal();
     }
 
+    public static void cadastroEstado() {
+        Integer codigoEstado = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do estado"));
+        String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado");
+        String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado");
+        Object[] selectionValuesPais= PaisDAO.findPaisInArray();
+        String initialSelectionPais = (String) selectionValuesPais[0];
+        Object selectionPais = JOptionPane.showInputDialog(null, "Selecione o país",
+                "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
+        List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
+        Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
+        EstadoDAO.salvar(estado);
+        chamaMenuPrincipal();
+    }
+
     public static void cadastroMaterial() {
         Integer codigoMaterial = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do material"));
         String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
@@ -96,7 +110,7 @@ public class ViewController extends View {
 
     public static void listBoxCadastros() {
         try {
-            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Espaço", "Reserva"};
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado" ,"Espaço", "Reserva"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
                     "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -113,6 +127,9 @@ public class ViewController extends View {
                     break;
                 case "Pais":
                     cadastroPais();
+                    break;
+                case "Estado":
+                    cadastroEstado();
                     break;
                 case "Espaço":
                     cadastroEspaco();
