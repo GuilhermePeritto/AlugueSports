@@ -5,7 +5,7 @@ public class Espaco {
     private String nomeEspaco;
     private Esporte esporte;
 
-    public class disponibilidadeEspaco{
+    public static void disponibilidadeEspaco(){
 
     }
 
