@@ -1,5 +1,4 @@
 import java.math.BigDecimal;
-
 public class Calcular {
     public static BigDecimal somar(Double... valores) {
         BigDecimal resultado = new BigDecimal(String.valueOf(valores[0]));
