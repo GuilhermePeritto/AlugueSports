@@ -5,6 +5,10 @@ public class Espaco {
     private String nomeEspaco;
     private Esporte esporte;
 
+    public class disponibilidadeEspaco{
+
+    }
+
     public Espaco(Integer codigo, String nomeEspaco, Esporte esporte) {
         this.codigoEspaco = codigo;
         this.nomeEspaco = nomeEspaco;
