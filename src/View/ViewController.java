@@ -11,6 +11,7 @@ import java.util.List;
 public class ViewController extends View {
 
     public static void cadastroUsuarioCliente() {
+        try {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo"));
         String nome = JOptionPane.showInputDialog(null, "Digite o nome");
         String telefone = JOptionPane.showInputDialog(null, "Digite o telefone");
@@ -23,25 +24,40 @@ public class ViewController extends View {
         UsuarioCliente pessoa = new UsuarioCliente(codigo, nome, telefone, cpf, rg, cliente);
         UsuarioClienteDAO.salvar(pessoa);
         chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            cadastroUsuarioCliente();
+        }
     }
 
     public static void cadastroEsporte() {
+        try {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do esporte"));
         String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
         Esporte esporte = new Esporte(codigo, nomeEsporte);
         EsporteDAO.salvar(esporte);
         chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            cadastroEsporte();
+        }
     }
 
     public static void cadastroPais() {
+        try {
         Integer codigoPais = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do país"));
         String nomePais = JOptionPane.showInputDialog(null, "Digite o nome do país");
         Pais pais = new Pais(codigoPais, nomePais);
         PaisDAO.salvar(pais);
         chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            cadastroPais();
+        }
     }
 
     public static void cadastroEstado() {
+        try {
         Integer codigoEstado = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do estado"));
         String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado");
         String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado");
@@ -53,17 +69,27 @@ public class ViewController extends View {
         Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
         EstadoDAO.salvar(estado);
         chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            cadastroEstado();
+        }
     }
 
     public static void cadastroMaterial() {
+        try {
         Integer codigoMaterial = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do material"));
         String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
         Material material = new Material(codigoMaterial, nomeMaterial);
         MaterialDAO.salvar(material);
         chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            cadastroMaterial();
+        }
     }
 
     public static void cadastroEspaco() {
+        try {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do espaco"));
         String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaco");
         Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
@@ -74,8 +100,13 @@ public class ViewController extends View {
         Espaco espaco = new Espaco(codigo,nomeEspaco, esporte.get(0));
         EspacoDAO.salvar(espaco);
         chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            cadastroEspaco();
+        }
     }
     public static <EnumStatusReserva> void cadastroReserva() {
+        try {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da reserva"));
         //DATA RESERVA
         LocalDate dataReserva = LocalDate.now();
@@ -106,6 +137,10 @@ public class ViewController extends View {
         Reserva reserva = new Reserva(codigo, LocalDate.now(),dataReserva,usuarioCliente.get(0), statusReserva);
         ReservaDAO.salvar(reserva);
         chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            cadastroReserva();
+        }
     }
 
     public static void listBoxCadastros() {
