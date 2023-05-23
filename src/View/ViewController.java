@@ -12,18 +12,18 @@ public class ViewController extends View {
 
     public static void cadastroUsuarioCliente() {
         try {
-        Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo"));
-        String nome = JOptionPane.showInputDialog(null, "Digite o nome");
-        String telefone = JOptionPane.showInputDialog(null, "Digite o telefone");
-        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf");
-        String rg = JOptionPane.showInputDialog(null, "Digite o rg");
-        JCheckBox jCheckBox = new JCheckBox("Cliente");
-        int result = JOptionPane.showOptionDialog(null, jCheckBox, "Informe se o cadastro é cliente?",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
-        Boolean cliente = jCheckBox.isSelected();
-        UsuarioCliente pessoa = new UsuarioCliente(codigo, nome, telefone, cpf, rg, cliente);
-        UsuarioClienteDAO.salvar(pessoa);
-        chamaMenuPrincipal();
+            Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo"));
+            String nome = JOptionPane.showInputDialog(null, "Digite o nome");
+            String telefone = JOptionPane.showInputDialog(null, "Digite o telefone");
+            String cpf = JOptionPane.showInputDialog(null, "Digite o cpf");
+            String rg = JOptionPane.showInputDialog(null, "Digite o rg");
+            JCheckBox jCheckBox = new JCheckBox("Cliente");
+            int result = JOptionPane.showOptionDialog(null, jCheckBox, "Informe se o cadastro é cliente?",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, null, null);
+            Boolean cliente = jCheckBox.isSelected();
+            UsuarioCliente pessoa = new UsuarioCliente(codigo, nome, telefone, cpf, rg, cliente);
+            UsuarioClienteDAO.salvar(pessoa);
+            chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
             cadastroUsuarioCliente();
@@ -32,11 +32,11 @@ public class ViewController extends View {
 
     public static void cadastroEsporte() {
         try {
-        Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do esporte"));
-        String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
-        Esporte esporte = new Esporte(codigo, nomeEsporte);
-        EsporteDAO.salvar(esporte);
-        chamaMenuPrincipal();
+            Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do esporte"));
+            String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
+            Esporte esporte = new Esporte(codigo, nomeEsporte);
+            EsporteDAO.salvar(esporte);
+            chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
             cadastroEsporte();
@@ -45,11 +45,11 @@ public class ViewController extends View {
 
     public static void cadastroPais() {
         try {
-        Integer codigoPais = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do país"));
-        String nomePais = JOptionPane.showInputDialog(null, "Digite o nome do país");
-        Pais pais = new Pais(codigoPais, nomePais);
-        PaisDAO.salvar(pais);
-        chamaMenuPrincipal();
+            Integer codigoPais = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do país"));
+            String nomePais = JOptionPane.showInputDialog(null, "Digite o nome do país");
+            Pais pais = new Pais(codigoPais, nomePais);
+            PaisDAO.salvar(pais);
+            chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
             cadastroPais();
@@ -58,17 +58,17 @@ public class ViewController extends View {
 
     public static void cadastroEstado() {
         try {
-        Integer codigoEstado = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do estado"));
-        String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado");
-        String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado");
-        Object[] selectionValuesPais= PaisDAO.findPaisInArray();
-        String initialSelectionPais = (String) selectionValuesPais[0];
-        Object selectionPais = JOptionPane.showInputDialog(null, "Selecione o país",
-                "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
-        List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
-        Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
-        EstadoDAO.salvar(estado);
-        chamaMenuPrincipal();
+            Integer codigoEstado = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do estado"));
+            String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado");
+            String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado");
+            Object[] selectionValuesPais = PaisDAO.findPaisInArray();
+            String initialSelectionPais = (String) selectionValuesPais[0];
+            Object selectionPais = JOptionPane.showInputDialog(null, "Selecione o país",
+                    "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
+            List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
+            Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
+            EstadoDAO.salvar(estado);
+            chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
             cadastroEstado();
@@ -77,11 +77,23 @@ public class ViewController extends View {
 
     public static void cadastroMaterial() {
         try {
-        Integer codigoMaterial = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do material"));
-        String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
-        Material material = new Material(codigoMaterial, nomeMaterial);
-        MaterialDAO.salvar(material);
-        chamaMenuPrincipal();
+            Integer codigoMaterial = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do material"));
+            String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
+
+            Object[] selectionStatusMaterial = {"ALUGADO", "DISPONIVEL"};
+            String initialSelectionStatusMaterial = (String) selectionStatusMaterial[0];
+            Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status do material?",
+                    "Lista de Status", JOptionPane.QUESTION_MESSAGE, null, selectionStatusMaterial, initialSelectionStatusMaterial);
+            EnumStatusMaterial statusMaterial = EnumStatusMaterial.DISPONIVEL;
+            if (selectionStatus.equals("ALUGADO")) {
+                statusMaterial = EnumStatusMaterial.ALUGADO;
+            } else if (selectionStatus.equals("DISPONIVEL")) {
+                statusMaterial = EnumStatusMaterial.DISPONIVEL;
+            }
+
+            Material material = new Material(codigoMaterial, nomeMaterial, statusMaterial);
+            MaterialDAO.salvar(material);
+            chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
             cadastroMaterial();
@@ -90,59 +102,61 @@ public class ViewController extends View {
 
     public static void cadastroEspaco() {
         try {
-        Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do espaco"));
-        String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaco");
-        Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
-        String initialSelectionEsporte = (String) selectionValuesEsporte[0];
-        Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione tipo de esporte?",
-                "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
-        List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
-        Espaco espaco = new Espaco(codigo,nomeEspaco, esporte.get(0));
-        EspacoDAO.salvar(espaco);
-        chamaMenuPrincipal();
+            Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do espaco"));
+            String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaco");
+            Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
+            String initialSelectionEsporte = (String) selectionValuesEsporte[0];
+            Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione tipo de esporte?",
+                    "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
+            List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
+            Espaco espaco = new Espaco(codigo, nomeEspaco, esporte.get(0));
+            EspacoDAO.salvar(espaco);
+            chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
             cadastroEspaco();
         }
     }
+
     public static <EnumStatusReserva> void cadastroReserva() {
         try {
-        Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da reserva"));
-        String titulo = JOptionPane.showInputDialog(null, "Digite o titulo da reserva");
-        //DATA RESERVA
-        LocalDate dataReserva = LocalDate.now();
-        String imputDataReserva = JOptionPane.showInputDialog(null, "Digite a data de reserva");
-        try {
-            dataReserva = LocalDate.parse(imputDataReserva, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
-        }
-        //USUARIO
-        Object[] selectionValuesUsuarioCliente = UsuarioClienteDAO.findUsuarioClienteInArray();
-        String initialSelectionUsuarioCliente = (String) selectionValuesUsuarioCliente[0];
-        Object selectionUsuarioCliente = JOptionPane.showInputDialog(null, "Selecione o cliente?",
-                "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesUsuarioCliente, initialSelectionUsuarioCliente);
-        List<UsuarioCliente> usuarioCliente = UsuarioClienteDAO.buscarPorNome((String) selectionUsuarioCliente);
-        //FORMA DE PAGAMENTO
-        Object[] selectionStatusReserva = {"ABERTO", "CANCELADO", "FINALIZADO"};
-        String initialSelectionStatusReserva = (String) selectionStatusReserva[0];
-        Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva?",
-                "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
+            Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da reserva"));
+            String titulo = JOptionPane.showInputDialog(null, "Digite o titulo da reserva");
+            //DATA RESERVA
+            LocalDate dataReserva = LocalDate.now();
+            String imputDataReserva = JOptionPane.showInputDialog(null, "Digite a data de reserva");
+            try {
+                dataReserva = LocalDate.parse(imputDataReserva, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
+            }
+            //USUARIO
+            Object[] selectionValuesUsuarioCliente = UsuarioClienteDAO.findUsuarioClienteInArray();
+            String initialSelectionUsuarioCliente = (String) selectionValuesUsuarioCliente[0];
+            Object selectionUsuarioCliente = JOptionPane.showInputDialog(null, "Selecione o cliente?",
+                    "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesUsuarioCliente, initialSelectionUsuarioCliente);
+            List<UsuarioCliente> usuarioCliente = UsuarioClienteDAO.buscarPorNome((String) selectionUsuarioCliente);
+            //FORMA DE PAGAMENTO
+            Object[] selectionStatusReserva = {"ABERTO", "CANCELADO", "FINALIZADO"};
+            String initialSelectionStatusReserva = (String) selectionStatusReserva[0];
+            Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva?",
+                    "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
 
-        Model.EnumStatusReserva statusReserva = Model.EnumStatusReserva.ABERTO;
-        if (selectionStatus.equals("CANCELADO")) {
-            statusReserva = Model.EnumStatusReserva.CANCELADO;
-        } else if (selectionStatus.equals("FINALIZADO")) {
-            statusReserva = Model.EnumStatusReserva.FINALIZADO;
-        }
-        Reserva reserva = new Reserva(codigo, titulo ,LocalDate.now(),dataReserva,usuarioCliente.get(0), statusReserva);
-        ReservaDAO.salvar(reserva);
-        chamaMenuPrincipal();
+            Model.EnumStatusReserva statusReserva = Model.EnumStatusReserva.ABERTO;
+            if (selectionStatus.equals("CANCELADO")) {
+                statusReserva = Model.EnumStatusReserva.CANCELADO;
+            } else if (selectionStatus.equals("FINALIZADO")) {
+                statusReserva = Model.EnumStatusReserva.FINALIZADO;
+            }
+            Reserva reserva = new Reserva(codigo, titulo, LocalDate.now(), dataReserva, usuarioCliente.get(0), statusReserva);
+            ReservaDAO.salvar(reserva);
+            chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
             cadastroReserva();
         }
     }
+
     public static void cancelarReserva() {
         Object[] selectionValuesReserva = ReservaDAO.findReservaInArray();
         String initialSelectionReserva = (String) selectionValuesReserva[0];
@@ -153,9 +167,21 @@ public class ViewController extends View {
         JOptionPane.showMessageDialog(null, "Reserva cancelada com sucesso!");
         JOptionPane.showMessageDialog(null, ReservaDAO.buscaTodos());
     }
+
+    public static void alugarMaterial() {
+        Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
+        String initialSelectionMaterial = (String) selectionValuesMaterial[0];
+        Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material?",
+                "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
+        List<Material> alugarMaterial = MaterialDAO.buscarPorNome((String) selectionMaterial);
+        MaterialDAO.alugarMaterial(alugarMaterial.get(0));
+        JOptionPane.showMessageDialog(null, "Material alugado com sucesso!");
+        JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
+    }
+
     public static void listBoxCadastros() {
         try {
-            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado" ,"Espaço", "Reserva"};
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
                     "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -189,9 +215,10 @@ public class ViewController extends View {
             chamaMenuPrincipal();
         }
     }
+
     public static void listBoxProcessos() {
         try {
-            Object[] selectionValues = {"Cancelar Reserva"};
+            Object[] selectionValues = {"Cancelar Reserva", "Alugar Material"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo?",
                     "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -199,6 +226,9 @@ public class ViewController extends View {
             switch ((String) selection) {
                 case "Cancelar Reserva":
                     cancelarReserva();
+                    break;
+                case "Alugar Material":
+                    alugarMaterial();
                     break;
 
                 default:

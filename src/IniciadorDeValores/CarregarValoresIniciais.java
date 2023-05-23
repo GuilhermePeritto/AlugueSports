@@ -72,19 +72,19 @@ public class CarregarValoresIniciais {
     }
 
     public static void StartMaterial() {
-        Material bola = new Material(1, "Bola");
+        Material bola = new Material(1, "Bola", EnumStatusMaterial.DISPONIVEL);
         MaterialDAO.salvar(bola);
-        Material couro = new Material(2, "Couro");
+        Material couro = new Material(2, "Couro", EnumStatusMaterial.DISPONIVEL);
         MaterialDAO.salvar(couro);
-        Material borracha = new Material(3, "Borracha");
+        Material borracha = new Material(3, "Borracha", EnumStatusMaterial.DISPONIVEL);
         MaterialDAO.salvar(borracha);
-        Material papel = new Material(4, "Papel");
+        Material papel = new Material(4, "Papel", EnumStatusMaterial.DISPONIVEL);
         MaterialDAO.salvar(papel);
-        Material plastico = new Material(5, "Plástico");
+        Material plastico = new Material(5, "Plástico", EnumStatusMaterial.DISPONIVEL);
         MaterialDAO.salvar(plastico);
-        Material metal = new Material(6, "Metal");
+        Material metal = new Material(6, "Metal", EnumStatusMaterial.DISPONIVEL);
         MaterialDAO.salvar(metal);
-        Material outros = new Material(7, "Outros");
+        Material outros = new Material(7, "Outros", EnumStatusMaterial.DISPONIVEL);
         MaterialDAO.salvar(outros);
     }
 

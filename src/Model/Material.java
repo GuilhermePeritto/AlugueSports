@@ -4,9 +4,12 @@ public class Material {
     Integer codigoMaterial;
     String nomeMaterial;
 
-    public Material(Integer codigoMaterial, String nomeMaterial) {
+    EnumStatusMaterial enumStatusMaterial;
+
+    public Material(Integer codigoMaterial, String nomeMaterial, EnumStatusMaterial enumStatusMaterial) {
         this.codigoMaterial = codigoMaterial;
         this.nomeMaterial = nomeMaterial;
+        this.enumStatusMaterial = enumStatusMaterial;
     }
 
     public Integer getCodigoMaterial() {
@@ -25,11 +28,20 @@ public class Material {
         this.nomeMaterial = nomeMaterial;
     }
 
+    public EnumStatusMaterial getEnumStatusMaterial() {
+        return enumStatusMaterial;
+    }
+
+    public void setEnumStatusMaterial(EnumStatusMaterial enumStatusMaterial) {
+        this.enumStatusMaterial = enumStatusMaterial;
+    }
+
     @Override
     public String toString() {
         return "Material{" +
                 "codigoMaterial=" + codigoMaterial +
                 ", nomeMaterial='" + nomeMaterial + '\'' +
+                ", enumStatusMaterial=" + enumStatusMaterial +
                 '}';
     }
 }
