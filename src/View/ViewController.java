@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+
 public class ViewController extends View {
 
     public static void cadastroUsuarioCliente() {
@@ -88,6 +89,35 @@ public class ViewController extends View {
         }
     }
 
+
+    public static void disponibilidaDeMaterial(){
+        //MaterialDAO.buscaTodos();
+
+        Model.EnumStatusMaterial statusMaterial = EnumStatusMaterial.DISPONIVEL;
+
+        if (statusMaterial.equals(EnumStatusMaterial.ALOCADO)){
+            System.out.println(" MATERIAL ALOCADO!");
+            statusMaterial = EnumStatusMaterial.ALOCADO;
+
+        } else if (statusMaterial.equals(EnumStatusMaterial.DISPONIVEL)) {
+            System.out.println(" MATERIAL DISPONIVEL!");
+            statusMaterial = EnumStatusMaterial.DISPONIVEL;
+
+        } else if (statusMaterial.equals(EnumStatusMaterial.COSERTO)) {
+            System.out.println(" MATERIAL CONSERTO!");
+            statusMaterial = EnumStatusMaterial.COSERTO;
+        }
+
+        else {
+            System.out.println(" DESCARTADO! ");
+            statusMaterial = EnumStatusMaterial.DESCARTADO;
+        }
+
+        System.out.println(statusMaterial);
+
+    }
+
+
     public static void cadastroEspaco() {
         try {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do espaco"));
@@ -145,7 +175,7 @@ public class ViewController extends View {
 
     public static void listBoxCadastros() {
         try {
-            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado" ,"Espaço", "Reserva"};
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado" ,"Espaço", "Reserva","Disponibilidade de Material"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
                     "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -172,6 +202,10 @@ public class ViewController extends View {
                 case "Reserva":
                     cadastroReserva();
                     break;
+                case "Disponibilidade de Material":
+                    disponibilidaDeMaterial();
+                    break;
+
                 default:
                     chamaMenuPrincipal();
             }
