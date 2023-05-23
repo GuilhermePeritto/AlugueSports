@@ -108,6 +108,7 @@ public class ViewController extends View {
     public static <EnumStatusReserva> void cadastroReserva() {
         try {
         Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da reserva"));
+        String titulo = JOptionPane.showInputDialog(null, "Digite o titulo da reserva");
         //DATA RESERVA
         LocalDate dataReserva = LocalDate.now();
         String imputDataReserva = JOptionPane.showInputDialog(null, "Digite a data de reserva");
@@ -134,7 +135,7 @@ public class ViewController extends View {
         } else if (selectionStatus.equals("FINALIZADO")) {
             statusReserva = Model.EnumStatusReserva.FINALIZADO;
         }
-        Reserva reserva = new Reserva(codigo, LocalDate.now(),dataReserva,usuarioCliente.get(0), statusReserva);
+        Reserva reserva = new Reserva(codigo, titulo ,LocalDate.now(),dataReserva,usuarioCliente.get(0), statusReserva);
         ReservaDAO.salvar(reserva);
         chamaMenuPrincipal();
         } catch (Exception e) {
@@ -142,7 +143,16 @@ public class ViewController extends View {
             cadastroReserva();
         }
     }
-
+    public static void cancelarReserva() {
+        Object[] selectionValuesReserva = ReservaDAO.findReservaInArray();
+        String initialSelectionReserva = (String) selectionValuesReserva[0];
+        Object selectionReserva = JOptionPane.showInputDialog(null, "Selecione a reserva?",
+                "Cancelar Reserva", JOptionPane.QUESTION_MESSAGE, null, selectionValuesReserva, initialSelectionReserva);
+        List<Reserva> reserva = ReservaDAO.buscarPorNome((String) selectionReserva);
+        ReservaDAO.cancelar(reserva.get(0));
+        JOptionPane.showMessageDialog(null, "Reserva cancelada com sucesso!");
+        JOptionPane.showMessageDialog(null, ReservaDAO.buscaTodos());
+    }
     public static void listBoxCadastros() {
         try {
             Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado" ,"Espaço", "Reserva"};
@@ -172,6 +182,25 @@ public class ViewController extends View {
                 case "Reserva":
                     cadastroReserva();
                     break;
+                default:
+                    chamaMenuPrincipal();
+            }
+        } catch (Exception e) {
+            chamaMenuPrincipal();
+        }
+    }
+    public static void listBoxProcessos() {
+        try {
+            Object[] selectionValues = {"Cancelar Reserva"};
+            String initialSelection = (String) selectionValues[0];
+            Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo?",
+                    "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+
+            switch ((String) selection) {
+                case "Cancelar Reserva":
+                    cancelarReserva();
+                    break;
+
                 default:
                     chamaMenuPrincipal();
             }

@@ -89,15 +89,15 @@ public class CarregarValoresIniciais {
     }
 
     public static void StartReserva() {
-        Reserva reserva1 = new Reserva(1, LocalDate.now(), LocalDate.now() , new UsuarioCliente(1, "Tomas", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO);
+        Reserva reserva1 = new Reserva(1, "Reserva1",LocalDate.now(), LocalDate.now() , new UsuarioCliente(1, "Tomas", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO);
         ReservaDAO.salvar(reserva1);
-        Reserva reserva2 = new Reserva(2, LocalDate.now(), LocalDate.now() , new UsuarioCliente(2, "Maria", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO);
+        Reserva reserva2 = new Reserva(2, "Reserva2",LocalDate.now(), LocalDate.now() , new UsuarioCliente(2, "Maria", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO);
         ReservaDAO.salvar(reserva2);
-        Reserva reserva3 = new Reserva(3, LocalDate.now(), LocalDate.now() , new UsuarioCliente(3, "Pedro", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO);
+        Reserva reserva3 = new Reserva(3, "Reserva3",LocalDate.now(), LocalDate.now() , new UsuarioCliente(3, "Pedro", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO);
         ReservaDAO.salvar(reserva3);
-        Reserva reserva4 = new Reserva(4, LocalDate.now(), LocalDate.now() , new UsuarioCliente(4, "João", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO);
+        Reserva reserva4 = new Reserva(4, "Reserva4",LocalDate.now(), LocalDate.now() , new UsuarioCliente(4, "João", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO);
         ReservaDAO.salvar(reserva4);
-        Reserva reserva5 = new Reserva(5, LocalDate.now(), LocalDate.now() , new UsuarioCliente(5, "Carlos", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO);
+        Reserva reserva5 = new Reserva(5, "Reserva5",LocalDate.now(), LocalDate.now() , new UsuarioCliente(5, "Carlos", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO);
         ReservaDAO.salvar(reserva5);
     }
 }

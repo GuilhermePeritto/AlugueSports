@@ -5,14 +5,16 @@ import java.time.LocalDate;
 public class Reserva {
 
     private Integer codigoReserva;
+    private String tituloReserva;
     private LocalDate dataSolicitacao;
     private LocalDate dataAlocacao;
     private UsuarioCliente usuarioCliente;
     private EnumStatusReserva enumStatusReserva;
 
 
-    public Reserva(Integer codigoReserva, LocalDate dataSolicitacao, LocalDate dataAlocacao, UsuarioCliente usuarioCliente, EnumStatusReserva enumStatusReserva) {
+    public Reserva(Integer codigoReserva, String tituloReserva, LocalDate dataSolicitacao, LocalDate dataAlocacao, UsuarioCliente usuarioCliente, EnumStatusReserva enumStatusReserva) {
         this.codigoReserva = codigoReserva;
+        this.tituloReserva = tituloReserva;
         this.dataSolicitacao = dataSolicitacao;
         this.dataAlocacao = dataAlocacao;
         this.usuarioCliente = usuarioCliente;
@@ -55,10 +57,23 @@ public class Reserva {
         return enumStatusReserva;
     }
 
+    public void setEnumStatusReserva(EnumStatusReserva enumStatusReserva) {
+        this.enumStatusReserva = enumStatusReserva;
+    }
+
+    public String getTituloReserva() {
+        return tituloReserva;
+    }
+
+    public void setTituloReserva(String tituloReserva) {
+        this.tituloReserva = tituloReserva;
+    }
+
     @Override
     public String toString() {
         return "Reserva{" +
-                "codigo=" + codigoReserva +
+                "codigoReserva=" + codigoReserva +
+                ", tituloReserva='" + tituloReserva + '\'' +
                 ", dataSolicitacao=" + dataSolicitacao +
                 ", dataAlocacao=" + dataAlocacao +
                 ", usuarioCliente=" + usuarioCliente +
