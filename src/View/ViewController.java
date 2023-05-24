@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static Repository.ReservaDAO.reservarMaterial;
+import static Repository.ReservaDAO.verificarDisponibilidade;
+
 public class ViewController extends View {
 
     public static void cadastroUsuarioCliente() {
@@ -118,15 +121,23 @@ public class ViewController extends View {
         }
     }
 
-    public static <EnumStatusReserva> void cadastroReserva() {
+    public static void cadastroReserva() {
         try {
             Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da reserva"));
             String titulo = JOptionPane.showInputDialog(null, "Digite o titulo da reserva");
             //DATA RESERVA
-            LocalDate dataReserva = LocalDate.now();
-            String imputDataReserva = JOptionPane.showInputDialog(null, "Digite a data de reserva");
+            LocalDate dataReservaInicio = LocalDate.now();
+            String imputDataReservaInicio = JOptionPane.showInputDialog(null, "Digite a data de inicio da reserva");
             try {
-                dataReserva = LocalDate.parse(imputDataReserva, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                dataReservaInicio = LocalDate.parse(imputDataReservaInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
+            }
+
+            LocalDate dataReservaFim = LocalDate.now();
+            String imputDataReservaFim = JOptionPane.showInputDialog(null, "Digite a data de fim da reserva");
+            try {
+                dataReservaFim = LocalDate.parse(imputDataReservaFim, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
             }
@@ -148,7 +159,24 @@ public class ViewController extends View {
             } else if (selectionStatus.equals("FINALIZADO")) {
                 statusReserva = Model.EnumStatusReserva.FINALIZADO;
             }
-            Reserva reserva = new Reserva(codigo, titulo, LocalDate.now(), dataReserva, usuarioCliente.get(0), statusReserva);
+
+            Object[] selectionValuesEspaco = EspacoDAO.findEsportesInArray();
+            String initialSelectionEspaco = (String) selectionValuesEspaco[0];
+            Object selectionEspaco = JOptionPane.showInputDialog(null, "Selecione o espaco?",
+                    "Alugar espaco", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEspaco, initialSelectionEspaco);
+            List<Espaco> espaco = EspacoDAO.buscarPorNome((String) selectionEspaco);
+
+            Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
+            String initialSelectionMaterial = (String) selectionValuesMaterial[0];
+            Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material?",
+                    "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
+            List<Material> material = MaterialDAO.buscarPorNome((String) selectionMaterial);
+            verificarDisponibilidade(material.get(0), dataReservaInicio, dataReservaFim);
+            reservarMaterial(material.get(0), dataReservaInicio, dataReservaFim);
+            if (!verificarDisponibilidade(material.get(0), dataReservaInicio, dataReservaFim)) {
+                listBoxCadastros();
+            }
+            Reserva reserva = new Reserva(codigo, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim,usuarioCliente.get(0), statusReserva, material.get(0), espaco.get(0));
             ReservaDAO.salvar(reserva);
             chamaMenuPrincipal();
         } catch (Exception e) {

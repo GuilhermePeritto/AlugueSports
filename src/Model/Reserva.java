@@ -7,18 +7,24 @@ public class Reserva {
     private Integer codigoReserva;
     private String tituloReserva;
     private LocalDate dataSolicitacao;
-    private LocalDate dataAlocacao;
+    private LocalDate dataAlocacaoInicio;
+    private LocalDate dataAlocacaoFim;
     private UsuarioCliente usuarioCliente;
     private EnumStatusReserva enumStatusReserva;
 
+    private Material material;
+    private Espaco espaco;
 
-    public Reserva(Integer codigoReserva, String tituloReserva, LocalDate dataSolicitacao, LocalDate dataAlocacao, UsuarioCliente usuarioCliente, EnumStatusReserva enumStatusReserva) {
+    public Reserva(Integer codigoReserva, String tituloReserva, LocalDate dataSolicitacao, LocalDate dataAlocacaoInicio, LocalDate dataAlocacaoFim, UsuarioCliente usuarioCliente, EnumStatusReserva enumStatusReserva, Material material, Espaco espaco) {
         this.codigoReserva = codigoReserva;
         this.tituloReserva = tituloReserva;
         this.dataSolicitacao = dataSolicitacao;
-        this.dataAlocacao = dataAlocacao;
+        this.dataAlocacaoInicio = dataAlocacaoInicio;
+        this.dataAlocacaoFim = dataAlocacaoFim;
         this.usuarioCliente = usuarioCliente;
         this.enumStatusReserva = enumStatusReserva;
+        this.material = material;
+        this.espaco = espaco;
     }
 
     public Integer getCodigoReserva() {
@@ -29,6 +35,14 @@ public class Reserva {
         this.codigoReserva = codigoReserva;
     }
 
+    public String getTituloReserva() {
+        return tituloReserva;
+    }
+
+    public void setTituloReserva(String tituloReserva) {
+        this.tituloReserva = tituloReserva;
+    }
+
     public LocalDate getDataSolicitacao() {
         return dataSolicitacao;
     }
@@ -37,12 +51,20 @@ public class Reserva {
         this.dataSolicitacao = dataSolicitacao;
     }
 
-    public LocalDate getDataAlocacao() {
-        return dataAlocacao;
+    public LocalDate getDataAlocacaoInicio() {
+        return dataAlocacaoInicio;
     }
 
-    public void setDataAlocacao(LocalDate dataAlocacao) {
-        this.dataAlocacao = dataAlocacao;
+    public void setDataAlocacaoInicio(LocalDate dataAlocacaoInicio) {
+        this.dataAlocacaoInicio = dataAlocacaoInicio;
+    }
+
+    public LocalDate getDataAlocacaoFim() {
+        return dataAlocacaoFim;
+    }
+
+    public void setDataAlocacaoFim(LocalDate dataAlocacaoFim) {
+        this.dataAlocacaoFim = dataAlocacaoFim;
     }
 
     public UsuarioCliente getUsuarioCliente() {
@@ -61,12 +83,20 @@ public class Reserva {
         this.enumStatusReserva = enumStatusReserva;
     }
 
-    public String getTituloReserva() {
-        return tituloReserva;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setTituloReserva(String tituloReserva) {
-        this.tituloReserva = tituloReserva;
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
+    public Espaco getEspaco() {
+        return espaco;
+    }
+
+    public void setEspaco(Espaco espaco) {
+        this.espaco = espaco;
     }
 
     @Override
@@ -75,9 +105,12 @@ public class Reserva {
                 "codigoReserva=" + codigoReserva +
                 ", tituloReserva='" + tituloReserva + '\'' +
                 ", dataSolicitacao=" + dataSolicitacao +
-                ", dataAlocacao=" + dataAlocacao +
+                ", dataAlocacaoInicio=" + dataAlocacaoInicio +
+                ", dataAlocacaoFim=" + dataAlocacaoFim +
                 ", usuarioCliente=" + usuarioCliente +
                 ", enumStatusReserva=" + enumStatusReserva +
+                ", material=" + material +
+                ", espaco=" + espaco +
                 '}';
     }
 }
