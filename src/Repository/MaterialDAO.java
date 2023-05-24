@@ -1,8 +1,6 @@
 package Repository;
-import Model.EnumStatusMaterial;
-import Model.Material;
-import Model.Pais;
-import Model.UsuarioCliente;
+import Model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +15,15 @@ public class MaterialDAO {
     public static void alugarMaterial(Material material) {
         material.setEnumStatusMaterial(EnumStatusMaterial.ALUGADO);
     }
+
+    public static void cancelarAluguel(Material material) {
+        material.setEnumStatusMaterial(EnumStatusMaterial.DISPONIVEL);
+    }
     public static List<Material> buscarPorNome(String nome) {
         List<Material> materiaisFiltrados = new ArrayList<>();
         for (Material material : materialList) {
             if (material.getNomeMaterial().contains(nome)) {
-                materialList.add(material);
+                materiaisFiltrados.add(material);
             }
         }
         return materialList;

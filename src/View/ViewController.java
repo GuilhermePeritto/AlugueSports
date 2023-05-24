@@ -179,6 +179,17 @@ public class ViewController extends View {
         JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
     }
 
+    public static void cancelarAluguelMaterial() {
+        Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
+        String initialSelectionMaterial = (String) selectionValuesMaterial[0];
+        Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material?",
+                "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
+        List<Material> alugarMaterial = MaterialDAO.buscarPorNome((String) selectionMaterial);
+        MaterialDAO.cancelarAluguel(alugarMaterial.get(0));
+        JOptionPane.showMessageDialog(null, "Aluguel de material cancelado com sucesso!");
+        JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
+    }
+
     public static void listBoxCadastros() {
         try {
             Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
@@ -218,7 +229,7 @@ public class ViewController extends View {
 
     public static void listBoxProcessos() {
         try {
-            Object[] selectionValues = {"Cancelar Reserva", "Alugar Material"};
+            Object[] selectionValues = {"Cancelar Reserva", "Alugar Material", "Cancelar Aluguel de material"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo?",
                     "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -229,6 +240,9 @@ public class ViewController extends View {
                     break;
                 case "Alugar Material":
                     alugarMaterial();
+                    break;
+                case "Cancelar Aluguel de material":
+                    cancelarAluguelMaterial();
                     break;
 
                 default:
