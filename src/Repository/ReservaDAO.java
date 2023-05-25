@@ -60,7 +60,7 @@ public class ReservaDAO {
         return true;
     }
 
-    public static boolean verificarDisponibilidade(Material material, LocalDate datainicio, LocalDate datafim) {
+    public static boolean verificarDisponibilidadeMaterial(Material material, LocalDate datainicio, LocalDate datafim) {
         // Verifica se o material está disponível para o dia especificado
         for (Reserva reserva : usuarioReserva) {
             if (reserva.getMaterial() == material &&
@@ -82,6 +82,53 @@ public class ReservaDAO {
         }
         JOptionPane.showMessageDialog(null, "Material disponível para o dia especificado.");
         return true;
+    }
+
+    public static boolean reservarEspaco(Espaco espaco, LocalDate dataInicio, LocalDate dataFim) {
+        // Verifica se o material está disponível
+        if (espaco.getEnumStatusEspaco() != EnumStatusEspaco.DISPONIVEL) {
+            JOptionPane.showMessageDialog(null, "Espaco não disponível para reserva.");
+            return false;
+        }
+
+        // Verifica se o material já está reservado para algum dia dentro do período
+        for (Reserva reserva : usuarioReserva) {
+            if (reserva.getEspaco() == espaco &&
+                    (dataInicio.isBefore(reserva.getDataAlocacaoFim()) || dataInicio.isEqual(reserva.getDataAlocacaoFim())) &&
+                    (dataFim.isAfter(reserva.getDataAlocacaoInicio()) || dataFim.isEqual(reserva.getDataAlocacaoInicio()))) {
+                JOptionPane.showMessageDialog(null, "Espaco já reservado para algum dia dentro desse período.");
+                return false;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Reserva realizada com sucesso.");
+        return true;
+    }
+
+    public static boolean verificarDisponibilidadeEspaco(Espaco espaco, LocalDate datainicio, LocalDate datafim) {
+        // Verifica se o material está disponível para o dia especificado
+        for (Reserva reserva : usuarioReserva) {
+            if (reserva.getEspaco() == espaco &&
+                    (datainicio.isEqual(reserva.getDataAlocacaoInicio()) ||
+                            (datainicio.isAfter(reserva.getDataAlocacaoInicio()) && datainicio.isBefore(reserva.getDataAlocacaoFim())) ||
+                            datainicio.isEqual(reserva.getDataAlocacaoFim()))) {
+                JOptionPane.showMessageDialog(null, "Espaco não disponível nessa data.");
+                return false;
+            }
+        }
+        for (Reserva reserva : usuarioReserva) {
+            if (reserva.getEspaco() == espaco &&
+                    (datafim.isEqual(reserva.getDataAlocacaoInicio()) ||
+                            (datafim.isAfter(reserva.getDataAlocacaoInicio()) && datafim.isBefore(reserva.getDataAlocacaoFim())) ||
+                            datafim.isEqual(reserva.getDataAlocacaoFim()))) {
+                JOptionPane.showMessageDialog(null, "Espaco não disponível nessa data.");
+                return false;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Espaco disponível para o dia especificado.");
+        return true;
+    }
+    public static Integer canculaCodigo(){
+        return usuarioReserva.size() + 1;
     }
 
 }

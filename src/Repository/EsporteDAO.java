@@ -33,4 +33,8 @@ public class EsporteDAO {
 
         return clienteNomes.toArray();
     }
+
+    public static Integer canculaCodigo(){
+        return esportes.size() + 1;
+    }
 }

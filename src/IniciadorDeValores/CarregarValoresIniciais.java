@@ -38,15 +38,15 @@ public class CarregarValoresIniciais {
     }
 
     public static void StartEspaco() {
-        Espaco Campo1 = new Espaco(1, "Campo 1", new Esporte(1, "Futbol"));
+        Espaco Campo1 = new Espaco(1, "Campo 1", new Esporte(1, "Futbol"),LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL);
         EspacoDAO.salvar(Campo1);
-        Espaco Campo2 = new Espaco(2, "Campo 2", new Esporte(2, "Basquete"));
+        Espaco Campo2 = new Espaco(2, "Campo 2", new Esporte(2, "Basquete") ,LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL);
         EspacoDAO.salvar(Campo2);
-        Espaco Campo3 = new Espaco(3, "Campo 3", new Esporte(3, "Natação"));
+        Espaco Campo3 = new Espaco(3, "Campo 3", new Esporte(3, "Natação"), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL);
         EspacoDAO.salvar(Campo3);
-        Espaco Campo4 = new Espaco(4, "Campo 4", new Esporte(4, "Voley"));
+        Espaco Campo4 = new Espaco(4, "Campo 4", new Esporte(4, "Voley"), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL);
         EspacoDAO.salvar(Campo4);
-        Espaco Campo5 = new Espaco(5, "Campo 5", new Esporte(5, "Corrida"));
+        Espaco Campo5 = new Espaco(5, "Campo 5", new Esporte(5, "Corrida"), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL);
         EspacoDAO.salvar(Campo5);
     }
 
@@ -89,15 +89,15 @@ public class CarregarValoresIniciais {
     }
 
     public static void StartReserva() {
-        Reserva reserva1 = new Reserva(1, "Reserva1",LocalDate.now(), LocalDate.now() , LocalDate.now(),new UsuarioCliente(1, "Tomas", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO, new Material(1, "Bola", EnumStatusMaterial.DISPONIVEL), new Espaco(1, "Campo 1", new Esporte(1, "Futbol")));
+        Reserva reserva1 = new Reserva(1, "Reserva1",LocalDate.now(), LocalDate.now() , LocalDate.now(),new UsuarioCliente(1, "Tomas", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO, new Material(1, "Bola", EnumStatusMaterial.DISPONIVEL), new Espaco(1, "Campo 1", new Esporte(1, "Futbol"), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL));
         ReservaDAO.salvar(reserva1);
-        Reserva reserva2 = new Reserva(2, "Reserva2",LocalDate.now(), LocalDate.now() , LocalDate.now(), new UsuarioCliente(2, "Maria", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO, new Material(2, "Couro", EnumStatusMaterial.DISPONIVEL), new Espaco(2, "Campo 2", new Esporte(2, "Basquete")));
+        Reserva reserva2 = new Reserva(2, "Reserva2",LocalDate.now(), LocalDate.now() , LocalDate.now(), new UsuarioCliente(2, "Maria", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO, new Material(2, "Couro", EnumStatusMaterial.DISPONIVEL), new Espaco(2, "Campo 2", new Esporte(2, "Basquete"), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL));
         ReservaDAO.salvar(reserva2);
-        Reserva reserva3 = new Reserva(3, "Reserva3",LocalDate.now(), LocalDate.now() , LocalDate.now(), new UsuarioCliente(3, "Pedro", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO, new Material(3, "Borracha", EnumStatusMaterial.DISPONIVEL), new Espaco(3, "Campo 3", new Esporte(3, "Natação")));
+        Reserva reserva3 = new Reserva(3, "Reserva3",LocalDate.now(), LocalDate.now() , LocalDate.now(), new UsuarioCliente(3, "Pedro", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO, new Material(3, "Borracha", EnumStatusMaterial.DISPONIVEL), new Espaco(3, "Campo 3", new Esporte(3, "Natação"), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL));
         ReservaDAO.salvar(reserva3);
-        Reserva reserva4 = new Reserva(4, "Reserva4",LocalDate.now(), LocalDate.now() , LocalDate.now(), new UsuarioCliente(4, "João", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO, new Material(4, "Papel", EnumStatusMaterial.DISPONIVEL), new Espaco(4, "Campo 4", new Esporte(4, "Voley")));
+        Reserva reserva4 = new Reserva(4, "Reserva4",LocalDate.now(), LocalDate.now() , LocalDate.now(), new UsuarioCliente(4, "João", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO, new Material(4, "Papel", EnumStatusMaterial.DISPONIVEL), new Espaco(4, "Campo 4", new Esporte(4, "Voley"), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL));
         ReservaDAO.salvar(reserva4);
-        Reserva reserva5 = new Reserva(5, "Reserva5",LocalDate.now(), LocalDate.now() , LocalDate.now(), new UsuarioCliente(5, "Carlos", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO, new Material(5, "Plástico", EnumStatusMaterial.DISPONIVEL), new Espaco(5, "Campo 5", new Esporte(5, "Corrida")));
+        Reserva reserva5 = new Reserva(5, "Reserva5",LocalDate.now(), LocalDate.now() , LocalDate.now(), new UsuarioCliente(5, "Carlos", "48996638183", "65161621951", "123456", true), EnumStatusReserva.ABERTO, new Material(5, "Plástico", EnumStatusMaterial.DISPONIVEL), new Espaco(5, "Campo 5", new Esporte(5, "Corrida"), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL));
         ReservaDAO.salvar(reserva5);
     }
 }

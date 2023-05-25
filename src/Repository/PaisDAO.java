@@ -35,4 +35,7 @@ public class PaisDAO {
 
         return paisNomes.toArray();
     }
+    public static Integer canculaCodigo(){
+        return paises.size() + 1;
+    }
 }

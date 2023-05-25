@@ -11,7 +11,6 @@ public class Reserva {
     private LocalDate dataAlocacaoFim;
     private UsuarioCliente usuarioCliente;
     private EnumStatusReserva enumStatusReserva;
-
     private Material material;
     private Espaco espaco;
 

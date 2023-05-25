@@ -1,11 +1,13 @@
 package Model;
 
+import java.time.LocalDate;
+
 public class Esporte {
     private Integer codigoEsporte;
     private String nomeEsporte;
 
-    public Esporte(Integer codigo, String nomeEsporte) {
-        this.codigoEsporte = codigo;
+    public Esporte(Integer codigoEsporte, String nomeEsporte) {
+        this.codigoEsporte = codigoEsporte;
         this.nomeEsporte = nomeEsporte;
     }
 

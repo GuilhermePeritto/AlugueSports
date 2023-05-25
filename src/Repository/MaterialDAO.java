@@ -39,4 +39,7 @@ public class MaterialDAO {
 
         return materiaisNomes.toArray();
     }
+    public static Integer canculaCodigo(){
+        return materialList.size() + 1;
+    }
 }

@@ -32,4 +32,7 @@ public class UsuarioClienteDAO {
 
         return clienteNomes.toArray();
     }
+    public static Integer canculaCodigo(){
+        return usuarioClientes.size() + 1;
+    }
 }

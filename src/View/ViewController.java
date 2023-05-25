@@ -8,14 +8,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static Repository.ReservaDAO.reservarMaterial;
-import static Repository.ReservaDAO.verificarDisponibilidade;
+import static Repository.ReservaDAO.*;
 
 public class ViewController extends View {
 
     public static void cadastroUsuarioCliente() {
         try {
-            Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo"));
+            Integer codigo = UsuarioClienteDAO.canculaCodigo();
             String nome = JOptionPane.showInputDialog(null, "Digite o nome");
             String telefone = JOptionPane.showInputDialog(null, "Digite o telefone");
             String cpf = JOptionPane.showInputDialog(null, "Digite o cpf");
@@ -29,39 +28,39 @@ public class ViewController extends View {
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
-            cadastroUsuarioCliente();
+            chamaMenuPrincipal();
         }
     }
 
     public static void cadastroEsporte() {
         try {
-            Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do esporte"));
+            Integer codigo = EsporteDAO.canculaCodigo();
             String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
             Esporte esporte = new Esporte(codigo, nomeEsporte);
             EsporteDAO.salvar(esporte);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
-            cadastroEsporte();
+            chamaMenuPrincipal();
         }
     }
 
     public static void cadastroPais() {
         try {
-            Integer codigoPais = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do país"));
+            Integer codigoPais = PaisDAO.canculaCodigo();
             String nomePais = JOptionPane.showInputDialog(null, "Digite o nome do país");
             Pais pais = new Pais(codigoPais, nomePais);
             PaisDAO.salvar(pais);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
-            cadastroPais();
+            chamaMenuPrincipal();
         }
     }
 
     public static void cadastroEstado() {
         try {
-            Integer codigoEstado = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o codigo do estado"));
+            Integer codigoEstado = EstadoDAO.canculaCodigo();
             String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado");
             String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado");
             Object[] selectionValuesPais = PaisDAO.findPaisInArray();
@@ -74,13 +73,13 @@ public class ViewController extends View {
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
-            cadastroEstado();
+            chamaMenuPrincipal();
         }
     }
 
     public static void cadastroMaterial() {
         try {
-            Integer codigoMaterial = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do material"));
+            Integer codigoMaterial = MaterialDAO.canculaCodigo();
             String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
 
             Object[] selectionStatusMaterial = {"ALUGADO", "DISPONIVEL"};
@@ -99,31 +98,59 @@ public class ViewController extends View {
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
-            cadastroMaterial();
+            chamaMenuPrincipal();
         }
     }
 
     public static void cadastroEspaco() {
         try {
-            Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código do espaco"));
+            Integer codigo = EspacoDAO.canculaCodigo();
             String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaco");
             Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
             String initialSelectionEsporte = (String) selectionValuesEsporte[0];
             Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione tipo de esporte?",
                     "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
             List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
-            Espaco espaco = new Espaco(codigo, nomeEspaco, esporte.get(0));
+
+            LocalDate dataReservaInicio = LocalDate.now();
+            String imputDataReservaInicio = JOptionPane.showInputDialog(null, "Digite a data de inicio da reserva");
+            try {
+                dataReservaInicio = LocalDate.parse(imputDataReservaInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
+            }
+
+            LocalDate dataReservaFim = LocalDate.now();
+            String imputDataReservaFim = JOptionPane.showInputDialog(null, "Digite a data de fim da reserva");
+            try {
+                dataReservaFim = LocalDate.parse(imputDataReservaFim, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
+            }
+
+            Object[] selectionStatusEspaco = {"ALUGADO", "DISPONIVEL"};
+            String initialSelectionStatusEspaco = (String) selectionStatusEspaco[0];
+            Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status do espaco!",
+                    "Lista de Status", JOptionPane.QUESTION_MESSAGE, null, selectionStatusEspaco, initialSelectionStatusEspaco);
+            EnumStatusEspaco statusEspaco = EnumStatusEspaco.DISPONIVEL;
+            if (selectionStatus.equals("ALUGADO")) {
+                statusEspaco = EnumStatusEspaco.ALUGADO;
+            } else if (selectionStatus.equals("DISPONIVEL")) {
+                statusEspaco = EnumStatusEspaco.DISPONIVEL;
+            }
+
+            Espaco espaco = new Espaco(codigo, nomeEspaco, esporte.get(0), dataReservaInicio, dataReservaFim, statusEspaco);
             EspacoDAO.salvar(espaco);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
-            cadastroEspaco();
+            chamaMenuPrincipal();
         }
     }
 
     public static void cadastroReserva() {
         try {
-            Integer codigo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o código da reserva"));
+            Integer codigoReserva = ReservaDAO.canculaCodigo();
             String titulo = JOptionPane.showInputDialog(null, "Digite o titulo da reserva");
             //DATA RESERVA
             LocalDate dataReservaInicio = LocalDate.now();
@@ -165,23 +192,24 @@ public class ViewController extends View {
             Object selectionEspaco = JOptionPane.showInputDialog(null, "Selecione o espaco?",
                     "Alugar espaco", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEspaco, initialSelectionEspaco);
             List<Espaco> espaco = EspacoDAO.buscarPorNome((String) selectionEspaco);
-
+            verificarDisponibilidadeEspaco(espaco.get(0), dataReservaInicio, dataReservaFim);
+            reservarEspaco(espaco.get(0), dataReservaInicio, dataReservaFim);
             Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
             String initialSelectionMaterial = (String) selectionValuesMaterial[0];
             Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material?",
                     "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
             List<Material> material = MaterialDAO.buscarPorNome((String) selectionMaterial);
-            verificarDisponibilidade(material.get(0), dataReservaInicio, dataReservaFim);
+            verificarDisponibilidadeMaterial(material.get(0), dataReservaInicio, dataReservaFim);
             reservarMaterial(material.get(0), dataReservaInicio, dataReservaFim);
-            if (!verificarDisponibilidade(material.get(0), dataReservaInicio, dataReservaFim)) {
+            if (!verificarDisponibilidadeMaterial(material.get(0), dataReservaInicio, dataReservaFim)) {
                 listBoxCadastros();
             }
-            Reserva reserva = new Reserva(codigo, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim,usuarioCliente.get(0), statusReserva, material.get(0), espaco.get(0));
+            Reserva reserva = new Reserva(codigoReserva, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim,usuarioCliente.get(0), statusReserva, material.get(0), espaco.get(0));
             ReservaDAO.salvar(reserva);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
-            cadastroReserva();
+            chamaMenuPrincipal();
         }
     }
 

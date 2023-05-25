@@ -35,4 +35,8 @@ public class EspacoDAO {
 
         return espacoNomes.toArray();
     }
+
+    public static Integer canculaCodigo(){
+        return espacos.size() + 1;
+    }
 }
