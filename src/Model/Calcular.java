@@ -1,3 +1,5 @@
+package Model;
+
 import java.math.BigDecimal;
 public class Calcular {
     public static BigDecimal somar(Double... valores) {

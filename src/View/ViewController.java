@@ -4,6 +4,7 @@ import Model.*;
 import Repository.*;
 
 import javax.swing.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -92,8 +93,8 @@ public class ViewController extends View {
             } else if (selectionStatus.equals("DISPONIVEL")) {
                 statusMaterial = EnumStatusMaterial.DISPONIVEL;
             }
-
-            Material material = new Material(codigoMaterial, nomeMaterial, statusMaterial);
+            Double valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor do material"));
+            Material material = new Material(codigoMaterial, nomeMaterial, statusMaterial, valor);
             MaterialDAO.salvar(material);
             chamaMenuPrincipal();
         } catch (Exception e) {
@@ -138,8 +139,8 @@ public class ViewController extends View {
             } else if (selectionStatus.equals("DISPONIVEL")) {
                 statusEspaco = EnumStatusEspaco.DISPONIVEL;
             }
-
-            Espaco espaco = new Espaco(codigo, nomeEspaco, esporte.get(0), dataReservaInicio, dataReservaFim, statusEspaco);
+            Double valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor do espaco"));
+            Espaco espaco = new Espaco(codigo, nomeEspaco, esporte.get(0), dataReservaInicio, dataReservaFim, statusEspaco, valor);
             EspacoDAO.salvar(espaco);
             chamaMenuPrincipal();
         } catch (Exception e) {
@@ -204,7 +205,9 @@ public class ViewController extends View {
             if (!verificarDisponibilidadeMaterial(material.get(0), dataReservaInicio, dataReservaFim)) {
                 listBoxCadastros();
             }
-            Reserva reserva = new Reserva(codigoReserva, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim,usuarioCliente.get(0), statusReserva, material.get(0), espaco.get(0));
+            Double diasReserva = calculardias(dataReservaInicio, dataReservaFim);
+            Double valorReserva = calcularValor(material.get(0),espaco.get(0), diasReserva);
+            Reserva reserva = new Reserva(codigoReserva, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim,usuarioCliente.get(0), statusReserva, material.get(0), espaco.get(0), valorReserva);
             ReservaDAO.salvar(reserva);
             chamaMenuPrincipal();
         } catch (Exception e) {
@@ -246,6 +249,15 @@ public class ViewController extends View {
         JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
     }
 
+    public static void verificarReputacaoCliente() {
+        Object[] selectionValuesUsuarioCliente = UsuarioClienteDAO.findUsuarioClienteInArray();
+        String initialSelectionUsuarioCliente = (String) selectionValuesUsuarioCliente[0];
+        Object selectionUsuarioCliente = JOptionPane.showInputDialog(null, "Selecione o cliente?",
+                "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesUsuarioCliente, initialSelectionUsuarioCliente);
+        List<UsuarioCliente> usuarioCliente = UsuarioClienteDAO.buscarPorNome((String) selectionUsuarioCliente);
+        verificarCliente(usuarioCliente.get(0));
+    }
+
     public static void listBoxCadastros() {
         try {
             Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
@@ -285,7 +297,7 @@ public class ViewController extends View {
 
     public static void listBoxProcessos() {
         try {
-            Object[] selectionValues = {"Cancelar Reserva", "Alugar Material", "Cancelar Aluguel de material"};
+            Object[] selectionValues = {"Cancelar Reserva", "Alugar Material", "Cancelar Aluguel de material", "Verificar reputação do cliente"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo?",
                     "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -299,6 +311,9 @@ public class ViewController extends View {
                     break;
                 case "Cancelar Aluguel de material":
                     cancelarAluguelMaterial();
+                    break;
+                    case "Verificar reputação do cliente":
+                    verificarReputacaoCliente();
                     break;
 
                 default:

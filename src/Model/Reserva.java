@@ -1,5 +1,6 @@
 package Model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Reserva {
@@ -13,8 +14,9 @@ public class Reserva {
     private EnumStatusReserva enumStatusReserva;
     private Material material;
     private Espaco espaco;
+    private Double valorReserva;
 
-    public Reserva(Integer codigoReserva, String tituloReserva, LocalDate dataSolicitacao, LocalDate dataAlocacaoInicio, LocalDate dataAlocacaoFim, UsuarioCliente usuarioCliente, EnumStatusReserva enumStatusReserva, Material material, Espaco espaco) {
+    public Reserva(Integer codigoReserva, String tituloReserva, LocalDate dataSolicitacao, LocalDate dataAlocacaoInicio, LocalDate dataAlocacaoFim, UsuarioCliente usuarioCliente, EnumStatusReserva enumStatusReserva, Material material, Espaco espaco, Double valorReserva) {
         this.codigoReserva = codigoReserva;
         this.tituloReserva = tituloReserva;
         this.dataSolicitacao = dataSolicitacao;
@@ -24,6 +26,7 @@ public class Reserva {
         this.enumStatusReserva = enumStatusReserva;
         this.material = material;
         this.espaco = espaco;
+        this.valorReserva = valorReserva;
     }
 
     public Integer getCodigoReserva() {
@@ -98,6 +101,14 @@ public class Reserva {
         this.espaco = espaco;
     }
 
+    public Double getValorReserva() {
+        return valorReserva;
+    }
+
+    public void setValorReserva(Double valorReserva) {
+        this.valorReserva = valorReserva;
+    }
+
     @Override
     public String toString() {
         return "Reserva{" +
@@ -110,6 +121,7 @@ public class Reserva {
                 ", enumStatusReserva=" + enumStatusReserva +
                 ", material=" + material +
                 ", espaco=" + espaco +
+                ", valorReserva=" + valorReserva +
                 '}';
     }
 }

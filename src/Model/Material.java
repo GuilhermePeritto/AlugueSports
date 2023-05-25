@@ -1,15 +1,16 @@
 package Model;
 
 public class Material {
-    Integer codigoMaterial;
-    String nomeMaterial;
+    private Integer codigoMaterial;
+    private String nomeMaterial;
+    private EnumStatusMaterial enumStatusMaterial;
+    private Double valorMaterial;
 
-    EnumStatusMaterial enumStatusMaterial;
-
-    public Material(Integer codigoMaterial, String nomeMaterial, EnumStatusMaterial enumStatusMaterial) {
+    public Material(Integer codigoMaterial, String nomeMaterial, EnumStatusMaterial enumStatusMaterial, Double valorMaterial) {
         this.codigoMaterial = codigoMaterial;
         this.nomeMaterial = nomeMaterial;
         this.enumStatusMaterial = enumStatusMaterial;
+        this.valorMaterial = valorMaterial;
     }
 
     public Integer getCodigoMaterial() {
@@ -36,12 +37,21 @@ public class Material {
         this.enumStatusMaterial = enumStatusMaterial;
     }
 
+    public Double getValorMaterial() {
+        return valorMaterial;
+    }
+
+    public void setValorMaterial(Double valorMaterial) {
+        this.valorMaterial = valorMaterial;
+    }
+
     @Override
     public String toString() {
         return "Material{" +
                 "codigoMaterial=" + codigoMaterial +
                 ", nomeMaterial='" + nomeMaterial + '\'' +
                 ", enumStatusMaterial=" + enumStatusMaterial +
+                ", valorMaterial=" + valorMaterial +
                 '}';
     }
 }

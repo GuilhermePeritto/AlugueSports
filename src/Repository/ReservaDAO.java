@@ -3,18 +3,24 @@ package Repository;
 import Model.*;
 
 import javax.swing.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReservaDAO {
     static List<Reserva> usuarioReserva = new ArrayList<>();
-    public  static void salvar(Reserva reserva) {
+
+    public static void salvar(Reserva reserva) {
         usuarioReserva.add(reserva);
     }
-    public static List<Reserva> buscaTodos(){
+
+    public static List<Reserva> buscaTodos() {
         return usuarioReserva;
     }
+
     public static void cancelar(Reserva reserva) {
         reserva.setEnumStatusReserva(EnumStatusReserva.CANCELADO);
     }
@@ -127,8 +133,34 @@ public class ReservaDAO {
         JOptionPane.showMessageDialog(null, "Espaco disponível para o dia especificado.");
         return true;
     }
-    public static Integer canculaCodigo(){
+
+    public static Integer canculaCodigo() {
         return usuarioReserva.size() + 1;
     }
 
+    public static Double calculardias(LocalDate dataInicio, LocalDate dataFim) {
+        LocalDateTime dataInicialTempoZero = dataInicio.atStartOfDay();
+        LocalDateTime dataFinalTempoZero = dataInicio.atStartOfDay();
+
+        long diferencaEmSegundos = ChronoUnit.SECONDS.between(dataInicialTempoZero, dataFinalTempoZero);
+        double diferencaEmDias = diferencaEmSegundos / (24.0 * 60 * 60);
+
+        return diferencaEmDias;
+    }
+
+    public static Double calcularValor(Material material, Espaco espaco, Double diasReserva) {
+        return Calcular.somar(Calcular.multiplicar(material.getValorMaterial(), diasReserva).doubleValue(), Calcular.multiplicar(espaco.getValorEspaco(), diasReserva).doubleValue()).doubleValue();
+    }
+
+    public static void verificarCliente(UsuarioCliente usuarioCliente) {
+        if (usuarioReserva.get(usuarioCliente.getCodigo()).getDataAlocacaoFim().isBefore(LocalDate.now())) {
+            JOptionPane.showMessageDialog(null, "Cliente Malandro!");
+        }
+        else if (usuarioReserva.get(usuarioCliente.getCodigo()).getDataAlocacaoFim().isAfter(LocalDate.now())) {
+            JOptionPane.showMessageDialog(null, "Cliente ja tem reservas nos dias " + usuarioReserva.get(usuarioCliente.getCodigo()).getDataAlocacaoInicio() + " a " + usuarioReserva.get(usuarioCliente.getCodigo()).getDataAlocacaoFim());
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Cliente nao tem reservas");
+        }
+    }
 }
