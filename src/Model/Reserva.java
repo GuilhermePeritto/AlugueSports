@@ -1,6 +1,5 @@
 package Model;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Reserva {
@@ -10,19 +9,19 @@ public class Reserva {
     private LocalDate dataSolicitacao;
     private LocalDate dataAlocacaoInicio;
     private LocalDate dataAlocacaoFim;
-    private UsuarioCliente usuarioCliente;
+    private Cliente cliente;
     private EnumStatusReserva enumStatusReserva;
     private Material material;
     private Espaco espaco;
     private Double valorReserva;
 
-    public Reserva(Integer codigoReserva, String tituloReserva, LocalDate dataSolicitacao, LocalDate dataAlocacaoInicio, LocalDate dataAlocacaoFim, UsuarioCliente usuarioCliente, EnumStatusReserva enumStatusReserva, Material material, Espaco espaco, Double valorReserva) {
+    public Reserva(Integer codigoReserva, String tituloReserva, LocalDate dataSolicitacao, LocalDate dataAlocacaoInicio, LocalDate dataAlocacaoFim, Cliente cliente, EnumStatusReserva enumStatusReserva, Material material, Espaco espaco, Double valorReserva) {
         this.codigoReserva = codigoReserva;
         this.tituloReserva = tituloReserva;
         this.dataSolicitacao = dataSolicitacao;
         this.dataAlocacaoInicio = dataAlocacaoInicio;
         this.dataAlocacaoFim = dataAlocacaoFim;
-        this.usuarioCliente = usuarioCliente;
+        this.cliente = cliente;
         this.enumStatusReserva = enumStatusReserva;
         this.material = material;
         this.espaco = espaco;
@@ -69,12 +68,12 @@ public class Reserva {
         this.dataAlocacaoFim = dataAlocacaoFim;
     }
 
-    public UsuarioCliente getUsuarioCliente() {
-        return usuarioCliente;
+    public Cliente getUsuarioCliente() {
+        return cliente;
     }
 
-    public void setUsuarioCliente(UsuarioCliente usuarioCliente) {
-        this.usuarioCliente = usuarioCliente;
+    public void setUsuarioCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public EnumStatusReserva getEnumStatusReserva() {
@@ -117,7 +116,7 @@ public class Reserva {
                 ", dataSolicitacao=" + dataSolicitacao +
                 ", dataAlocacaoInicio=" + dataAlocacaoInicio +
                 ", dataAlocacaoFim=" + dataAlocacaoFim +
-                ", usuarioCliente=" + usuarioCliente +
+                ", usuarioCliente=" + cliente +
                 ", enumStatusReserva=" + enumStatusReserva +
                 ", material=" + material +
                 ", espaco=" + espaco +

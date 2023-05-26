@@ -3,7 +3,6 @@ package Repository;
 import Model.*;
 
 import javax.swing.*;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -152,12 +151,12 @@ public class ReservaDAO {
         return Calcular.somar(Calcular.multiplicar(material.getValorMaterial(), diasReserva).doubleValue(), Calcular.multiplicar(espaco.getValorEspaco(), diasReserva).doubleValue()).doubleValue();
     }
 
-    public static void verificarCliente(UsuarioCliente usuarioCliente) {
-        if (usuarioReserva.get(usuarioCliente.getCodigo()).getDataAlocacaoFim().isBefore(LocalDate.now())) {
+    public static void verificarCliente(Cliente cliente) {
+        if (usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoFim().isBefore(LocalDate.now())) {
             JOptionPane.showMessageDialog(null, "Cliente Malandro!");
         }
-        else if (usuarioReserva.get(usuarioCliente.getCodigo()).getDataAlocacaoFim().isAfter(LocalDate.now())) {
-            JOptionPane.showMessageDialog(null, "Cliente ja tem reservas nos dias " + usuarioReserva.get(usuarioCliente.getCodigo()).getDataAlocacaoInicio() + " a " + usuarioReserva.get(usuarioCliente.getCodigo()).getDataAlocacaoFim());
+        else if (usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoFim().isAfter(LocalDate.now())) {
+            JOptionPane.showMessageDialog(null, "Cliente ja tem reservas nos dias " + usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoInicio() + " a " + usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoFim());
         }
         else {
             JOptionPane.showMessageDialog(null, "Cliente nao tem reservas");

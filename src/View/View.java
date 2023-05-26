@@ -1,7 +1,6 @@
 package View;
 
-import Repository.ReservaDAO;
-import Repository.UsuarioClienteDAO;
+import Repository.ClienteDAO;
 
 import javax.swing.*;
 
@@ -25,7 +24,7 @@ public class View {
                     listBoxProcessos();
                     break;
                 case 2: //Relatorios
-                    JOptionPane.showMessageDialog(null, UsuarioClienteDAO.buscaTodos());
+                    JOptionPane.showMessageDialog(null, ClienteDAO.buscaTodos());
                     chamaMenuPrincipal();
                     break;
                 case 3: //SAIR
