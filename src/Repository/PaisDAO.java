@@ -1,7 +1,6 @@
 
 package Repository;
         import Model.Pais;
-        import Model.UsuarioCliente;
 
         import java.util.ArrayList;
         import java.util.List;
@@ -34,5 +33,8 @@ public class PaisDAO {
         }
 
         return paisNomes.toArray();
+    }
+    public static Integer canculaCodigo(){
+        return paises.size() + 1;
     }
 }

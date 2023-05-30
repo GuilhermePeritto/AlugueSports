@@ -1,10 +1,11 @@
 package View;
 
-import Repository.UsuarioClienteDAO;
+import Repository.ClienteDAO;
 
 import javax.swing.*;
 
 import static View.ViewController.listBoxCadastros;
+import static View.ViewController.listBoxProcessos;
 
 import IniciadorDeValores.*;
 
@@ -20,10 +21,10 @@ public class View {
                     listBoxCadastros();
                     break;
                 case 1: //Processos
-
+                    listBoxProcessos();
                     break;
                 case 2: //Relatorios
-                    JOptionPane.showMessageDialog(null, UsuarioClienteDAO.buscaTodos());
+                    JOptionPane.showMessageDialog(null, ClienteDAO.buscaTodos());
                     chamaMenuPrincipal();
                     break;
                 case 3: //SAIR

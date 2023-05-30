@@ -5,18 +5,27 @@ import java.time.LocalDate;
 public class Reserva {
 
     private Integer codigoReserva;
+    private String tituloReserva;
     private LocalDate dataSolicitacao;
-    private LocalDate dataAlocacao;
-    private UsuarioCliente usuarioCliente;
+    private LocalDate dataAlocacaoInicio;
+    private LocalDate dataAlocacaoFim;
+    private Cliente cliente;
     private EnumStatusReserva enumStatusReserva;
+    private Material material;
+    private Espaco espaco;
+    private Double valorReserva;
 
-
-    public Reserva(Integer codigoReserva, LocalDate dataSolicitacao, LocalDate dataAlocacao, UsuarioCliente usuarioCliente, EnumStatusReserva enumStatusReserva) {
+    public Reserva(Integer codigoReserva, String tituloReserva, LocalDate dataSolicitacao, LocalDate dataAlocacaoInicio, LocalDate dataAlocacaoFim, Cliente cliente, EnumStatusReserva enumStatusReserva, Material material, Espaco espaco, Double valorReserva) {
         this.codigoReserva = codigoReserva;
+        this.tituloReserva = tituloReserva;
         this.dataSolicitacao = dataSolicitacao;
-        this.dataAlocacao = dataAlocacao;
-        this.usuarioCliente = usuarioCliente;
+        this.dataAlocacaoInicio = dataAlocacaoInicio;
+        this.dataAlocacaoFim = dataAlocacaoFim;
+        this.cliente = cliente;
         this.enumStatusReserva = enumStatusReserva;
+        this.material = material;
+        this.espaco = espaco;
+        this.valorReserva = valorReserva;
     }
 
     public Integer getCodigoReserva() {
@@ -27,6 +36,14 @@ public class Reserva {
         this.codigoReserva = codigoReserva;
     }
 
+    public String getTituloReserva() {
+        return tituloReserva;
+    }
+
+    public void setTituloReserva(String tituloReserva) {
+        this.tituloReserva = tituloReserva;
+    }
+
     public LocalDate getDataSolicitacao() {
         return dataSolicitacao;
     }
@@ -35,34 +52,75 @@ public class Reserva {
         this.dataSolicitacao = dataSolicitacao;
     }
 
-    public LocalDate getDataAlocacao() {
-        return dataAlocacao;
+    public LocalDate getDataAlocacaoInicio() {
+        return dataAlocacaoInicio;
     }
 
-    public void setDataAlocacao(LocalDate dataAlocacao) {
-        this.dataAlocacao = dataAlocacao;
+    public void setDataAlocacaoInicio(LocalDate dataAlocacaoInicio) {
+        this.dataAlocacaoInicio = dataAlocacaoInicio;
     }
 
-    public UsuarioCliente getUsuarioCliente() {
-        return usuarioCliente;
+    public LocalDate getDataAlocacaoFim() {
+        return dataAlocacaoFim;
     }
 
-    public void setUsuarioCliente(UsuarioCliente usuarioCliente) {
-        this.usuarioCliente = usuarioCliente;
+    public void setDataAlocacaoFim(LocalDate dataAlocacaoFim) {
+        this.dataAlocacaoFim = dataAlocacaoFim;
+    }
+
+    public Cliente getUsuarioCliente() {
+        return cliente;
+    }
+
+    public void setUsuarioCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public EnumStatusReserva getEnumStatusReserva() {
         return enumStatusReserva;
     }
 
+    public void setEnumStatusReserva(EnumStatusReserva enumStatusReserva) {
+        this.enumStatusReserva = enumStatusReserva;
+    }
+
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
+
+    public Espaco getEspaco() {
+        return espaco;
+    }
+
+    public void setEspaco(Espaco espaco) {
+        this.espaco = espaco;
+    }
+
+    public Double getValorReserva() {
+        return valorReserva;
+    }
+
+    public void setValorReserva(Double valorReserva) {
+        this.valorReserva = valorReserva;
+    }
+
     @Override
     public String toString() {
         return "Reserva{" +
-                "codigo=" + codigoReserva +
+                "codigoReserva=" + codigoReserva +
+                ", tituloReserva='" + tituloReserva + '\'' +
                 ", dataSolicitacao=" + dataSolicitacao +
-                ", dataAlocacao=" + dataAlocacao +
-                ", usuarioCliente=" + usuarioCliente +
+                ", dataAlocacaoInicio=" + dataAlocacaoInicio +
+                ", dataAlocacaoFim=" + dataAlocacaoFim +
+                ", usuarioCliente=" + cliente +
                 ", enumStatusReserva=" + enumStatusReserva +
+                ", material=" + material +
+                ", espaco=" + espaco +
+                ", valorReserva=" + valorReserva +
                 '}';
     }
 }

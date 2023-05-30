@@ -1,22 +1,32 @@
 package Model;
 
+import java.time.LocalDate;
+
 public class Espaco {
     private Integer codigoEspaco;
     private String nomeEspaco;
     private Esporte esporte;
+    private LocalDate dataInicioReserva;
+    private LocalDate dataFimReserva;
+    private EnumStatusEspaco enumStatusEspaco;
+    private Double valorEspaco;
 
-    public Espaco(Integer codigo, String nomeEspaco, Esporte esporte) {
-        this.codigoEspaco = codigo;
+    public Espaco(Integer codigoEspaco, String nomeEspaco, Esporte esporte, LocalDate dataInicioReserva, LocalDate dataFimReserva, EnumStatusEspaco enumStatusEspaco, Double valorEspaco) {
+        this.codigoEspaco = codigoEspaco;
         this.nomeEspaco = nomeEspaco;
         this.esporte = esporte;
+        this.dataInicioReserva = dataInicioReserva;
+        this.dataFimReserva = dataFimReserva;
+        this.enumStatusEspaco = enumStatusEspaco;
+        this.valorEspaco = valorEspaco;
     }
 
-    public Integer getCodigo() {
+    public Integer getCodigoEspaco() {
         return codigoEspaco;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigoEspaco = codigo;
+    public void setCodigoEspaco(Integer codigoEspaco) {
+        this.codigoEspaco = codigoEspaco;
     }
 
     public String getNomeEspaco() {
@@ -35,12 +45,47 @@ public class Espaco {
         this.esporte = esporte;
     }
 
+    public LocalDate getDataInicioReserva() {
+        return dataInicioReserva;
+    }
+
+    public void setDataInicioReserva(LocalDate dataInicioReserva) {
+        this.dataInicioReserva = dataInicioReserva;
+    }
+
+    public LocalDate getDataFimReserva() {
+        return dataFimReserva;
+    }
+
+    public void setDataFimReserva(LocalDate dataFimReserva) {
+        this.dataFimReserva = dataFimReserva;
+    }
+
+    public EnumStatusEspaco getEnumStatusEspaco() {
+        return enumStatusEspaco;
+    }
+
+    public void setEnumStatusEspaco(EnumStatusEspaco enumStatusEspaco) {
+        this.enumStatusEspaco = enumStatusEspaco;
+    }
+
+    public Double getValorEspaco() {
+        return valorEspaco;
+    }
+
+    public void setValorEspaco(Double valorEspaco) {
+        this.valorEspaco = valorEspaco;
+    }
     @Override
     public String toString() {
         return "Espaco{" +
-                "codigo=" + codigoEspaco +
+                "codigoEspaco=" + codigoEspaco +
                 ", nomeEspaco='" + nomeEspaco + '\'' +
                 ", esporte=" + esporte +
+                ", dataInicioReserva=" + dataInicioReserva +
+                ", dataFimReserva=" + dataFimReserva +
+                ", enumStatusEspaco=" + enumStatusEspaco +
+                ", valorEspaco=" + valorEspaco +
                 '}';
     }
 }

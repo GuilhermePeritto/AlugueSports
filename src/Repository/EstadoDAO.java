@@ -14,5 +14,8 @@ public class EstadoDAO {
     public static List<Estado> buscaEspacos(){
         return estados;
     }
+    public static Integer canculaCodigo(){
+        return estados.size() + 1;
+    }
 
 }
