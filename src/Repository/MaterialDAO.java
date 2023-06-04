@@ -1,6 +1,7 @@
 package Repository;
 import Model.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class MaterialDAO {
     public static void cancelarAluguel(Material material) {
         material.setEnumStatusMaterial(EnumStatusMaterial.DISPONIVEL);
     }
+
     public static List<Material> buscarPorNome(String nome) {
         List<Material> materiaisFiltrados = new ArrayList<>();
         for (Material material : materialList) {
