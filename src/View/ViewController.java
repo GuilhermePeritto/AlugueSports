@@ -98,8 +98,16 @@ public class ViewController extends View {
         try {
             Integer codigoMaterial = MaterialDAO.canculaCodigo();
             String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
-            verificaRegistroNullo(nomeMaterial);
-            Object[] selectionStatusMaterial = {"ALUGADO", "DISPONIVEL"};
+            while (nomeMaterial == null || nomeMaterial.toString().isEmpty()){
+                nomeMaterial = JOptionPane.showInputDialog(null, " Campo vazio \n Digite o nome do material");
+                if(nomeMaterial == null){
+                    JOptionPane.showMessageDialog(null, "Cancelar .");
+                    chamaMenuPrincipal();
+                }
+            }
+            //MaterialDAO.verificaCampoNulo(nomeMaterial);
+            //verificaRegistroNullo(nomeMaterial);
+            Object[] selectionStatusMaterial = {"ALUGADO", "DISPONIVEL", "CONSERTO", "DESCARTADO"};
             String initialSelectionStatusMaterial = (String) selectionStatusMaterial[0];
             Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status do material",
                     "Lista de Status", JOptionPane.QUESTION_MESSAGE, null, selectionStatusMaterial, initialSelectionStatusMaterial);
@@ -108,16 +116,34 @@ public class ViewController extends View {
                 statusMaterial = EnumStatusMaterial.ALUGADO;
             } else if (selectionStatus.equals("DISPONIVEL")) {
                 statusMaterial = EnumStatusMaterial.DISPONIVEL;
+            } else if (selectionStatus.equals("CONSERTO")) {
+                statusMaterial = EnumStatusMaterial.CONSERTO;
+            } else if (selectionStatus.equals("DESCARTADO")) {
+                statusMaterial = EnumStatusMaterial.DESCARTADO;
             }
-            verificaRegistroNullo(selectionStatus);
-            Double valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor do material"));
-            verificaRegistroNullo(valor);
+
+            //verificaRegistroNullo(selectionStatus);
+            //Double valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor do material"));
+            String valorStr = JOptionPane.showInputDialog(null, "Digite o valor do material");
+            while (valorStr == null || valorStr.toString().isEmpty()){
+                valorStr = JOptionPane.showInputDialog(null, " Campo vazio \n Digite o valor do material");
+                if(valorStr == null){
+                    JOptionPane.showMessageDialog(null, "Cancelar .");
+                    chamaMenuPrincipal();
+                }
+            }
+            double valor = Double.parseDouble(valorStr);
+
+
+            //verificaRegistroNullo(valor);
             Material material = new Material(codigoMaterial, nomeMaterial, statusMaterial, valor);
             MaterialDAO.salvar(material);
             JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"error" + e);
             chamaMenuPrincipal();
         }
     }
@@ -295,9 +321,10 @@ public class ViewController extends View {
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro",
                     "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
 
-            switch ((String) selection) {
-                case "Cliente":
-                    cadastroCliente();
+
+                        switch ((String) selection) {
+                            case "Cliente":
+                                cadastroCliente();
                     break;
                 case "Esporte":
                     cadastroEsporte();
