@@ -34,7 +34,7 @@ public class ViewController extends View {
             verificaRegistroNullo(rg);
             Cliente pessoa = new Cliente(codigo, nome, nascimento, telefone, cpf, rg);
             ClienteDAO.salvar(pessoa);
-            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -48,7 +48,7 @@ public class ViewController extends View {
             String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
             Esporte esporte = new Esporte(codigo, nomeEsporte);
             EsporteDAO.salvar(esporte);
-            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -63,7 +63,7 @@ public class ViewController extends View {
             verificaRegistroNullo(nomePais);
             Pais pais = new Pais(codigoPais, nomePais);
             PaisDAO.salvar(pais);
-            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -86,7 +86,7 @@ public class ViewController extends View {
             verificaRegistroNullo(selectionPais);
             Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
             EstadoDAO.salvar(estado);
-            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -114,7 +114,7 @@ public class ViewController extends View {
             verificaRegistroNullo(valor);
             Material material = new Material(codigoMaterial, nomeMaterial, statusMaterial, valor);
             MaterialDAO.salvar(material);
-            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -164,7 +164,7 @@ public class ViewController extends View {
             verificaRegistroNullo(valor);
             Espaco espaco = new Espaco(codigo, nomeEspaco, esporte.get(0), dataReservaInicio, dataReservaFim, statusEspaco, valor);
             EspacoDAO.salvar(espaco);
-            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -234,7 +234,7 @@ public class ViewController extends View {
             Double valorReserva = calcularValor(material.get(0), espaco.get(0), diasReserva);
             Reserva reserva = new Reserva(codigoReserva, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim, cliente.get(0), statusReserva, material.get(0), espaco.get(0), valorReserva);
             ReservaDAO.salvar(reserva);
-            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.OK_OPTION);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -250,7 +250,7 @@ public class ViewController extends View {
         List<Reserva> reserva = ReservaDAO.buscarPorNome((String) selectionReserva);
         verificaRegistroNullo(selectionReserva);
         ReservaDAO.cancelar(reserva.get(0));
-        JOptionPane.showMessageDialog(null, "Reserva cancelada com sucesso!", "Cancelamento", JOptionPane.OK_OPTION);
+        JOptionPane.showMessageDialog(null, "Reserva cancelada com sucesso!", "Cancelamento", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(null, ReservaDAO.buscaTodos());
     }
 
@@ -262,7 +262,7 @@ public class ViewController extends View {
         List<Material> alugarMaterial = MaterialDAO.buscarPorNome((String) selectionMaterial);
         verificaRegistroNullo(selectionMaterial);
         MaterialDAO.alugarMaterial(alugarMaterial.get(0));
-        JOptionPane.showMessageDialog(null, "Material alugado com sucesso!", "Alugado", JOptionPane.OK_OPTION);
+        JOptionPane.showMessageDialog(null, "Material alugado com sucesso!", "Alugado", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
     }
 
@@ -274,7 +274,7 @@ public class ViewController extends View {
         List<Material> alugarMaterial = MaterialDAO.buscarPorNome((String) selectionMaterial);
         verificaRegistroNullo(selectionMaterial);
         MaterialDAO.cancelarAluguel(alugarMaterial.get(0));
-        JOptionPane.showMessageDialog(null, "Aluguel de material cancelado com sucesso!", "Alugado", JOptionPane.OK_OPTION);
+        JOptionPane.showMessageDialog(null, "Aluguel de material cancelado com sucesso!", "Alugado", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
     }
 
