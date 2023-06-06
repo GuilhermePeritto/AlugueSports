@@ -8,6 +8,7 @@ import static View.ViewController.listBoxCadastros;
 import static View.ViewController.listBoxProcessos;
 
 import IniciadorDeValores.*;
+import Repository.EsporteDAO;
 import Repository.MaterialDAO;
 
 public class View {
@@ -25,6 +26,7 @@ public class View {
                     listBoxProcessos();
                     break;
                 case 2: //Relatorios
+                    JOptionPane.showMessageDialog(null, EsporteDAO.buscaTodos());
                      JOptionPane.showMessageDialog(null, ClienteDAO.buscaTodos());
                      JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
                     chamaMenuPrincipal();
