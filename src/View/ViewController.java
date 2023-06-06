@@ -23,8 +23,8 @@ public class ViewController extends View {
             try {
                 nascimento = LocalDate.parse(imputnascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
-        }
+                JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
+            }
             verificaRegistroNullo(nascimento);
             String telefone = JOptionPane.showInputDialog(null, "Digite o telefone");
             verificaRegistroNullo(telefone);
@@ -288,16 +288,16 @@ public class ViewController extends View {
     }
 
     public static void listBoxCadastros() {
-                    try {
-                        Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
-                       String initialSelection = (String) selectionValues[0];
-                        Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
-                                "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+        try {
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
+            String initialSelection = (String) selectionValues[0];
+            Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
+                    "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
 
 
-                        switch ((String) selection) {
-                            case "Cliente":
-                                cadastroCliente();
+            switch ((String) selection) {
+                case "Cliente":
+                    cadastroCliente();
                     break;
                 case "Esporte":
                     cadastroEsporte();
@@ -347,7 +347,7 @@ public class ViewController extends View {
                     chamaMenuPrincipal();
                     break;
                 case "Pais":
-                   processoPais();
+                    processoPais();
                     chamaMenuPrincipal();
                     break;
                 case "Estado":
@@ -371,7 +371,7 @@ public class ViewController extends View {
     }
 
 
-    public static void processoEsporte (){
+    public static void processoEsporte() {
         Object[] selectionValues = EsporteDAO.findEsportesInArray();
         String initialSelection = (String) selectionValues[0];
         Object selection = JOptionPane.showInputDialog(null, "Selecione o esporte!",
@@ -391,7 +391,7 @@ public class ViewController extends View {
                 EsporteDAO.excluirDadosEsporte(esportes.get(0));
                 break;
             case "Busca por nome - Esporte":
-                String nomeBusca = JOptionPane.showInputDialog(null,"Informe o nome para busca.");
+                String nomeBusca = JOptionPane.showInputDialog(null, "Informe o nome para busca.");
                 EsporteDAO.buscarPorNome(nomeBusca);
                 break;
         }
@@ -419,7 +419,7 @@ public class ViewController extends View {
 
                 break;
             case "Busca por nome - Material":
-                String nomeBusca = JOptionPane.showInputDialog(null,"Informe o nome para busca.");
+                String nomeBusca = JOptionPane.showInputDialog(null, "Informe o nome para busca.");
                 MaterialDAO.buscarPorNome(nomeBusca);
                 break;
         }
@@ -456,7 +456,7 @@ public class ViewController extends View {
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
         List<Cliente> cliente = ClienteDAO.buscarPorNome((String) selection);
         verificaRegistroNullo(selection);
-        Object[] selectionValuesCliente = {"Alterar Dados", "Excluir Cadastro","Busca por nome"};
+        Object[] selectionValuesCliente = {"Alterar Dados", "Excluir Cadastro", "Busca por nome"};
         String initialSelectionCliente = (String) selectionValues[0];
         Object selectionCliente = JOptionPane.showInputDialog(null, "Selecione o processo!",
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValuesCliente, initialSelectionCliente);
@@ -469,12 +469,11 @@ public class ViewController extends View {
                 ClienteDAO.excluirCadastroCliente(cliente.get(0));
                 break;
             case "Busca por nome":
-                String nomeBusca = JOptionPane.showInputDialog(null,"Informe o nome para busca.");
+                String nomeBusca = JOptionPane.showInputDialog(null, "Informe o nome para busca.");
                 ClienteDAO.buscarPorNome(nomeBusca);
                 break;
         }
     }
-}
 
     public static void processoReserva() {
         Object[] selectionValues = ReservaDAO.findReservaInArray();
