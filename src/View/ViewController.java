@@ -455,43 +455,4 @@ public class ViewController extends View {
                 ReservaDAO.excluirCadastroReserva(reserva.get(0));
         }
     }
-  
-    public static void chamaMenuRelatorios() {
-        try {
-            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
-            String initialSelection = (String) selectionValues[0];
-            Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo",
-                    "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
-
-            switch ((String) selection) {
-                case "Cliente":
-                    emitirRelatorio(ClienteDAO.buscaTodos());
-                    break;
-                case "Esporte":
-                    //
-                    break;
-                case "Material":
-//
-                    break;
-                case "Pais":
-//
-                    break;
-                case "Estado":
-//
-                case "Cidade":
-//
-                    break;
-                case "Espaço":
-//
-                    break;
-                case "Reserva":
-//
-                    break;
-                default:
-                    chamaMenuPrincipal();
-            }
-        } catch (Exception e) {
-            chamaMenuPrincipal();
-        }
-    }
 }
