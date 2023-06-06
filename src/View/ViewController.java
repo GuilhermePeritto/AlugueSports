@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static Form.RelatorioClienteForm.emitirRelatorio;
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 import static Repository.ReservaDAO.*;
 
@@ -505,7 +504,7 @@ public class ViewController extends View {
 
             switch ((String) selection) {
                 case "Cliente":
-                    emitirRelatorio(ClienteDAO.buscaTodos());
+//                    emitirRelatorio(ClienteDAO.buscaTodos());
                     break;
                 case "Esporte":
                     //
