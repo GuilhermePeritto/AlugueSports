@@ -5,13 +5,9 @@ import Model.*;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-
-import static Model.VerificaRegistroNullo.verificaRegistroNullo;
-import static View.ViewController.listBoxCadastros;
 
 public class ReservaDAO {
     static List<Reserva> usuarioReserva = new ArrayList<>();
@@ -165,71 +161,5 @@ public class ReservaDAO {
         else {
             JOptionPane.showMessageDialog(null, "Cliente nao tem reservas");
         }
-    }
-    public static void alterarDadosReserva(Reserva reserva) {
-        //Altera titulo da reserva
-        String tituloReserva = JOptionPane.showInputDialog(null, "Digite o titulo");
-        verificaRegistroNullo(tituloReserva);
-        reserva.setTituloReserva(tituloReserva);
-
-        //Altera data inicio
-        LocalDate dataAlocacaoInicio = LocalDate.now();
-        String inputDataAlocacaoInicio = JOptionPane.showInputDialog(null, "Informe a data de início desejada");
-        try {
-            dataAlocacaoInicio = LocalDate.parse(inputDataAlocacaoInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
-        }
-        verificaRegistroNullo(dataAlocacaoInicio);
-
-        //Altera data fim
-        LocalDate dataAlocacaoFim = LocalDate.now();
-        String inputDataAlocacaoFim = JOptionPane.showInputDialog(null, "Informe a data fim desejada");
-        try {
-            dataAlocacaoFim = LocalDate.parse(inputDataAlocacaoFim, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
-        }
-        verificaRegistroNullo(dataAlocacaoFim);
-
-        //altera status da reserva
-        Object[] selectionStatusReserva = {"CANCELADO", "ABERTO"};
-        String initialSelectionStatusReserva = (String) selectionStatusReserva[0];
-        Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva!",
-                "Lista de Status", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
-        EnumStatusReserva statusReserva = EnumStatusReserva.ABERTO;
-        if (selectionStatus.equals("ABERTO")) {
-            statusReserva = EnumStatusReserva.ABERTO;
-        } else if (selectionStatus.equals("CANCELADO")) {
-            statusReserva = EnumStatusReserva.CANCELADO;
-        }
-        verificaRegistroNullo(statusReserva);
-
-        //altera material selecionado na reserva
-        Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
-        String initialSelectionMaterial = (String) selectionValuesMaterial[0];
-        Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material",
-                "Alterar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
-        List<Material> material = MaterialDAO.buscarPorNome((String) selectionMaterial);
-        verificaRegistroNullo(selectionMaterial);
-        verificarDisponibilidadeMaterial(material.get(0), dataAlocacaoInicio, dataAlocacaoFim);
-        reservarMaterial(material.get(0), dataAlocacaoInicio, dataAlocacaoFim);
-        verificaRegistroNullo(material);
-
-        //altera espaco selecionado na reserva
-        Object[] selectionValuesEspaco = EspacoDAO.findEspacoInArray();
-        String initialSelectionEspaco = (String) selectionValuesEspaco[0];
-        Object selectionEspaco = JOptionPane.showInputDialog(null, "Selecione o Espaco",
-                "Alterar Espaço", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEspaco, initialSelectionEspaco);
-        List<Espaco> espaco = EspacoDAO.buscarPorNome((String) selectionEspaco);
-        verificaRegistroNullo(selectionEspaco);
-        verificarDisponibilidadeEspaco(espaco.get(0), dataAlocacaoInicio, dataAlocacaoFim);
-        reservarEspaco(espaco.get(0), dataAlocacaoInicio, dataAlocacaoFim);
-        verificaRegistroNullo(espaco);
-    }
-
-    public static void excluirCadastroReserva(Reserva reserva) {
-        usuarioReserva.remove(reserva);
-        JOptionPane.showMessageDialog(null, "Reserva excluida com sucesso!");
     }
 }
