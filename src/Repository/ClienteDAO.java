@@ -1,11 +1,13 @@
 package Repository;
 import Model.Cliente;
+import Model.Pais;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
+import static View.View.chamaMenuPrincipal;
 
 public class ClienteDAO {
     static List<Cliente> clientes = new ArrayList<>();
@@ -35,6 +37,8 @@ public class ClienteDAO {
         verificaRegistroNullo(rg);
         cliente.setRg(rg);
     }
+
+
 
     public static List<Cliente> buscarPorNome(String nome) {
         List<Cliente> clientesFiltradas = new ArrayList<>();
