@@ -474,7 +474,6 @@ public class ViewController extends View {
                 break;
         }
     }
-}
 
     public static void processoReserva() {
         Object[] selectionValues = ReservaDAO.findReservaInArray();
