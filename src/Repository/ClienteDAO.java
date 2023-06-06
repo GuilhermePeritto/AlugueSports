@@ -36,6 +36,7 @@ public class ClienteDAO {
         String rg = JOptionPane.showInputDialog(null, "Digite o rg");
         verificaRegistroNullo(rg);
         cliente.setRg(rg);
+
     }
 
 
