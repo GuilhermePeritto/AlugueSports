@@ -5,15 +5,15 @@ import Repository.ClienteDAO;
 import javax.swing.*;
 
 import IniciadorDeValores.*;
-import Repository.EsporteDAO;
-import Repository.MaterialDAO;
+
+import static View.ViewController.*;
 
 import static View.ViewController.*;
 
 public class View {
     public static void chamaMenuPrincipal() {
         try {
-            String[] opcoesMenu = {"Cadastros", "Processos", "Relatorios", "Carga Inicial", "Sair"};
+            String[] opcoesMenu = {"Cadastros", "Processos", "Relatorios", "Carga Inicial"};
             int opcao = JOptionPane.showOptionDialog(null, "Escolha uma opção: ",
                     "Menu Principal",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcoesMenu, opcoesMenu[0]);
@@ -27,7 +27,7 @@ public class View {
                 case 2: //Relatorios
                     chamaMenuRelatorios();
                     break;
-                case 3: //CarregadorDeValoresIniciais
+                case 3: //SAIR
                     try {
                         CarregarValoresIniciais.StartReserva();
                         CarregarValoresIniciais.StartClientes();
@@ -43,16 +43,6 @@ public class View {
                         chamaMenuPrincipal();
                     }
                     break;
-
-                case 4: //Sair
-                    int opcaoSair = JOptionPane.showOptionDialog(null," Deseja realmente sair ? ",
-                            "Confirmação",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,null,null);
-
-                        if (opcaoSair == JOptionPane.YES_NO_OPTION){
-                            System.exit(0);
-                        }else {
-                            chamaMenuPrincipal();
-                        }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
