@@ -1,5 +1,6 @@
 package Repository;
 import Model.Cliente;
+import Model.Pais;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class ClienteDAO {
         verificaRegistroNullo(rg);
         cliente.setRg(rg);
     }
+
+
 
     public static List<Cliente> buscarPorNome(String nome) {
         List<Cliente> clientesFiltradas = new ArrayList<>();
