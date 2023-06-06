@@ -8,8 +8,6 @@ import IniciadorDeValores.*;
 
 import static View.ViewController.*;
 
-import static View.ViewController.*;
-
 public class View {
     public static void chamaMenuPrincipal() {
         try {
