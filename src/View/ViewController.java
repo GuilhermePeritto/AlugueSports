@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static Form.RelatorioClienteForm.emitirRelatorio;
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 import static Repository.ReservaDAO.*;
 
@@ -370,43 +369,27 @@ public class ViewController extends View {
         }
     }
 
-    public static void chamaMenuRelatorios() {
-        try {
-            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
-            String initialSelection = (String) selectionValues[0];
-            Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo",
-                    "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+    private static void processoPais() {
+        Object[] selectionValues = PaisDAO.findPaisInArray();
+        String initialSelection = (String) selectionValues[0];
+        Object selection = JOptionPane.showInputDialog(null, "Selecione o cliente!",
+                "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+        List<Pais> pais = PaisDAO.buscarPorNome((String) selection);
+        verificaRegistroNullo(selection);
+        Object[] selectionValuesCliente = {"Alterar Dados", "Excluir Cadastro"};
+        String initialSelectionCliente = (String) selectionValues[0];
+        Object selectionCliente = JOptionPane.showInputDialog(null, "Selecione o processo!",
+                "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValuesCliente, initialSelectionCliente);
+        verificaRegistroNullo(selectionCliente);
 
-            switch ((String) selection) {
-                case "Cliente":
-                    emitirRelatorio(ClienteDAO.buscaTodos());
-                    break;
-                case "Esporte":
-                    //
-                    break;
-                case "Material":
-//
-                    break;
-                case "Pais":
-//
-                    break;
-                case "Estado":
-//
-                case "Cidade":
-//
-                    break;
-                case "Espaço":
-//
-                    break;
-                case "Reserva":
-//
-                    break;
-                default:
-                    chamaMenuPrincipal();
-            }
-        } catch (Exception e) {
-            chamaMenuPrincipal();
+        switch ((String) selectionCliente) {
+            case "Alterar Dados":
+                PaisDAO.alterardadospais(pais.get(0));
+                break;
+            case "Excluir Cadastro":
+                PaisDAO.excluirCadastropais(pais.get(0));
         }
+
     }
 
     private static void processoPais() {

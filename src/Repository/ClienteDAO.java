@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
+import static View.View.chamaMenuPrincipal;
 
 public class ClienteDAO {
     static List<Cliente> clientes = new ArrayList<>();
