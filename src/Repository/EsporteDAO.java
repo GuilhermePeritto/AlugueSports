@@ -1,8 +1,13 @@
 package Repository;
 
+import Model.Cliente;
 import Model.Esporte;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
 public class EsporteDAO {
     static List<Esporte> esportes= new ArrayList<>();
@@ -12,6 +17,20 @@ public class EsporteDAO {
     public static List<Esporte> buscaTodos() {
         return esportes;
     }
+
+    public static void excluirDadosEsporte (Esporte esporte){
+        esportes.remove(esporte);
+        JOptionPane.showMessageDialog(null, "Esporte removido com sucesso!");
+    }
+
+    public static void alterarDadosEsporte(Esporte esporte) {
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome");
+        verificaRegistroNullo(nome);
+        esporte.setNomeEsporte(nome);
+        JOptionPane.showMessageDialog(null,"Cadastro alterado com sucesso");
+    }
+
+
 
     public static List<Esporte> buscarPorNome(String nome) {
         List<Esporte> esportesFiltrados = new ArrayList<>();

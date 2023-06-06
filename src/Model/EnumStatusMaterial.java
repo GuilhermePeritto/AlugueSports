@@ -3,5 +3,7 @@ package Model;
 public enum EnumStatusMaterial {
 
     ALUGADO,
-    DISPONIVEL
+    DISPONIVEL,
+    CONSERTO,
+    INATIVADO
 }
