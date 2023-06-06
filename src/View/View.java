@@ -4,10 +4,9 @@ import Repository.ClienteDAO;
 
 import javax.swing.*;
 
-import static View.ViewController.listBoxCadastros;
-import static View.ViewController.listBoxProcessos;
-
 import IniciadorDeValores.*;
+
+import static View.ViewController.*;
 
 public class View {
     public static void chamaMenuPrincipal() {
@@ -24,8 +23,7 @@ public class View {
                     listBoxProcessos();
                     break;
                 case 2: //Relatorios
-                    JOptionPane.showMessageDialog(null, ClienteDAO.buscaTodos());
-                    chamaMenuPrincipal();
+                    chamaMenuRelatorios();
                     break;
                 case 3: //SAIR
                     try {
