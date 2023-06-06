@@ -25,7 +25,7 @@ public class EspacoDAO {
         return espacosFiltrados;
     }
 
-    public static Object[] findEspacoInArray() {
+    public static Object[] findEsportesInArray() {
         List<Espaco> espacos = buscaEspacos();
         List<String> espacoNomes = new ArrayList<>();
 

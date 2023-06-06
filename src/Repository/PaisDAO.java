@@ -1,13 +1,9 @@
 
 package Repository;
-        import Model.Cliente;
         import Model.Pais;
 
-        import javax.swing.*;
         import java.util.ArrayList;
         import java.util.List;
-
-        import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
 public class PaisDAO {
     static List<Pais> paises = new ArrayList<>();
@@ -18,10 +14,6 @@ public class PaisDAO {
         return paises;
     }
 
-    public static void excluirCadastropais(Pais pais) {
-        paises.remove(pais);
-        JOptionPane.showMessageDialog(null, "Pais excluido com sucesso!");
-    }
     public static List<Pais> buscarPorNome(String nome) {
         List<Pais> paisesFiltrados = new ArrayList<>();
         for (Pais pais : paises) {
@@ -30,12 +22,6 @@ public class PaisDAO {
             }
         }
         return paisesFiltrados;
-    }
-
-    public static void alterardadospais(Pais pais) {
-        String nome = JOptionPane.showInputDialog(null, "Digite o nome");
-        verificaRegistroNullo(nome);
-        pais.setNomePais(nome);
     }
 
     public static Object[] findPaisInArray() {
