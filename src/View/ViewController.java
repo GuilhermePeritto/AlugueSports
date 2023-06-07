@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static Form.RelatorioClienteForm.emitirRelatorio;
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 import static Repository.ReservaDAO.*;
 
@@ -34,6 +35,7 @@ public class ViewController extends View {
             verificaRegistroNullo(rg);
             Cliente pessoa = new Cliente(codigo, nome, nascimento, telefone, cpf, rg);
             ClienteDAO.salvar(pessoa);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -47,6 +49,7 @@ public class ViewController extends View {
             String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
             Esporte esporte = new Esporte(codigo, nomeEsporte);
             EsporteDAO.salvar(esporte);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -61,6 +64,7 @@ public class ViewController extends View {
             verificaRegistroNullo(nomePais);
             Pais pais = new Pais(codigoPais, nomePais);
             PaisDAO.salvar(pais);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -83,6 +87,7 @@ public class ViewController extends View {
             verificaRegistroNullo(selectionPais);
             Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
             EstadoDAO.salvar(estado);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -195,13 +200,13 @@ public class ViewController extends View {
             verificaRegistroNullo(imputDataReservaFim);
             Object[] selectionValuesUsuarioCliente = ClienteDAO.findUsuarioClienteInArray();
             String initialSelectionUsuarioCliente = (String) selectionValuesUsuarioCliente[0];
-            Object selectionUsuarioCliente = JOptionPane.showInputDialog(null, "Selecione o cliente?",
+            Object selectionUsuarioCliente = JOptionPane.showInputDialog(null, "Selecione o cliente",
                     "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesUsuarioCliente, initialSelectionUsuarioCliente);
             List<Cliente> cliente = ClienteDAO.buscarPorNome((String) selectionUsuarioCliente);
             verificaRegistroNullo(selectionUsuarioCliente);
             Object[] selectionStatusReserva = {"ABERTO", "CANCELADO", "FINALIZADO"};
             String initialSelectionStatusReserva = (String) selectionStatusReserva[0];
-            Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva?",
+            Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva",
                     "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
 
             Model.EnumStatusReserva statusReserva = Model.EnumStatusReserva.ABERTO;
@@ -213,7 +218,7 @@ public class ViewController extends View {
             verificaRegistroNullo(selectionStatus);
             Object[] selectionValuesEspaco = EspacoDAO.findEspacoInArray();
             String initialSelectionEspaco = (String) selectionValuesEspaco[0];
-            Object selectionEspaco = JOptionPane.showInputDialog(null, "Selecione o espaco?",
+            Object selectionEspaco = JOptionPane.showInputDialog(null, "Selecione o espaco",
                     "Alugar espaco", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEspaco, initialSelectionEspaco);
             List<Espaco> espaco = EspacoDAO.buscarPorNome((String) selectionEspaco);
             verificaRegistroNullo(selectionEspaco);
@@ -221,7 +226,7 @@ public class ViewController extends View {
             reservarEspaco(espaco.get(0), dataReservaInicio, dataReservaFim);
             Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
             String initialSelectionMaterial = (String) selectionValuesMaterial[0];
-            Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material?",
+            Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material",
                     "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
             List<Material> material = MaterialDAO.buscarPorNome((String) selectionMaterial);
             verificaRegistroNullo(selectionMaterial);
@@ -234,6 +239,7 @@ public class ViewController extends View {
             Double valorReserva = calcularValor(material.get(0), espaco.get(0), diasReserva);
             Reserva reserva = new Reserva(codigoReserva, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim, cliente.get(0), statusReserva, material.get(0), espaco.get(0), valorReserva);
             ReservaDAO.salvar(reserva);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -244,43 +250,43 @@ public class ViewController extends View {
     public static void cancelarReserva() {
         Object[] selectionValuesReserva = ReservaDAO.findReservaInArray();
         String initialSelectionReserva = (String) selectionValuesReserva[0];
-        Object selectionReserva = JOptionPane.showInputDialog(null, "Selecione a reserva?",
+        Object selectionReserva = JOptionPane.showInputDialog(null, "Selecione a reserva",
                 "Cancelar Reserva", JOptionPane.QUESTION_MESSAGE, null, selectionValuesReserva, initialSelectionReserva);
         List<Reserva> reserva = ReservaDAO.buscarPorNome((String) selectionReserva);
         verificaRegistroNullo(selectionReserva);
         ReservaDAO.cancelar(reserva.get(0));
-        JOptionPane.showMessageDialog(null, "Reserva cancelada com sucesso!");
+        JOptionPane.showMessageDialog(null, "Reserva cancelada com sucesso!", "Cancelamento", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(null, ReservaDAO.buscaTodos());
     }
 
     public static void alugarMaterial() {
         Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
         String initialSelectionMaterial = (String) selectionValuesMaterial[0];
-        Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material?",
+        Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material",
                 "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
         List<Material> alugarMaterial = MaterialDAO.buscarPorNome((String) selectionMaterial);
         verificaRegistroNullo(selectionMaterial);
         MaterialDAO.alugarMaterial(alugarMaterial.get(0));
-        JOptionPane.showMessageDialog(null, "Material alugado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Material alugado com sucesso!", "Alugado", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
     }
 
     public static void cancelarAluguelMaterial() {
         Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
         String initialSelectionMaterial = (String) selectionValuesMaterial[0];
-        Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material?",
+        Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material",
                 "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
         List<Material> alugarMaterial = MaterialDAO.buscarPorNome((String) selectionMaterial);
         verificaRegistroNullo(selectionMaterial);
         MaterialDAO.cancelarAluguel(alugarMaterial.get(0));
-        JOptionPane.showMessageDialog(null, "Aluguel de material cancelado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Aluguel de material cancelado com sucesso!", "Alugado", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
     }
 
     public static void verificarReputacaoCliente() {
         Object[] selectionValuesUsuarioCliente = ClienteDAO.findUsuarioClienteInArray();
         String initialSelectionUsuarioCliente = (String) selectionValuesUsuarioCliente[0];
-        Object selectionUsuarioCliente = JOptionPane.showInputDialog(null, "Selecione o cliente?",
+        Object selectionUsuarioCliente = JOptionPane.showInputDialog(null, "Selecione o cliente",
                 "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesUsuarioCliente, initialSelectionUsuarioCliente);
         List<Cliente> cliente = ClienteDAO.buscarPorNome((String) selectionUsuarioCliente);
         verificaRegistroNullo(selectionUsuarioCliente);
@@ -288,16 +294,15 @@ public class ViewController extends View {
     }
 
     public static void listBoxCadastros() {
-                    try {
-                        Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
-                       String initialSelection = (String) selectionValues[0];
-                        Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro?",
-                                "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+        try {
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
+            String initialSelection = (String) selectionValues[0];
+            Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro",
+                    "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
 
-
-                        switch ((String) selection) {
-                            case "Cliente":
-                                cadastroCliente();
+            switch ((String) selection) {
+                case "Cliente":
+                    cadastroCliente();
                     break;
                 case "Esporte":
                     cadastroEsporte();
@@ -325,12 +330,11 @@ public class ViewController extends View {
         }
     }
 
-
     public static void listBoxProcessos() {
         try {
             Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
             String initialSelection = (String) selectionValues[0];
-            Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo?",
+            Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo",
                     "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
 
             switch ((String) selection) {
@@ -474,10 +478,6 @@ public class ViewController extends View {
                 break;
         }
     }
-
-
-
-
     public static void processoReserva() {
         Object[] selectionValues = ReservaDAO.findReservaInArray();
         String initialSelection = (String) selectionValues[0];
@@ -496,6 +496,66 @@ public class ViewController extends View {
                 break;
             case "Excluir Cadastro":
                 ReservaDAO.excluirCadastroReserva(reserva.get(0));
+        }
+    }
+
+    public static void chamaMenuRelatorios() {
+        try {
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
+            String initialSelection = (String) selectionValues[0];
+            Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo",
+                    "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+
+            switch ((String) selection) {
+                case "Cliente":
+                    emitirRelatorio(ClienteDAO.buscaTodos());
+                    break;
+                case "Esporte":
+                    //
+                    break;
+                case "Material":
+//
+                    break;
+                case "Pais":
+//
+                    break;
+                case "Estado":
+//
+                case "Cidade":
+//
+                    break;
+                case "Espaço":
+//
+                    break;
+                case "Reserva":
+//
+                    break;
+                default:
+                    chamaMenuPrincipal();
+            }
+        } catch (Exception e) {
+            chamaMenuPrincipal();
+        }
+    }
+
+    public static void processoCliente() {
+        Object[] selectionValues = ClienteDAO.findUsuarioClienteInArray();
+        String initialSelection = (String) selectionValues[0];
+        Object selection = JOptionPane.showInputDialog(null, "Selecione o cliente!",
+                "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+        List<Cliente> cliente = ClienteDAO.buscarPorNome((String) selection);
+        verificaRegistroNullo(selection);
+        Object[] selectionValuesCliente = {"Alterar Dados", "Excluir Cadastro"};
+        String initialSelectionCliente = (String) selectionValues[0];
+        Object selectionCliente = JOptionPane.showInputDialog(null, "Selecione o processo!",
+                "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValuesCliente, initialSelectionCliente);
+        verificaRegistroNullo(selectionCliente);
+        switch ((String) selectionCliente) {
+            case "Alterar Dados":
+                ClienteDAO.alterarDadosCliente(cliente.get(0));
+                break;
+            case "Excluir Cadastro":
+                ClienteDAO.excluirCadastroCliente(cliente.get(0));
         }
     }
 }
