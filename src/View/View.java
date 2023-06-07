@@ -4,11 +4,12 @@ import Repository.ClienteDAO;
 
 import javax.swing.*;
 
+import static View.ViewController.listBoxCadastros;
+import static View.ViewController.listBoxProcessos;
+
 import IniciadorDeValores.*;
 import Repository.EsporteDAO;
 import Repository.MaterialDAO;
-
-import static View.ViewController.*;
 
 public class View {
     public static void chamaMenuPrincipal() {
@@ -25,7 +26,10 @@ public class View {
                     listBoxProcessos();
                     break;
                 case 2: //Relatorios
-                    chamaMenuRelatorios();
+                    JOptionPane.showMessageDialog(null, EsporteDAO.buscaTodos());
+                     JOptionPane.showMessageDialog(null, ClienteDAO.buscaTodos());
+                     JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
+                    chamaMenuPrincipal();
                     break;
                 case 3: //CarregadorDeValoresIniciais
                     try {
