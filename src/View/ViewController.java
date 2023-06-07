@@ -174,7 +174,7 @@ public class ViewController extends View {
 
     public static void cadastroReserva() {
         try {
-            Integer codigoReserva = ReservaDAO.canculaCodigo();
+            Integer codigoReserva = canculaCodigo();
             String titulo = JOptionPane.showInputDialog(null, "Digite o titulo da reserva");
             verificaRegistroNullo(titulo);
             LocalDate dataReservaInicio = LocalDate.now();
@@ -204,14 +204,14 @@ public class ViewController extends View {
             Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva",
                     "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
 
-            Model.EnumStatusReserva statusReserva = Model.EnumStatusReserva.ABERTO;
+            EnumStatusReserva statusReserva = EnumStatusReserva.ABERTO;
             if (selectionStatus.equals("CANCELADO")) {
-                statusReserva = Model.EnumStatusReserva.CANCELADO;
+                statusReserva = EnumStatusReserva.CANCELADO;
             } else if (selectionStatus.equals("FINALIZADO")) {
-                statusReserva = Model.EnumStatusReserva.FINALIZADO;
+                statusReserva = EnumStatusReserva.FINALIZADO;
             }
             verificaRegistroNullo(selectionStatus);
-            Object[] selectionValuesEspaco = EspacoDAO.findEsportesInArray();
+            Object[] selectionValuesEspaco = EspacoDAO.findEspacoInArray();
             String initialSelectionEspaco = (String) selectionValuesEspaco[0];
             Object selectionEspaco = JOptionPane.showInputDialog(null, "Selecione o espaco",
                     "Alugar espaco", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEspaco, initialSelectionEspaco);
@@ -233,7 +233,7 @@ public class ViewController extends View {
             Double diasReserva = calculardias(dataReservaInicio, dataReservaFim);
             Double valorReserva = calcularValor(material.get(0), espaco.get(0), diasReserva);
             Reserva reserva = new Reserva(codigoReserva, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim, cliente.get(0), statusReserva, material.get(0), espaco.get(0), valorReserva);
-            ReservaDAO.salvar(reserva);
+            salvar(reserva);
             JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
@@ -354,7 +354,7 @@ public class ViewController extends View {
                     chamaMenuPrincipal();
                     break;
                 case "Espaço":
-//                    processoEspaco();
+                    processoEspaco();
                     chamaMenuPrincipal();
                     break;
                 case "Reserva":
@@ -410,6 +410,28 @@ public class ViewController extends View {
                 break;
             case "Excluir Cadastro":
                 ClienteDAO.excluirCadastroCliente(cliente.get(0));
+        }
+    }
+
+
+    public static void processoEspaco() {
+        Object[] selectionValues = EspacoDAO.findEspacoInArray();
+        String initialSelection = (String) selectionValues[0];
+        Object selection = JOptionPane.showInputDialog(null, "Selecione o espaço.",
+                "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+        List<Espaco> espaco = EspacoDAO.buscarPorNome((String) selection);
+        verificaRegistroNullo(selection);
+        Object[] selectionValuesEspaco = {"Alterar Dados", "Excluir Cadastro"};
+        String initialSelectionEspaco = (String) selectionValues[0];
+        Object selectionCliente = JOptionPane.showInputDialog(null, "Selecione o processo!",
+                "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEspaco, initialSelectionEspaco);
+        verificaRegistroNullo(selectionCliente);
+        switch ((String) selectionCliente) {
+            case "Alterar Dados":
+                EspacoDAO.alterarEspaco(espaco.get(0));
+                break;
+            case "Excluir Cadastro":
+                EspacoDAO.excluirEspaco(espaco.get(0));
         }
     }
 }
