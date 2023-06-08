@@ -1,5 +1,7 @@
 package View;
 
+import Form.RelatorioCidadeForm;
+import Form.RelatorioClienteForm;
 import Model.*;
 import Repository.*;
 
@@ -87,6 +89,27 @@ public class ViewController extends View {
             verificaRegistroNullo(selectionPais);
             Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
             EstadoDAO.salvar(estado);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            chamaMenuPrincipal();
+        }
+    }
+
+    public static void cadastroCidade() {
+        try {
+            Integer codigoCidade = CidadeDAO.canculaCodigo();
+            String nomeCidade = JOptionPane.showInputDialog(null, "Digite o nome da cidade");
+            verificaRegistroNullo(nomeCidade);
+            Object[] selectionValuesEstado = EstadoDAO.findEstadoInArray();
+            String initialSelectionEstado = (String) selectionValuesEstado[0];
+            Object selectionEstado = JOptionPane.showInputDialog(null, "Selecione o estado",
+                    "Lista de Estados", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEstado, initialSelectionEstado);
+            List<Estado> estados = EstadoDAO.buscarPorNome(selectionEstado.toString());
+            verificaRegistroNullo(selectionEstado);
+            Cidade cidade = new Cidade(codigoCidade, nomeCidade, estados.get(0));
+            CidadeDAO.salvar(cidade);
             JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             chamaMenuPrincipal();
         } catch (Exception e) {
@@ -235,7 +258,7 @@ public class ViewController extends View {
             if (!verificarDisponibilidadeMaterial(material.get(0), dataReservaInicio, dataReservaFim)) {
                 listBoxCadastros();
             }
-            Double diasReserva = calculardias(dataReservaInicio, dataReservaFim);
+            Double diasReserva = calcularDias(dataReservaInicio, dataReservaFim);
             Double valorReserva = calcularValor(material.get(0), espaco.get(0), diasReserva);
             Reserva reserva = new Reserva(codigoReserva, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim, cliente.get(0), statusReserva, material.get(0), espaco.get(0), valorReserva);
             ReservaDAO.salvar(reserva);
@@ -295,7 +318,7 @@ public class ViewController extends View {
 
     public static void listBoxCadastros() {
         try {
-            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Cidade", "Espaço", "Reserva"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de cadastro",
                     "Cadastro", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -316,6 +339,9 @@ public class ViewController extends View {
                 case "Estado":
                     cadastroEstado();
                     break;
+                case "Cidade":
+                    cadastroCidade();
+                    break;
                 case "Espaço":
                     cadastroEspaco();
                     break;
@@ -332,7 +358,7 @@ public class ViewController extends View {
 
     public static void listBoxProcessos() {
         try {
-            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Cidade", "Espaço", "Reserva"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo",
                     "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
@@ -358,6 +384,9 @@ public class ViewController extends View {
 //                    processoEstado();
                     chamaMenuPrincipal();
                     break;
+                case "Cidade":
+                    processoCidade();
+                    chamaMenuPrincipal();
                 case "Espaço":
 //                    processoEspaco();
                     chamaMenuPrincipal();
@@ -453,6 +482,34 @@ public class ViewController extends View {
 
     }
 
+    private static void processoCidade() {
+        Object[] selectionValues = CidadeDAO.findCidadeInArray();
+        String initialSelection = (String) selectionValues[0];
+        Object selection = JOptionPane.showInputDialog(null, "Selecione a cidade!",
+                "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+        List<Cidade> cidades = CidadeDAO.buscarPorNome((String) selection);
+        verificaRegistroNullo(selection);
+        Object[] selectionValuesCidade = {"Alterar Dados", "Excluir Cadastro"};
+        String initialSelectionCidade = (String) selectionValues[0];
+        Object selectionCidade = JOptionPane.showInputDialog(null, "Selecione o processo!",
+                "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValuesCidade, initialSelectionCidade);
+        verificaRegistroNullo(selectionCidade);
+
+        switch ((String) selectionCidade) {
+            case "Alterar Dados":
+                CidadeDAO.alterarDadosCidade(cidades.get(0));
+                break;
+            case "Excluir Cadastro":
+                CidadeDAO.excluirCadastroCidade(cidades.get(0));
+                break;
+            case "Busca por nome":
+                String nomeBusca = JOptionPane.showInputDialog(null, "Informe o nome para busca.");
+                CidadeDAO.buscarPorNome(nomeBusca);
+                break;
+        }
+
+    }
+
     public static void processoCliente() {
         Object[] selectionValues = ClienteDAO.findUsuarioClienteInArray();
         String initialSelection = (String) selectionValues[0];
@@ -502,14 +559,14 @@ public class ViewController extends View {
 
     public static void chamaMenuRelatorios() {
         try {
-            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Espaço", "Reserva"};
+            Object[] selectionValues = {"Cliente", "Esporte", "Material", "Pais", "Estado", "Cidade", "Espaço", "Reserva"};
             String initialSelection = (String) selectionValues[0];
             Object selection = JOptionPane.showInputDialog(null, "Selecione o tipo de processo",
                     "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
 
             switch ((String) selection) {
                 case "Cliente":
-                    emitirRelatorio(ClienteDAO.buscaTodos());
+                    RelatorioClienteForm.emitirRelatorio(ClienteDAO.buscaTodos());
                     break;
                 case "Esporte":
                     //
@@ -523,7 +580,7 @@ public class ViewController extends View {
                 case "Estado":
 //
                 case "Cidade":
-//
+                    RelatorioCidadeForm.emitirRelatorio(CidadeDAO.buscaTodos());
                     break;
                 case "Espaço":
 //

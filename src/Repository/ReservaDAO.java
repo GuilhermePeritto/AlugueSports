@@ -141,7 +141,7 @@ public class ReservaDAO {
         return usuarioReserva.size() + 1;
     }
 
-    public static Double calculardias(LocalDate dataInicio, LocalDate dataFim) {
+    public static Double calcularDias(LocalDate dataInicio, LocalDate dataFim) {
         LocalDateTime dataInicialTempoZero = dataInicio.atStartOfDay();
         LocalDateTime dataFinalTempoZero = dataInicio.atStartOfDay();
 
