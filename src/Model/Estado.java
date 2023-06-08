@@ -21,6 +21,7 @@ public class Estado {
         return nomeEstado;
     }
 
+
     public String getSigla() {
         return sigla;
     }

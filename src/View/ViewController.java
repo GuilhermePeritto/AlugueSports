@@ -85,6 +85,7 @@ public class ViewController extends View {
                     "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
             List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
             verificaRegistroNullo(selectionPais);
+
             Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
             EstadoDAO.salvar(estado);
             JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -355,7 +356,7 @@ public class ViewController extends View {
                     chamaMenuPrincipal();
                     break;
                 case "Estado":
-//                    processoEstado();
+                    processoEstado();
                     chamaMenuPrincipal();
                     break;
                 case "Espaço":
@@ -372,6 +373,32 @@ public class ViewController extends View {
         } catch (Exception e) {
             chamaMenuPrincipal();
         }
+    }
+
+    private static void processoEstado() {
+
+        Object[] selectionValues = EstadoDAO.findEstadoInArray();
+        String initialSelection = (String) selectionValues[0];
+        Object selection = JOptionPane.showInputDialog(null, "Selecione o Estado!",
+                "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
+
+        List<Estado> estados = EstadoDAO.buscarPorNome((String) selection);
+        verificaRegistroNullo(selection);
+        Object[] selectionValuesCliente = {"Alterar Dados", "Excluir Cadastro"};
+        String initialSelectionCliente = (String) selectionValues[0];
+        Object selectionCliente = JOptionPane.showInputDialog(null, "Selecione o processo!",
+                "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValuesCliente, initialSelectionCliente);
+        verificaRegistroNullo(selectionCliente);
+
+        switch ((String) selectionCliente) {
+            case "Alterar Dados":
+                EstadoDAO.alterardadosestado(estados.get(0));
+                break;
+            case "Excluir Cadastro":
+                EstadoDAO.excluirCadastroEstado(estados.get(0));
+        }
+
+
     }
 
 
@@ -433,7 +460,7 @@ public class ViewController extends View {
     private static void processoPais() {
         Object[] selectionValues = PaisDAO.findPaisInArray();
         String initialSelection = (String) selectionValues[0];
-        Object selection = JOptionPane.showInputDialog(null, "Selecione o cliente!",
+        Object selection = JOptionPane.showInputDialog(null, "Selecione o Pais!",
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
         List<Pais> pais = PaisDAO.buscarPorNome((String) selection);
         verificaRegistroNullo(selection);
