@@ -11,6 +11,8 @@ import java.util.List;
 
 import static Form.RelatorioClienteForm.emitirRelatorio;
 import static Form.RelatorioMaterialForm.emitirRelatorio;
+import static Form.RelatorioEsporteFomr.emitirRelatorio;
+
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 import static Repository.ReservaDAO.*;
 
@@ -514,7 +516,7 @@ public class ViewController extends View {
                     emitirRelatorio(ClienteDAO.buscaTodos());
                     break;
                 case "Esporte":
-                    //
+                    emitirRelatorio(EsporteDAO.buscaTodos());
                     break;
                 case "Material":
                     emitirRelatorio(MaterialDAO.buscaTodos());
