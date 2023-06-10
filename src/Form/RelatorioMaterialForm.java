@@ -1,42 +1,43 @@
 package Form;
 
-import Model.Cidade;
-import Relatorio.TableCidade;
+import Model.Material;
+import Relatorio.TableCliente;
+import Relatorio.TableMaterial;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
-import java.awt.*;
 import java.awt.event.WindowAdapter;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Vector;
 
 import static View.ViewController.chamaMenuRelatorios;
 
-public class RelatorioCidadeForm extends JPanel {
+public class RelatorioMaterialForm extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
     public static final String[] nomeColunas =
-            {"Codigo", "Nome", "Estado"};
+            {"Código", "Nome", "Status-Material", "Valor", ""};
 
     protected JTable table;
     protected JScrollPane scroller;
-    protected TableCidade tabela;
+    protected TableMaterial tabela;
 
-    public RelatorioCidadeForm(Vector<Cidade> vetorDados) {
-        iniciarComponentes(vetorDados);
+    public RelatorioMaterialForm(Vector<Material> vetorDados) {
+        iniciarVetorComponentes(vetorDados);
     }
 
-    public void iniciarComponentes(Vector<Cidade> vetorDados) {
-        tabela = new TableCidade(nomeColunas, vetorDados);
+    public void iniciarVetorComponentes(Vector<Material> vetorDados){
+        tabela = new TableMaterial(nomeColunas, vetorDados);
         table = new JTable();
         table.setModel(tabela);
         table.setSurrendersFocusOnKeystroke(true);
         scroller = new javax.swing.JScrollPane(table);
         table.setPreferredScrollableViewportSize(new java.awt.Dimension(500, 300));
 
-        TableColumn colunaEscondida = table.getColumnModel().getColumn(TableCidade.INDEX_ESCONDIDO);
+        TableColumn colunaEscondida = table.getColumnModel().getColumn(TableMaterial.INDEX_ESCONDIDO);
         colunaEscondida.setMinWidth(2);
         colunaEscondida.setPreferredWidth(2);
         colunaEscondida.setMaxWidth(2);
@@ -44,10 +45,10 @@ public class RelatorioCidadeForm extends JPanel {
         add(scroller, BorderLayout.CENTER);
     }
 
-    public static void emitirRelatorio(List<Cidade> cidades) {
+    public static void emitirRelatorio(List<Material> material){
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-            JFrame frame = new JFrame("Relatorio");
+            JFrame frame = new JFrame("Relatorio - Material");
 
             frame.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent evt) {
@@ -55,12 +56,12 @@ public class RelatorioCidadeForm extends JPanel {
                     chamaMenuRelatorios();
                 }
             });
-            Vector<Cidade> vetorDados = new Vector<Cidade>();
-            for (Cidade cidade : cidades) {
-                vetorDados.add(cidade);
+            Vector<Material> vetorDados = new Vector<Material>();
+            for (Material material1 : material) {
+                vetorDados.add(material1);
             }
 
-            frame.getContentPane().add(new RelatorioCidadeForm(vetorDados));
+            frame.getContentPane().add(new RelatorioMaterialForm(vetorDados));
             frame.pack();
             frame.setVisible(true);
             frame.setLocationRelativeTo(null);
@@ -68,4 +69,8 @@ public class RelatorioCidadeForm extends JPanel {
             e.printStackTrace();
         }
     }
-}
+    }
+
+
+
+

@@ -71,6 +71,21 @@ public class CarregarValoresIniciais {
         EstadoDAO.salvar(rioGrandeDoSul);
     }
 
+    public static void StartCidade() {
+        Cidade criciuma = new Cidade(1, "Criciuma", new Estado(1, "Santa Catarina", "SC", new Pais(1, "Brasil")));
+        CidadeDAO.salvar(criciuma);
+        Cidade sideropolis = new Cidade(2, "Sideropolis", new Estado(1, "Santa Catarina", "SC", new Pais(1, "Brasil")));
+        CidadeDAO.salvar(sideropolis);
+        Cidade novaVeneza = new Cidade(3, "Nova Veneza", new Estado(1, "Santa Catarina", "SC", new Pais(1, "Brasil")));
+        CidadeDAO.salvar(novaVeneza);
+        Cidade forquilinha = new Cidade(4, "Forquilhinha", new Estado(1, "Santa Catarina", "SC", new Pais(1, "Brasil")));
+        CidadeDAO.salvar(forquilinha);
+        Cidade saoPaulo = new Cidade(5, "São Paulo", new Estado(3, "São Paulo", "SP", new Pais(1, "Brasil")));
+        CidadeDAO.salvar(saoPaulo);
+        Cidade portoAlegre = new Cidade(6, "Porto Alegre", new Estado(4, "Rio Grande do Sul", "RS", new Pais(1, "Brasil")));
+        CidadeDAO.salvar(portoAlegre);
+    }
+
     public static void StartMaterial() {
         Material bola = new Material(1, "Bola", EnumStatusMaterial.DISPONIVEL, 1000.0);
         MaterialDAO.salvar(bola);
