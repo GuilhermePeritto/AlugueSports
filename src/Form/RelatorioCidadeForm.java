@@ -2,7 +2,6 @@ package Form;
 
 import Model.Cidade;
 import Relatorio.TableCidade;
-import Relatorio.TableCliente;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -37,7 +36,7 @@ public class RelatorioCidadeForm extends JPanel {
         scroller = new javax.swing.JScrollPane(table);
         table.setPreferredScrollableViewportSize(new java.awt.Dimension(500, 300));
 
-        TableColumn colunaEscondida = table.getColumnModel().getColumn(TableCliente.INDEX_ESCONDIDO);
+        TableColumn colunaEscondida = table.getColumnModel().getColumn(TableCidade.INDEX_ESCONDIDO);
         colunaEscondida.setMinWidth(2);
         colunaEscondida.setPreferredWidth(2);
         colunaEscondida.setMaxWidth(2);
