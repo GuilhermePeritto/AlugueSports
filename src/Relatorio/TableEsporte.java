@@ -1,7 +1,6 @@
 package Relatorio;
 
 import Model.Esporte;
-import Model.Material;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.Vector;
@@ -47,7 +46,7 @@ public class TableEsporte extends AbstractTableModel {
             case INDEX_CODIGO:
                 return registroEsporte.getCodigo();
             case INDEX_NOME:
-                return registroEsporte.getNomeEsporte();
+                return registroEsporte.getNome();
             default:
                 return new Object();
         }

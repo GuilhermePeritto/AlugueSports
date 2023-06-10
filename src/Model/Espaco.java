@@ -3,38 +3,38 @@ package Model;
 import java.time.LocalDate;
 
 public class Espaco {
-    private Integer codigoEspaco;
-    private String nomeEspaco;
+    private Integer codigo;
+    private String nome;
     private Esporte esporte;
     private LocalDate dataInicioReserva;
     private LocalDate dataFimReserva;
-    private EnumStatusEspaco enumStatusEspaco;
-    private Double valorEspaco;
+    private EnumStatusEspaco enumStatus;
+    private Double valor;
 
-    public Espaco(Integer codigoEspaco, String nomeEspaco, Esporte esporte, LocalDate dataInicioReserva, LocalDate dataFimReserva, EnumStatusEspaco enumStatusEspaco, Double valorEspaco) {
-        this.codigoEspaco = codigoEspaco;
-        this.nomeEspaco = nomeEspaco;
+    public Espaco(Integer codigo, String nome, Esporte esporte, LocalDate dataInicioReserva, LocalDate dataFimReserva, EnumStatusEspaco enumStatus, Double valor) {
+        this.codigo = codigo;
+        this.nome = nome;
         this.esporte = esporte;
         this.dataInicioReserva = dataInicioReserva;
         this.dataFimReserva = dataFimReserva;
-        this.enumStatusEspaco = enumStatusEspaco;
-        this.valorEspaco = valorEspaco;
+        this.enumStatus = enumStatus;
+        this.valor = valor;
     }
 
-    public Integer getCodigoEspaco() {
-        return codigoEspaco;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoEspaco(Integer codigoEspaco) {
-        this.codigoEspaco = codigoEspaco;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
-    public String getNomeEspaco() {
-        return nomeEspaco;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeEspaco(String nomeEspaco) {
-        this.nomeEspaco = nomeEspaco;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Esporte getEsporte() {
@@ -61,31 +61,31 @@ public class Espaco {
         this.dataFimReserva = dataFimReserva;
     }
 
-    public EnumStatusEspaco getEnumStatusEspaco() {
-        return enumStatusEspaco;
+    public EnumStatusEspaco getEnumStatus() {
+        return enumStatus;
     }
 
-    public void setEnumStatusEspaco(EnumStatusEspaco enumStatusEspaco) {
-        this.enumStatusEspaco = enumStatusEspaco;
+    public void setEnumStatus(EnumStatusEspaco enumStatus) {
+        this.enumStatus = enumStatus;
     }
 
-    public Double getValorEspaco() {
-        return valorEspaco;
+    public Double getValor() {
+        return valor;
     }
 
-    public void setValorEspaco(Double valorEspaco) {
-        this.valorEspaco = valorEspaco;
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
     @Override
     public String toString() {
         return "Espaco{" +
-                "codigoEspaco=" + codigoEspaco +
-                ", nomeEspaco='" + nomeEspaco + '\'' +
+                "codigoEspaco=" + codigo +
+                ", nomeEspaco='" + nome + '\'' +
                 ", esporte=" + esporte +
                 ", dataInicioReserva=" + dataInicioReserva +
                 ", dataFimReserva=" + dataFimReserva +
-                ", enumStatusEspaco=" + enumStatusEspaco +
-                ", valorEspaco=" + valorEspaco +
+                ", enumStatusEspaco=" + enumStatus +
+                ", valorEspaco=" + valor +
                 '}';
     }
 }

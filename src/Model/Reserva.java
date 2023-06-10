@@ -4,44 +4,44 @@ import java.time.LocalDate;
 
 public class Reserva {
 
-    private Integer codigoReserva;
-    private String tituloReserva;
+    private Integer codigo;
+    private String titulo;
     private LocalDate dataSolicitacao;
     private LocalDate dataAlocacaoInicio;
     private LocalDate dataAlocacaoFim;
     private Cliente cliente;
-    private EnumStatusReserva enumStatusReserva;
+    private EnumStatusReserva enumStatus;
     private Material material;
     private Espaco espaco;
-    private Double valorReserva;
+    private Double valor;
 
-    public Reserva(Integer codigoReserva, String tituloReserva, LocalDate dataSolicitacao, LocalDate dataAlocacaoInicio, LocalDate dataAlocacaoFim, Cliente cliente, EnumStatusReserva enumStatusReserva, Material material, Espaco espaco, Double valorReserva) {
-        this.codigoReserva = codigoReserva;
-        this.tituloReserva = tituloReserva;
+    public Reserva(Integer codigo, String titulo, LocalDate dataSolicitacao, LocalDate dataAlocacaoInicio, LocalDate dataAlocacaoFim, Cliente cliente, EnumStatusReserva enumStatus, Material material, Espaco espaco, Double valor) {
+        this.codigo = codigo;
+        this.titulo = titulo;
         this.dataSolicitacao = dataSolicitacao;
         this.dataAlocacaoInicio = dataAlocacaoInicio;
         this.dataAlocacaoFim = dataAlocacaoFim;
         this.cliente = cliente;
-        this.enumStatusReserva = enumStatusReserva;
+        this.enumStatus = enumStatus;
         this.material = material;
         this.espaco = espaco;
-        this.valorReserva = valorReserva;
+        this.valor = valor;
     }
 
-    public Integer getCodigoReserva() {
-        return codigoReserva;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoReserva(Integer codigoReserva) {
-        this.codigoReserva = codigoReserva;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
-    public String getTituloReserva() {
-        return tituloReserva;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTituloReserva(String tituloReserva) {
-        this.tituloReserva = tituloReserva;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public LocalDate getDataSolicitacao() {
@@ -76,12 +76,12 @@ public class Reserva {
         this.cliente = cliente;
     }
 
-    public EnumStatusReserva getEnumStatusReserva() {
-        return enumStatusReserva;
+    public EnumStatusReserva getEnumStatus() {
+        return enumStatus;
     }
 
-    public void setEnumStatusReserva(EnumStatusReserva enumStatusReserva) {
-        this.enumStatusReserva = enumStatusReserva;
+    public void setEnumStatus(EnumStatusReserva enumStatus) {
+        this.enumStatus = enumStatus;
     }
 
     public Material getMaterial() {
@@ -100,27 +100,27 @@ public class Reserva {
         this.espaco = espaco;
     }
 
-    public Double getValorReserva() {
-        return valorReserva;
+    public Double getValor() {
+        return valor;
     }
 
-    public void setValorReserva(Double valorReserva) {
-        this.valorReserva = valorReserva;
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
 
     @Override
     public String toString() {
         return "Reserva{" +
-                "codigoReserva=" + codigoReserva +
-                ", tituloReserva='" + tituloReserva + '\'' +
+                "codigoReserva=" + codigo +
+                ", tituloReserva='" + titulo + '\'' +
                 ", dataSolicitacao=" + dataSolicitacao +
                 ", dataAlocacaoInicio=" + dataAlocacaoInicio +
                 ", dataAlocacaoFim=" + dataAlocacaoFim +
                 ", usuarioCliente=" + cliente +
-                ", enumStatusReserva=" + enumStatusReserva +
+                ", enumStatusReserva=" + enumStatus +
                 ", material=" + material +
                 ", espaco=" + espaco +
-                ", valorReserva=" + valorReserva +
+                ", valorReserva=" + valor +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
 package Repository;
 
-import Model.Cliente;
 import Model.Esporte;
 
 import javax.swing.*;
@@ -18,15 +17,15 @@ public class EsporteDAO {
         return esportes;
     }
 
-    public static void excluirDadosEsporte (Esporte esporte){
+    public static void excluir(Esporte esporte){
         esportes.remove(esporte);
         JOptionPane.showMessageDialog(null, "Esporte removido com sucesso!");
     }
 
-    public static void alterarDadosEsporte(Esporte esporte) {
+    public static void alterar(Esporte esporte) {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome");
         verificaRegistroNullo(nome);
-        esporte.setNomeEsporte(nome);
+        esporte.setNome(nome);
         JOptionPane.showMessageDialog(null,"Cadastro alterado com sucesso");
     }
 
@@ -35,7 +34,7 @@ public class EsporteDAO {
     public static List<Esporte> buscarPorNome(String nome) {
         List<Esporte> esportesFiltrados = new ArrayList<>();
         for (Esporte esporte : esportes) {
-            if (esporte.getNomeEsporte().contains(nome)) {
+            if (esporte.getNome().contains(nome)) {
                 esportesFiltrados.add(esporte);
             }
         }
@@ -47,13 +46,13 @@ public class EsporteDAO {
         List<String> clienteNomes = new ArrayList<>();
 
         for (Esporte esporte : produtos) {
-            clienteNomes.add(esporte.getNomeEsporte());
+            clienteNomes.add(esporte.getNome());
         }
 
         return clienteNomes.toArray();
     }
 
-    public static Integer canculaCodigo(){
+    public static Integer calculaCodigo(){
         return esportes.size() + 1;
     }
 }

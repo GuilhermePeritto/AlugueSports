@@ -17,25 +17,25 @@ public class MaterialDAO {
     public static List<Material> buscaTodos() {
         return materialList;
     }
-    public static void alugarMaterial(Material material) {
-        material.setEnumStatusMaterial(EnumStatusMaterial.ALUGADO);
+    public static void alugar(Material material) {
+        material.setEnumStatus(EnumStatusMaterial.ALUGADO);
     }
 
 
-    public static void exluirCadastro(Material material) {
+    public static void exluir(Material material) {
         materialList.remove(material);
         JOptionPane.showMessageDialog(null," Material removido com sucesso." );
     }
 
 
-    public static void alterarDadosMaterial(Material material){
-        String nomeMaterial = JOptionPane.showInputDialog(null," Infrome nome.");
-        verificaRegistroNullo(nomeMaterial);
-        material.setNomeMaterial(nomeMaterial);
+    public static void alterar(Material material){
+        String nome = JOptionPane.showInputDialog(null," Informe o nome do material.");
+        verificaRegistroNullo(nome);
+        material.setNome(nome);
 
         Object[] selectionStatusMaterial = {"ALUGADO", "DISPONIVEL", "CONSERTO", "INATIVADO"};
         String initialSelectionStatusMaterial = (String) selectionStatusMaterial[0];
-        Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status do material",
+        Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status do material.",
                 "Lista de Status", JOptionPane.QUESTION_MESSAGE, null, selectionStatusMaterial, initialSelectionStatusMaterial);
         EnumStatusMaterial statusMaterial = EnumStatusMaterial.DISPONIVEL;
 
@@ -48,21 +48,22 @@ public class MaterialDAO {
         } else if (selectionStatus.equals("INATIVADO")) {
             statusMaterial = EnumStatusMaterial.INATIVADO;
         }
+        material.setEnumStatus(statusMaterial);
 
-        String valorStr = JOptionPane.showInputDialog(null, "Digite o valor do material");
-        double valor = Double.parseDouble(valorStr);
+        String valor = JOptionPane.showInputDialog(null, "Digite o valor do material");
+        material.setValor(Double.parseDouble(valor));
         JOptionPane.showMessageDialog(null, "Material alterado com sucesso!");
     }
 
 
     public static void cancelarAluguel(Material material) {
-        material.setEnumStatusMaterial(EnumStatusMaterial.DISPONIVEL);
+        material.setEnumStatus(EnumStatusMaterial.DISPONIVEL);
     }
 
     public static List<Material> buscarPorNome(String nome) {
         List<Material> materiaisFiltrados = new ArrayList<>();
         for (Material material : materialList) {
-            if (material.getNomeMaterial().contains(nome)) {
+            if (material.getNome().contains(nome)) {
                 materiaisFiltrados.add(material);
             }
         }
@@ -74,12 +75,12 @@ public class MaterialDAO {
         List<String> materiaisNomes = new ArrayList<>();
 
         for (Material material : materiais) {
-            materiaisNomes.add(material.getNomeMaterial());
+            materiaisNomes.add(material.getNome());
         }
 
         return materiaisNomes.toArray();
     }
-    public static Integer canculaCodigo(){
+    public static Integer calculaCodigo(){
         return materialList.size() + 1;
     }
 }

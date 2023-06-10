@@ -1,37 +1,35 @@
 package Model;
 
-import java.time.LocalDate;
-
 public class Esporte {
-    private Integer codigoEsporte;
-    private String nomeEsporte;
+    private Integer codigo;
+    private String nome;
 
-    public Esporte(Integer codigoEsporte, String nomeEsporte) {
-        this.codigoEsporte = codigoEsporte;
-        this.nomeEsporte = nomeEsporte;
+    public Esporte(Integer codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
     }
 
     public Integer getCodigo() {
-        return codigoEsporte;
+        return codigo;
     }
 
     public void setCodigo(Integer codigo) {
-        this.codigoEsporte = codigo;
+        this.codigo = codigo;
     }
 
-    public String getNomeEsporte() {
-        return nomeEsporte;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeEsporte(String nomeEsporte) {
-        this.nomeEsporte = nomeEsporte;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override
     public String toString() {
         return "Esporte{" +
-                "codigo=" + codigoEsporte +
-                ", nomeEsporte='" + nomeEsporte + '\'' +
+                "codigo=" + codigo +
+                ", nomeEsporte='" + nome + '\'' +
                 '}';
     }
 }

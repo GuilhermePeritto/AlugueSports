@@ -1,13 +1,11 @@
 package Repository;
 import Model.Cliente;
-import Model.Pais;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
-import static View.View.chamaMenuPrincipal;
 
 public class ClienteDAO {
     static List<Cliente> clientes = new ArrayList<>();
@@ -18,12 +16,12 @@ public class ClienteDAO {
         return clientes;
     }
 
-    public static void excluirCadastroCliente(Cliente cliente) {
+    public static void excluir(Cliente cliente) {
         clientes.remove(cliente);
         JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso!");
     }
 
-    public static void alterarDadosCliente(Cliente cliente) {
+    public static void alterar(Cliente cliente) {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome");
         verificaRegistroNullo(nome);
         cliente.setNome(nome);
@@ -61,7 +59,7 @@ public class ClienteDAO {
 
         return clienteNomes.toArray();
     }
-    public static Integer canculaCodigo(){
+    public static Integer calculaCodigo(){
         return clientes.size() + 1;
     }
 
