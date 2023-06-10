@@ -1,5 +1,6 @@
 package View;
 
+import Form.RelatorioMaterialForm;
 import Model.*;
 import Repository.*;
 
@@ -9,6 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static Form.RelatorioClienteForm.emitirRelatorio;
+import static Form.RelatorioMaterialForm.emitirRelatorio;
+import static Form.RelatorioEsporteFomr.emitirRelatorio;
+
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 import static Repository.ReservaDAO.*;
 
@@ -356,7 +360,7 @@ public class ViewController extends View {
                     break;
                 case "Estado":
 //                    processoEstado();
-                    chamaMenuPrincipal();
+                    //chamaMenuPrincipal();
                     break;
                 case "Espaço":
                     processoEspaco();
@@ -512,10 +516,10 @@ public class ViewController extends View {
                     emitirRelatorio(ClienteDAO.buscaTodos());
                     break;
                 case "Esporte":
-                    //
+                    emitirRelatorio(EsporteDAO.buscaTodos());
                     break;
                 case "Material":
-//
+                    emitirRelatorio(MaterialDAO.buscaTodos());
                     break;
                 case "Pais":
 //
