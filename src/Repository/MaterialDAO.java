@@ -1,5 +1,6 @@
 package Repository;
 import Model.*;
+import Model.Material;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class MaterialDAO {
     public static void salvar(Material material) {
         materialList.add(material);
     }
+
     public static List<Material> buscaTodos() {
         return materialList;
     }
