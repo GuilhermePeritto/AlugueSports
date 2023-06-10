@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
-import static View.ViewController.listBoxCadastros;
 
 public class ReservaDAO {
     static List<Reserva> usuarioReserva = new ArrayList<>();
@@ -25,13 +24,13 @@ public class ReservaDAO {
     }
 
     public static void cancelar(Reserva reserva) {
-        reserva.setEnumStatusReserva(EnumStatusReserva.CANCELADO);
+        reserva.setEnumStatus(EnumStatusReserva.CANCELADO);
     }
 
     public static List<Reserva> buscarPorNome(String nome) {
         List<Reserva> reservasFiltrados = new ArrayList<>();
         for (Reserva reserva : usuarioReserva) {
-            if (reserva.getTituloReserva().contains(nome)) {
+            if (reserva.getTitulo().contains(nome)) {
                 reservasFiltrados.add(reserva);
             }
         }
@@ -43,7 +42,7 @@ public class ReservaDAO {
         List<String> reservaNomes = new ArrayList<>();
 
         for (Reserva reserva : reservas) {
-            reservaNomes.add(reserva.getTituloReserva());
+            reservaNomes.add(reserva.getTitulo());
         }
 
         return reservaNomes.toArray();
@@ -51,7 +50,7 @@ public class ReservaDAO {
 
     public static boolean reservarMaterial(Material material, LocalDate dataInicio, LocalDate dataFim) {
         // Verifica se o material está disponível
-        if (material.getEnumStatusMaterial() != EnumStatusMaterial.DISPONIVEL) {
+        if (material.getEnumStatus() != EnumStatusMaterial.DISPONIVEL) {
             JOptionPane.showMessageDialog(null, "Material não disponível para reserva.");
             return false;
         }
@@ -95,7 +94,7 @@ public class ReservaDAO {
 
     public static boolean reservarEspaco(Espaco espaco, LocalDate dataInicio, LocalDate dataFim) {
         // Verifica se o material está disponível
-        if (espaco.getEnumStatusEspaco() != EnumStatusEspaco.DISPONIVEL) {
+        if (espaco.getEnumStatus() != EnumStatusEspaco.DISPONIVEL) {
             JOptionPane.showMessageDialog(null, "Espaco não disponível para reserva.");
             return false;
         }
@@ -137,7 +136,7 @@ public class ReservaDAO {
         return true;
     }
 
-    public static Integer canculaCodigo() {
+    public static Integer calculaCodigo() {
         return usuarioReserva.size() + 1;
     }
 
@@ -152,7 +151,7 @@ public class ReservaDAO {
     }
 
     public static Double calcularValor(Material material, Espaco espaco, Double diasReserva) {
-        return Calcular.somar(Calcular.multiplicar(material.getValorMaterial(), diasReserva).doubleValue(), Calcular.multiplicar(espaco.getValorEspaco(), diasReserva).doubleValue()).doubleValue();
+        return Calcular.somar(Calcular.multiplicar(material.getValor(), diasReserva).doubleValue(), Calcular.multiplicar(espaco.getValor(), diasReserva).doubleValue()).doubleValue();
     }
 
     public static void verificarCliente(Cliente cliente) {
@@ -170,7 +169,7 @@ public class ReservaDAO {
         //Altera titulo da reserva
         String tituloReserva = JOptionPane.showInputDialog(null, "Digite o titulo");
         verificaRegistroNullo(tituloReserva);
-        reserva.setTituloReserva(tituloReserva);
+        reserva.setTitulo(tituloReserva);
 
         //Altera data inicio
         LocalDate dataAlocacaoInicio = LocalDate.now();
@@ -228,7 +227,7 @@ public class ReservaDAO {
         verificaRegistroNullo(espaco);
     }
 
-    public static void excluirCadastroReserva(Reserva reserva) {
+    public static void excluir(Reserva reserva) {
         usuarioReserva.remove(reserva);
         JOptionPane.showMessageDialog(null, "Reserva excluida com sucesso!");
     }

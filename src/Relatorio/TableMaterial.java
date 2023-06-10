@@ -50,13 +50,13 @@ public class TableMaterial extends AbstractTableModel {
         Material registroMaterial = (Material) vetorDados.get(linha);
         switch (coluna) {
             case INDEX_CODIGO:
-                return registroMaterial.getCodigoMaterial();
+                return registroMaterial.getCodigo();
             case INDEX_NOME:
-                return registroMaterial.getNomeMaterial();
+                return registroMaterial.getNome();
             case INDEX_VALOR:
-                return registroMaterial.getValorMaterial();
+                return registroMaterial.getValor();
             case INDEX_ENUMSTATUSMATERIAL:
-                return registroMaterial.getEnumStatusMaterial();
+                return registroMaterial.getEnumStatus();
             default:
                 return new Object();
         }

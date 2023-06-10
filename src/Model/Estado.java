@@ -1,24 +1,24 @@
 package Model;
 
 public class Estado {
-    private Integer codigoEstado;
-    private String nomeEstado;
+    private Integer codigo;
+    private String nome;
     private String sigla;
     private Pais pais;
 
-    public Estado(Integer codigoEstado, String nomeEstado, String sigla, Pais pais) {
-        this.codigoEstado = codigoEstado;
-        this.nomeEstado = nomeEstado;
+    public Estado(Integer codigo, String nome, String sigla, Pais pais) {
+        this.codigo = codigo;
+        this.nome = nome;
         sigla = sigla;
         this.pais = pais;
     }
 
-    public Integer getCodigoEstado() {
-        return codigoEstado;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public String getNomeEstado() {
-        return nomeEstado;
+    public String getNome() {
+        return nome;
     }
 
 
@@ -31,11 +31,11 @@ public class Estado {
     }
 
     public void setCodigo(Integer codigo) {
-        this.codigoEstado = codigoEstado;
+        this.codigo = this.codigo;
     }
 
-    public void setNomeEstado(String nomeEstado) {
-        this.nomeEstado = nomeEstado;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public void setSigla(String sigla) {
@@ -49,8 +49,8 @@ public class Estado {
     @Override
     public String toString() {
         return "Estado{" +
-                "codigoEstado=" + codigoEstado +
-                ", nomeEstado='" + nomeEstado + '\'' +
+                "codigoEstado=" + codigo +
+                ", nomeEstado='" + nome + '\'' +
                 ", sigla=" + sigla +
                 ", pais=" + pais +
                 '}';

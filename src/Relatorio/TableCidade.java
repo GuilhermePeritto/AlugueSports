@@ -43,7 +43,7 @@ public class TableCidade extends AbstractTableModel {
             case INDEX_CODIGO:
                 return registroCidade.getCodigo();
             case INDEX_NOME:
-                return registroCidade.getNomeCidade();
+                return registroCidade.getNome();
             case INDEX_ESTADO:
                 return registroCidade.getEstado();
             default:

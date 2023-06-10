@@ -2,13 +2,13 @@ package Model;
 
 public class Cidade {
     private Integer codigo;
-    private String nomeCidade;
+    private String nome;
     private Estado estado;
 
 
-    public Cidade(Integer codigo, String nomeCidade, Estado estado) {
+    public Cidade(Integer codigo, String nome, Estado estado) {
         this.codigo = codigo;
-        this.nomeCidade = nomeCidade;
+        this.nome = nome;
         this.estado = estado;
     }
 
@@ -21,12 +21,12 @@ public class Cidade {
         this.codigo = codigo;
     }
 
-    public String getNomeCidade() {
-        return nomeCidade;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeCidade(String nomeCidade) {
-        this.nomeCidade = nomeCidade;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Estado getEstado() {

@@ -1,6 +1,5 @@
 
 package Repository;
-        import Model.Cliente;
         import Model.Pais;
 
         import javax.swing.*;
@@ -25,7 +24,7 @@ public class PaisDAO {
     public static List<Pais> buscarPorNome(String nome) {
         List<Pais> paisesFiltrados = new ArrayList<>();
         for (Pais pais : paises) {
-            if (pais.getNomePais().contains(nome)) {
+            if (pais.getNome().contains(nome)) {
                 paisesFiltrados.add(pais);
             }
         }
@@ -35,7 +34,7 @@ public class PaisDAO {
     public static void alterardadospais(Pais pais) {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome");
         verificaRegistroNullo(nome);
-        pais.setNomePais(nome);
+        pais.setNome(nome);
     }
 
     public static Object[] findPaisInArray() {
@@ -43,12 +42,12 @@ public class PaisDAO {
         List<String> paisNomes = new ArrayList<>();
 
         for (Pais pais : paises) {
-            paisNomes.add(pais.getNomePais());
+            paisNomes.add(pais.getNome());
         }
 
         return paisNomes.toArray();
     }
-    public static Integer canculaCodigo(){
+    public static Integer calculaCodigo(){
         return paises.size() + 1;
     }
 }

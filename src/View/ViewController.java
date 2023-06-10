@@ -2,7 +2,6 @@ package View;
 
 import Form.RelatorioCidadeForm;
 import Form.RelatorioClienteForm;
-import Form.RelatorioMaterialForm;
 import Model.*;
 import Repository.*;
 
@@ -11,7 +10,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static Form.RelatorioClienteForm.emitirRelatorio;
 import static Form.RelatorioMaterialForm.emitirRelatorio;
 import static Form.RelatorioEsporteFomr.emitirRelatorio;
 
@@ -22,7 +20,7 @@ public class ViewController extends View {
 
     public static void cadastroCliente() {
         try {
-            Integer codigo = ClienteDAO.canculaCodigo();
+            Integer codigo = ClienteDAO.calculaCodigo();
             String nome = JOptionPane.showInputDialog(null, "Digite o nome");
             verificaRegistroNullo(nome);
             LocalDate nascimento = LocalDate.now();
@@ -51,7 +49,7 @@ public class ViewController extends View {
 
     public static void cadastroEsporte() {
         try {
-            Integer codigo = EsporteDAO.canculaCodigo();
+            Integer codigo = EsporteDAO.calculaCodigo();
             String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
             Esporte esporte = new Esporte(codigo, nomeEsporte);
             EsporteDAO.salvar(esporte);
@@ -65,7 +63,7 @@ public class ViewController extends View {
 
     public static void cadastroPais() {
         try {
-            Integer codigoPais = PaisDAO.canculaCodigo();
+            Integer codigoPais = PaisDAO.calculaCodigo();
             String nomePais = JOptionPane.showInputDialog(null, "Digite o nome do país");
             verificaRegistroNullo(nomePais);
             Pais pais = new Pais(codigoPais, nomePais);
@@ -80,7 +78,7 @@ public class ViewController extends View {
 
     public static void cadastroEstado() {
         try {
-            Integer codigoEstado = EstadoDAO.canculaCodigo();
+            Integer codigoEstado = EstadoDAO.calculaCodigo();
             String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado");
             verificaRegistroNullo(nomeEstado);
             String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado");
@@ -104,7 +102,7 @@ public class ViewController extends View {
 
     public static void cadastroCidade() {
         try {
-            Integer codigoCidade = CidadeDAO.canculaCodigo();
+            Integer codigoCidade = CidadeDAO.calculaCodigo();
             String nomeCidade = JOptionPane.showInputDialog(null, "Digite o nome da cidade");
             verificaRegistroNullo(nomeCidade);
             Object[] selectionValuesEstado = EstadoDAO.findEstadoInArray();
@@ -125,7 +123,7 @@ public class ViewController extends View {
 
     public static void cadastroMaterial() {
         try {
-            Integer codigoMaterial = MaterialDAO.canculaCodigo();
+            Integer codigoMaterial = MaterialDAO.calculaCodigo();
             String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
             verificaRegistroNullo(nomeMaterial);
             Object[] selectionStatusMaterial = {"ALUGADO", "DISPONIVEL", "CONSERTO", "INATIVO"};
@@ -157,7 +155,7 @@ public class ViewController extends View {
 
     public static void cadastroEspaco() {
         try {
-            Integer codigo = EspacoDAO.canculaCodigo();
+            Integer codigo = EspacoDAO.calculaCodigo();
             String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaco");
             verificaRegistroNullo(nomeEspaco);
             Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
@@ -207,7 +205,7 @@ public class ViewController extends View {
 
     public static void cadastroReserva() {
         try {
-            Integer codigoReserva = canculaCodigo();
+            Integer codigoReserva = calculaCodigo();
             String titulo = JOptionPane.showInputDialog(null, "Digite o titulo da reserva");
             verificaRegistroNullo(titulo);
             LocalDate dataReservaInicio = LocalDate.now();
@@ -294,7 +292,7 @@ public class ViewController extends View {
                 "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
         List<Material> alugarMaterial = MaterialDAO.buscarPorNome((String) selectionMaterial);
         verificaRegistroNullo(selectionMaterial);
-        MaterialDAO.alugarMaterial(alugarMaterial.get(0));
+        MaterialDAO.alugar(alugarMaterial.get(0));
         JOptionPane.showMessageDialog(null, "Material alugado com sucesso!", "Alugado", JOptionPane.INFORMATION_MESSAGE);
         JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
     }
@@ -425,10 +423,10 @@ public class ViewController extends View {
 
         switch ((String) selectionCliente) {
             case "Alterar Dados":
-                EstadoDAO.alterardadosestado(estados.get(0));
+                EstadoDAO.alterar(estados.get(0));
                 break;
             case "Excluir Cadastro":
-                EstadoDAO.excluirCadastroEstado(estados.get(0));
+                EstadoDAO.excluir(estados.get(0));
         }
 
 
@@ -449,10 +447,10 @@ public class ViewController extends View {
         verificaRegistroNullo(selectionEsporte);
         switch ((String) selectionEsporte) {
             case "Alterar Dados - Esporte":
-                EsporteDAO.alterarDadosEsporte(esportes.get(0));
+                EsporteDAO.alterar(esportes.get(0));
                 break;
             case "Excluir Cadastro - Esporte":
-                EsporteDAO.excluirDadosEsporte(esportes.get(0));
+                EsporteDAO.excluir(esportes.get(0));
                 break;
             case "Busca por nome - Esporte":
                 String nomeBusca = JOptionPane.showInputDialog(null, "Informe o nome para busca.");
@@ -476,10 +474,10 @@ public class ViewController extends View {
         verificaRegistroNullo(selectionMaterial);
         switch ((String) selectionMaterial) {
             case "Alterar Dados - Material":
-                MaterialDAO.alterarDadosMaterial(material.get(0));
+                MaterialDAO.alterar(material.get(0));
                 break;
             case "Excluir Cadastro - Mataerial":
-                MaterialDAO.exluirCadastro(material.get(0));
+                MaterialDAO.exluir(material.get(0));
 
                 break;
             case "Busca por nome - Material":
@@ -528,10 +526,10 @@ public class ViewController extends View {
 
         switch ((String) selectionCidade) {
             case "Alterar Dados":
-                CidadeDAO.alterarDadosCidade(cidades.get(0));
+                CidadeDAO.alterar(cidades.get(0));
                 break;
             case "Excluir Cadastro":
-                CidadeDAO.excluirCadastroCidade(cidades.get(0));
+                CidadeDAO.excluir(cidades.get(0));
                 break;
             case "Busca por nome":
                 String nomeBusca = JOptionPane.showInputDialog(null, "Informe o nome para busca.");
@@ -555,10 +553,10 @@ public class ViewController extends View {
         verificaRegistroNullo(selectionCliente);
         switch ((String) selectionCliente) {
             case "Alterar Dados":
-                ClienteDAO.alterarDadosCliente(cliente.get(0));
+                ClienteDAO.alterar(cliente.get(0));
                 break;
             case "Excluir Cadastro":
-                ClienteDAO.excluirCadastroCliente(cliente.get(0));
+                ClienteDAO.excluir(cliente.get(0));
                 break;
             case "Busca por nome":
                 String nomeBusca = JOptionPane.showInputDialog(null, "Informe o nome para busca.");
@@ -584,7 +582,7 @@ public class ViewController extends View {
                 ReservaDAO.alterarDadosReserva(reserva.get(0));
                 break;
             case "Excluir Cadastro":
-                ReservaDAO.excluirCadastroReserva(reserva.get(0));
+                ReservaDAO.excluir(reserva.get(0));
         }
     }
 
@@ -642,10 +640,10 @@ public class ViewController extends View {
         verificaRegistroNullo(selectionCliente);
         switch ((String) selectionCliente) {
             case "Alterar Dados":
-                EspacoDAO.alterarEspaco(espaco.get(0));
+                EspacoDAO.alterar(espaco.get(0));
                 break;
             case "Excluir Cadastro":
-                EspacoDAO.excluirEspaco(espaco.get(0));
+                EspacoDAO.excluir(espaco.get(0));
         }
     }
 }

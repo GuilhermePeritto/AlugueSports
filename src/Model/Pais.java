@@ -1,35 +1,35 @@
 package Model;
 
 public class Pais {
-    private Integer codigoPais;
-    private String nomePais;
+    private Integer codigo;
+    private String nome;
 
-    public Pais(Integer codigoPais, String nomePais) {
-        this.codigoPais = codigoPais;
-        this.nomePais = nomePais;
+    public Pais(Integer codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
     }
 
-    public Integer getCodigoPais() {
-        return codigoPais;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoPais(Integer codigoPais) {
-        this.codigoPais = codigoPais;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
-    public String getNomePais() {
-        return nomePais;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomePais(String nomePais) {
-        this.nomePais = nomePais;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override
     public String toString() {
         return "Pais{" +
-                "codigoPais=" + codigoPais +
-                ", nomePais='" + nomePais + '\'' +
+                "codigoPais=" + codigo +
+                ", nomePais='" + nome + '\'' +
                 '}';
     }
 }

@@ -1,57 +1,57 @@
 package Model;
 
 public class Material {
-    private Integer codigoMaterial;
-    private String nomeMaterial;
-    private EnumStatusMaterial enumStatusMaterial;
-    private Double valorMaterial;
+    private Integer codigo;
+    private String nome;
+    private EnumStatusMaterial enumStatus;
+    private Double valor;
 
-    public Material(Integer codigoMaterial, String nomeMaterial, EnumStatusMaterial enumStatusMaterial, Double valorMaterial) {
-        this.codigoMaterial = codigoMaterial;
-        this.nomeMaterial = nomeMaterial;
-        this.enumStatusMaterial = enumStatusMaterial;
-        this.valorMaterial = valorMaterial;
+    public Material(Integer codigo, String nome, EnumStatusMaterial enumStatus, Double valor) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.enumStatus = enumStatus;
+        this.valor = valor;
     }
 
-    public Integer getCodigoMaterial() {
-        return codigoMaterial;
+    public Integer getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoMaterial(Integer codigoMaterial) {
-        this.codigoMaterial = codigoMaterial;
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
-    public String getNomeMaterial() {
-        return nomeMaterial;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeMaterial(String nomeMaterial) {
-        this.nomeMaterial = nomeMaterial;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public EnumStatusMaterial getEnumStatusMaterial() {
-        return enumStatusMaterial;
+    public EnumStatusMaterial getEnumStatus() {
+        return enumStatus;
     }
 
-    public void setEnumStatusMaterial(EnumStatusMaterial enumStatusMaterial) {
-        this.enumStatusMaterial = enumStatusMaterial;
+    public void setEnumStatus(EnumStatusMaterial enumStatus) {
+        this.enumStatus = enumStatus;
     }
 
-    public Double getValorMaterial() {
-        return valorMaterial;
+    public Double getValor() {
+        return valor;
     }
 
-    public void setValorMaterial(Double valorMaterial) {
-        this.valorMaterial = valorMaterial;
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
 
     @Override
     public String toString() {
         return "Material{" +
-                "codigoMaterial=" + codigoMaterial +
-                ", nomeMaterial='" + nomeMaterial + '\'' +
-                ", enumStatusMaterial=" + enumStatusMaterial +
-                ", valorMaterial=" + valorMaterial +
+                "codigoMaterial=" + codigo +
+                ", nomeMaterial='" + nome + '\'' +
+                ", enumStatusMaterial=" + enumStatus +
+                ", valorMaterial=" + valor +
                 '}';
     }
 }

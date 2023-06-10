@@ -17,35 +17,32 @@ public class CidadeDAO {
         return cidades;
     }
 
-    public static void excluirCadastroCidade(Cidade cidade) {
+    public static void excluir(Cidade cidade) {
         cidades.remove(cidade);
         JOptionPane.showMessageDialog(null, "Cidade excluida com sucesso!");
     }
 
-    public static void alterarDadosCidade(Cidade cidade) {
-        String nomeCidade = JOptionPane.showInputDialog(null, "Digite o nome");
-        verificaRegistroNullo(nomeCidade);
+    public static void alterar(Cidade cidade) {
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome");
+        verificaRegistroNullo(nome);
         Object[] selectionValuesEstado = EstadoDAO.findEstadoInArray();
         String initialSelectionEstado = (String) selectionValuesEstado[0];
         Object selectionEstado = JOptionPane.showInputDialog(null, "Selecione o estado",
                 "Lista de Estados", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEstado, initialSelectionEstado);
         List<Estado> estado = EstadoDAO.buscarPorNome(selectionEstado.toString());
-        cidade.setNomeCidade(nomeCidade);
+        cidade.setNome(nome);
         cidade.setEstado(estado.get(0));
 
     }
 
-    public static Integer canculaCodigo(){
+    public static Integer calculaCodigo(){
         return cidades.size() + 1;
     }
 
-    public static List<Cidade> buscaCidades(){
-        return cidades;
-    }
     public static List<Cidade> buscarPorNome(String nomeCidade) {
         List<Cidade> cidadesFiltradas = new ArrayList<>();
         for (Cidade cidade : cidades) {
-            if (cidade.getNomeCidade().contains(nomeCidade)) {
+            if (cidade.getNome().contains(nomeCidade)) {
                 cidadesFiltradas.add(cidade);
             }
         }
@@ -53,11 +50,11 @@ public class CidadeDAO {
     }
 
     public static Object[] findCidadeInArray() {
-        List<Cidade> cidades = buscaCidades();
+        List<Cidade> cidades = buscaTodos();
         List<String> cidadeNomes = new ArrayList<>();
 
         for (Cidade cidade : cidades) {
-            cidadeNomes.add(cidade.getNomeCidade());
+            cidadeNomes.add(cidade.getNome());
         }
 
         return cidadeNomes.toArray();
