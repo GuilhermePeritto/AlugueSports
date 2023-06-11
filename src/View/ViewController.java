@@ -2,6 +2,7 @@ package View;
 
 import Form.RelatorioCidadeForm;
 import Form.RelatorioClienteForm;
+import Form.RelatorioPaisForm;
 import Model.*;
 import Repository.*;
 
@@ -604,7 +605,7 @@ public class ViewController extends View {
                     emitirRelatorio(MaterialDAO.buscaTodos());
                     break;
                 case "Pais":
-//
+                    RelatorioPaisForm.emitirRelatorio(PaisDAO.buscaTodos());
                     break;
                 case "Estado":
 //
