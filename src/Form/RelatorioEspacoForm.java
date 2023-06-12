@@ -17,7 +17,7 @@ public class RelatorioEspacoForm extends JPanel {
     private static final long serialVersionUID = 1L;
 
     public static final String[] nomeColunas =
-            {"Codigo", "Nome", "Status"};
+            {"Codigo", "Nome", "Status", ""};
 
     protected JTable table;
     protected JScrollPane scroller;
