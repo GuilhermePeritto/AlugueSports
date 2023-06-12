@@ -45,7 +45,7 @@ public class TableCidade extends AbstractTableModel {
             case INDEX_NOME:
                 return registroCidade.getNomeCidade();
             case INDEX_ESTADO:
-                return registroCidade.getEstado();
+                return registroCidade.getEstado().getNomeEstado();
             default:
                 return new Object();
         }
