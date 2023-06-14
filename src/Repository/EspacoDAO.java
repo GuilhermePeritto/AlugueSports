@@ -1,8 +1,6 @@
 package Repository;
 
-import Model.EnumStatusEspaco;
-import Model.Espaco;
-import Model.Esporte;
+import Model.*;
 
 import javax.swing.*;
 import java.time.LocalDate;
@@ -101,5 +99,9 @@ public class EspacoDAO {
         Double valor= Double.valueOf(JOptionPane.showInputDialog(null, "Digite o valor"));
         verificaRegistroNullo(valor);
         espaco.setValor(valor);
+    }
+
+    public static List<Espaco> getEspacos() {
+        return espacos;
     }
 }

@@ -9,7 +9,7 @@ public class Estado {
     public Estado(Integer codigo, String nome, String sigla, Pais pais) {
         this.codigo = codigo;
         this.nome = nome;
-        sigla = sigla;
+        this.sigla = sigla;
         this.pais = pais;
     }
 

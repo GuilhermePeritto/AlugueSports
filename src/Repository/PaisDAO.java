@@ -47,7 +47,8 @@ public class PaisDAO {
 
         return paisNomes.toArray();
     }
-    public static Integer calculaCodigo(){
-        return paises.size() + 1;
+
+    public static List<Pais> getPaises() {
+        return paises;
     }
 }

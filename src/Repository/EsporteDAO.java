@@ -1,5 +1,6 @@
 package Repository;
 
+import Model.Cidade;
 import Model.Esporte;
 
 import javax.swing.*;
@@ -52,7 +53,7 @@ public class EsporteDAO {
         return clienteNomes.toArray();
     }
 
-    public static Integer calculaCodigo(){
-        return esportes.size() + 1;
+    public static List<Esporte> getEsportes() {
+        return esportes;
     }
 }

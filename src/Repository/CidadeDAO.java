@@ -35,9 +35,6 @@ public class CidadeDAO {
 
     }
 
-    public static Integer calculaCodigo(){
-        return cidades.size() + 1;
-    }
 
     public static List<Cidade> buscarPorNome(String nomeCidade) {
         List<Cidade> cidadesFiltradas = new ArrayList<>();
@@ -58,5 +55,9 @@ public class CidadeDAO {
         }
 
         return cidadeNomes.toArray();
+    }
+
+    public static List<Cidade> getCidades() {
+        return cidades;
     }
 }

@@ -59,8 +59,8 @@ public class ClienteDAO {
 
         return clienteNomes.toArray();
     }
-    public static Integer calculaCodigo(){
-        return clientes.size() + 1;
-    }
 
+    public static List<Cliente> getClientes() {
+        return clientes;
+    }
 }

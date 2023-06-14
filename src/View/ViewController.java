@@ -21,7 +21,7 @@ public class ViewController extends View {
 
     public static void cadastroCliente() {
         try {
-            Integer codigo = ClienteDAO.calculaCodigo();
+            Integer codigo = CalcularCodigo.calculaCodigo(ClienteDAO.getClientes());
             String nome = JOptionPane.showInputDialog(null, "Digite o nome");
             verificaRegistroNullo(nome);
             LocalDate nascimento = LocalDate.now();
@@ -50,7 +50,7 @@ public class ViewController extends View {
 
     public static void cadastroEsporte() {
         try {
-            Integer codigo = EsporteDAO.calculaCodigo();
+            Integer codigo = CalcularCodigo.calculaCodigo(EsporteDAO.getEsportes());
             String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
             Esporte esporte = new Esporte(codigo, nomeEsporte);
             EsporteDAO.salvar(esporte);
@@ -64,7 +64,7 @@ public class ViewController extends View {
 
     public static void cadastroPais() {
         try {
-            Integer codigoPais = PaisDAO.calculaCodigo();
+            Integer codigoPais = CalcularCodigo.calculaCodigo(PaisDAO.getPaises());
             String nomePais = JOptionPane.showInputDialog(null, "Digite o nome do país");
             verificaRegistroNullo(nomePais);
             Pais pais = new Pais(codigoPais, nomePais);
@@ -79,7 +79,7 @@ public class ViewController extends View {
 
     public static void cadastroEstado() {
         try {
-            Integer codigoEstado = EstadoDAO.calculaCodigo();
+            Integer codigoEstado = CalcularCodigo.calculaCodigo(EstadoDAO.getEstados());
             String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado");
             verificaRegistroNullo(nomeEstado);
             String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado");
@@ -103,7 +103,7 @@ public class ViewController extends View {
 
     public static void cadastroCidade() {
         try {
-            Integer codigoCidade = CidadeDAO.calculaCodigo();
+            Integer codigoCidade = CalcularCodigo.calculaCodigo(CidadeDAO.getCidades());
             String nomeCidade = JOptionPane.showInputDialog(null, "Digite o nome da cidade");
             verificaRegistroNullo(nomeCidade);
             Object[] selectionValuesEstado = EstadoDAO.findEstadoInArray();
@@ -124,7 +124,7 @@ public class ViewController extends View {
 
     public static void cadastroMaterial() {
         try {
-            Integer codigoMaterial = MaterialDAO.calculaCodigo();
+            Integer codigoMaterial = CalcularCodigo.calculaCodigo(MaterialDAO.getMaterialList());
             String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
             verificaRegistroNullo(nomeMaterial);
             Object[] selectionStatusMaterial = {"ALUGADO", "DISPONIVEL", "CONSERTO", "INATIVO"};
@@ -156,7 +156,7 @@ public class ViewController extends View {
 
     public static void cadastroEspaco() {
         try {
-            Integer codigo = EspacoDAO.calculaCodigo();
+            Integer codigo = CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos());
             String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaco");
             verificaRegistroNullo(nomeEspaco);
             Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
@@ -206,7 +206,7 @@ public class ViewController extends View {
 
     public static void cadastroReserva() {
         try {
-            Integer codigoReserva = calculaCodigo();
+            Integer codigoReserva = CalcularCodigo.calculaCodigo(ReservaDAO.getUsuarioReserva());
             String titulo = JOptionPane.showInputDialog(null, "Digite o titulo da reserva");
             verificaRegistroNullo(titulo);
             LocalDate dataReservaInicio = LocalDate.now();

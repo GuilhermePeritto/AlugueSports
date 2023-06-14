@@ -80,7 +80,8 @@ public class MaterialDAO {
 
         return materiaisNomes.toArray();
     }
-    public static Integer calculaCodigo(){
-        return materialList.size() + 1;
+
+    public static List<Material> getMaterialList() {
+        return materialList;
     }
 }

@@ -1,5 +1,6 @@
 package Repository;
 
+import Model.Cidade;
 import Model.Estado;
 
 import javax.swing.*;
@@ -50,7 +51,7 @@ public class EstadoDAO {
         JOptionPane.showMessageDialog(null, "Estado excluido com sucesso!");
     }
 
-    public static Integer calculaCodigo(){
-        return estados.size() + 1;
+    public static List<Estado> getEstados() {
+        return estados;
     }
 }
