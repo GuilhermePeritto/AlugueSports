@@ -136,8 +136,8 @@ public class ReservaDAO {
         return true;
     }
 
-    public static Integer calculaCodigo() {
-        return usuarioReserva.size() + 1;
+    public static List<Reserva> getUsuarioReserva() {
+        return usuarioReserva;
     }
 
     public static Double calcularDias(LocalDate dataInicio, LocalDate dataFim) {

@@ -36,4 +36,13 @@ public class Cidade {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Cidade{" +
+                "codigo=" + codigo +
+                ", nome='" + nome + '\'' +
+                ", estado=" + estado +
+                '}';
+    }
 }

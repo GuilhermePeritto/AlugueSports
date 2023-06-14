@@ -29,14 +29,14 @@ public class View {
                     break;
                 case 3: //CarregadorDeValoresIniciais
                     try {
-                        CarregarValoresIniciais.StartReserva();
-                        CarregarValoresIniciais.StartClientes();
-                        CarregarValoresIniciais.StartMaterial();
-                        CarregarValoresIniciais.StartEspaco();
                         CarregarValoresIniciais.StartPais();
-                        CarregarValoresIniciais.StartEsporte();
                         CarregarValoresIniciais.StartEstado();
                         CarregarValoresIniciais.StartCidade();
+                        CarregarValoresIniciais.StartEsporte();
+                        CarregarValoresIniciais.StartEspaco();
+                        CarregarValoresIniciais.StartClientes();
+                        CarregarValoresIniciais.StartMaterial();
+                        CarregarValoresIniciais.StartReserva();
                         JOptionPane.showMessageDialog(null, "Cadastros salvos com Sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                         chamaMenuPrincipal();
                     } catch (Exception e) {
