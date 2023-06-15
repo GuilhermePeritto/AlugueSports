@@ -2,7 +2,6 @@ package Form;
 
 import Model.Esporte;
 import Relatorio.TableEsporte;
-import javafx.scene.control.Tab;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -14,7 +13,7 @@ import java.util.Vector;
 
 import static View.ViewController.chamaMenuRelatorios;
 
-public class RelatorioEsporteFomr extends JPanel {
+public class RelatorioEsporteForm extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +24,7 @@ public class RelatorioEsporteFomr extends JPanel {
     protected JScrollPane scroller;
     protected TableEsporte tabela;
 
-    public RelatorioEsporteFomr(Vector<Esporte> vetorDados){
+    public RelatorioEsporteForm(Vector<Esporte> vetorDados){
         iniciarVetorComponentes(vetorDados);
     }
 
@@ -61,7 +60,7 @@ public class RelatorioEsporteFomr extends JPanel {
                 vetorDados.add(esporte1);
             }
 
-            frame.getContentPane().add(new RelatorioEsporteFomr(vetorDados));
+            frame.getContentPane().add(new RelatorioEsporteForm(vetorDados));
             frame.pack();
             frame.setVisible(true);
             frame.setLocationRelativeTo(null);

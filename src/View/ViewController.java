@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static Form.RelatorioMaterialForm.emitirRelatorio;
-import static Form.RelatorioEsporteFomr.emitirRelatorio;
+import static Form.RelatorioEsporteForm.emitirRelatorio;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 import static Repository.ReservaDAO.*;
@@ -208,72 +208,88 @@ public class ViewController extends View {
 
     public static void cadastroReserva() {
         try {
-            Integer codigoReserva = CalcularCodigo.calculaCodigo(ReservaDAO.getUsuarioReserva());
-            String titulo = JOptionPane.showInputDialog(null, "Digite o titulo da reserva");
-            verificaRegistroNullo(titulo);
-            LocalDate dataReservaInicio = LocalDate.now();
-            String imputDataReservaInicio = JOptionPane.showInputDialog(null, "Digite a data de inicio da reserva");
-            try {
-                dataReservaInicio = LocalDate.parse(imputDataReservaInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
-            }
-            verificaRegistroNullo(imputDataReservaInicio);
-            LocalDate dataReservaFim = LocalDate.now();
-            String imputDataReservaFim = JOptionPane.showInputDialog(null, "Digite a data de fim da reserva");
-            try {
-                dataReservaFim = LocalDate.parse(imputDataReservaFim, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
-            }
-            verificaRegistroNullo(imputDataReservaFim);
-            Object[] selectionValuesUsuarioCliente = ClienteDAO.findUsuarioClienteInArray();
-            String initialSelectionUsuarioCliente = (String) selectionValuesUsuarioCliente[0];
-            Object selectionUsuarioCliente = JOptionPane.showInputDialog(null, "Selecione o cliente",
-                    "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesUsuarioCliente, initialSelectionUsuarioCliente);
-            List<Cliente> cliente = ClienteDAO.buscarPorNome((String) selectionUsuarioCliente);
-            verificaRegistroNullo(selectionUsuarioCliente);
-            Object[] selectionStatusReserva = {"ABERTO", "CANCELADO", "FINALIZADO"};
-            String initialSelectionStatusReserva = (String) selectionStatusReserva[0];
-            Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva",
-                    "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
 
-            EnumStatusReserva statusReserva = EnumStatusReserva.ABERTO;
-            if (selectionStatus.equals("CANCELADO")) {
-                statusReserva = EnumStatusReserva.CANCELADO;
-            } else if (selectionStatus.equals("FINALIZADO")) {
-                statusReserva = EnumStatusReserva.FINALIZADO;
+            if (ClienteDAO.getClientes().size() == 0){
+                JOptionPane.showMessageDialog(null, "Nenhum cliente cadastrado!"+"\n"+ "Por favor cadastre um cliente.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                chamaMenuPrincipal();
+            } else if (MaterialDAO.getMaterialList().size() == 0) {
+                JOptionPane.showMessageDialog(null, "Nenhum material cadastrado!" + "\n" + "Por favor cadastre um material.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                chamaMenuPrincipal();
+            } else if (EspacoDAO.getEspacos().size() == 0) {
+                JOptionPane.showMessageDialog(null, "Nenhum espaço cadastrado!" + "\n" + "Por favor cadastre um espaço.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                chamaMenuPrincipal();
             }
-            verificaRegistroNullo(selectionStatus);
-            Object[] selectionValuesEspaco = EspacoDAO.findEspacoInArray();
-            String initialSelectionEspaco = (String) selectionValuesEspaco[0];
-            Object selectionEspaco = JOptionPane.showInputDialog(null, "Selecione o espaco",
-                    "Alugar espaco", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEspaco, initialSelectionEspaco);
-            List<Espaco> espaco = EspacoDAO.buscarPorNome((String) selectionEspaco);
-            verificaRegistroNullo(selectionEspaco);
-            verificarDisponibilidadeEspaco(espaco.get(0), dataReservaInicio, dataReservaFim);
-            reservarEspaco(espaco.get(0), dataReservaInicio, dataReservaFim);
-            Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
-            String initialSelectionMaterial = (String) selectionValuesMaterial[0];
-            Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material",
-                    "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
-            List<Material> material = MaterialDAO.buscarPorNome((String) selectionMaterial);
-            verificaRegistroNullo(selectionMaterial);
-            verificarDisponibilidadeMaterial(material.get(0), dataReservaInicio, dataReservaFim);
-            reservarMaterial(material.get(0), dataReservaInicio, dataReservaFim);
-            if (!verificarDisponibilidadeMaterial(material.get(0), dataReservaInicio, dataReservaFim)) {
-                listBoxCadastros();
-            }
-            Double diasReserva = calcularDias(dataReservaInicio, dataReservaFim);
-            Double valorReserva = calcularValor(material.get(0), espaco.get(0), diasReserva);
-            Reserva reserva = new Reserva(codigoReserva, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim, cliente.get(0), statusReserva, material.get(0), espaco.get(0), valorReserva);
-            salvar(reserva);
-            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            chamaMenuPrincipal();
+
+            Integer codigoReserva = CalcularCodigo.calculaCodigo(ReservaDAO.getUsuarioReserva());
+                String titulo = JOptionPane.showInputDialog(null, "Digite o titulo da reserva");
+                verificaRegistroNullo(titulo);
+                LocalDate dataReservaInicio = LocalDate.now();
+                String imputDataReservaInicio = JOptionPane.showInputDialog(null, "Digite a data de inicio da reserva");
+                try {
+                    dataReservaInicio = LocalDate.parse(imputDataReservaInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
+                }
+                verificaRegistroNullo(imputDataReservaInicio);
+                LocalDate dataReservaFim = LocalDate.now();
+                String imputDataReservaFim = JOptionPane.showInputDialog(null, "Digite a data de fim da reserva");
+                try {
+                    dataReservaFim = LocalDate.parse(imputDataReservaFim, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
+                }
+                verificaRegistroNullo(imputDataReservaFim);
+                Object[] selectionValuesUsuarioCliente = ClienteDAO.findUsuarioClienteInArray();
+                String initialSelectionUsuarioCliente = (String) selectionValuesUsuarioCliente[0];
+                Object selectionUsuarioCliente = JOptionPane.showInputDialog(null, "Selecione o cliente",
+                        "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesUsuarioCliente, initialSelectionUsuarioCliente);
+                List<Cliente> cliente = ClienteDAO.buscarPorNome((String) selectionUsuarioCliente);
+                verificaRegistroNullo(selectionUsuarioCliente);
+                Object[] selectionStatusReserva = {"ABERTO", "CANCELADO", "FINALIZADO"};
+                String initialSelectionStatusReserva = (String) selectionStatusReserva[0];
+                Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva",
+                        "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
+
+                EnumStatusReserva statusReserva = EnumStatusReserva.ABERTO;
+                if (selectionStatus.equals("CANCELADO")) {
+                    statusReserva = EnumStatusReserva.CANCELADO;
+                } else if (selectionStatus.equals("FINALIZADO")) {
+                    statusReserva = EnumStatusReserva.FINALIZADO;
+                }
+                verificaRegistroNullo(selectionStatus);
+                Object[] selectionValuesEspaco = EspacoDAO.findEspacoInArray();
+                String initialSelectionEspaco = (String) selectionValuesEspaco[0];
+                Object selectionEspaco = JOptionPane.showInputDialog(null, "Selecione o espaco",
+                        "Alugar espaco", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEspaco, initialSelectionEspaco);
+                List<Espaco> espaco = EspacoDAO.buscarPorNome((String) selectionEspaco);
+                verificaRegistroNullo(selectionEspaco);
+                verificarDisponibilidadeEspaco(espaco.get(0), dataReservaInicio, dataReservaFim);
+                reservarEspaco(espaco.get(0), dataReservaInicio, dataReservaFim);
+                Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
+                String initialSelectionMaterial = (String) selectionValuesMaterial[0];
+                Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material",
+                        "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
+                List<Material> material = MaterialDAO.buscarPorNome((String) selectionMaterial);
+                verificaRegistroNullo(selectionMaterial);
+                verificarDisponibilidadeMaterial(material.get(0), dataReservaInicio, dataReservaFim);
+                reservarMaterial(material.get(0), dataReservaInicio, dataReservaFim);
+
+                if (!verificarDisponibilidadeMaterial(material.get(0), dataReservaInicio, dataReservaFim)) {
+                    listBoxCadastros();
+                }
+                Double diasReserva = calcularDias(dataReservaInicio, dataReservaFim);
+                Double valorReserva = calcularValor(material.get(0), espaco.get(0), diasReserva);
+                Reserva reserva = new Reserva(codigoReserva, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim, cliente.get(0), statusReserva, material.get(0), espaco.get(0), valorReserva);
+                salvar(reserva);
+                JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                chamaMenuPrincipal();
+            //}//CHAVES DO IF DO TESTE
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
             chamaMenuPrincipal();
         }
+
     }
 
     public static void cancelarReserva() {
