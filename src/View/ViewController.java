@@ -4,6 +4,7 @@ import Form.RelatorioCidadeForm;
 import Form.RelatorioClienteForm;
 import Form.RelatorioEspacoForm;
 import Form.RelatorioPaisForm;
+import Form.RelatorioReservaForm;
 import Model.*;
 import Repository.*;
 
@@ -617,7 +618,7 @@ public class ViewController extends View {
                     RelatorioEspacoForm.emitirRelatorio(EspacoDAO.buscaTodos());
                     break;
                 case "Reserva":
-//
+                    RelatorioReservaForm.emitirRelatorio(ReservaDAO.buscaTodos());
                     break;
                 default:
                     chamaMenuPrincipal();
