@@ -2,6 +2,7 @@ package View;
 
 import Form.RelatorioCidadeForm;
 import Form.RelatorioClienteForm;
+import Form.RelatorioEspacoForm;
 import Form.RelatorioPaisForm;
 import Model.*;
 import Repository.*;
@@ -613,7 +614,7 @@ public class ViewController extends View {
                     RelatorioCidadeForm.emitirRelatorio(CidadeDAO.buscaTodos());
                     break;
                 case "Espaço":
-//
+                    RelatorioEspacoForm.emitirRelatorio(EspacoDAO.buscaTodos());
                     break;
                 case "Reserva":
 //

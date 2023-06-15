@@ -1,9 +1,12 @@
 package Relatorio;
 
 import Model.Cidade;
+import Model.EnumStatusEspaco;
 import Model.Espaco;
+import Model.Esporte;
 
 import javax.swing.table.AbstractTableModel;
+import java.time.LocalDate;
 import java.util.Vector;
 
 public class TableEspaco extends AbstractTableModel {
@@ -12,8 +15,12 @@ public class TableEspaco extends AbstractTableModel {
 
     public static final int INDEX_CODIGO = 0;
     public static final int INDEX_NOME = 1;
-    public static final int INDEX_ESTADO = 2;
-    public static final int INDEX_ESCONDIDO = 3;
+    public static final int INDEX_ESPORTE = 2;
+    public static final int INDEX_DATAINI = 3;
+    public static final int INDEX_DATAFIM = 4;
+    public static final int INDEX_ESTATUS = 5;
+    public static final int INDEX_VALOR = 6;
+    public static final int INDEX_ESCONDIDO = 7;
 
     protected String[] nomeColunas;
     protected Vector<Espaco> vetorDados;
@@ -39,14 +46,22 @@ public class TableEspaco extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int linha, int coluna) {
-        Espaco registroCidade = (Espaco) vetorDados.get(linha);
+        Espaco registroEspaco = (Espaco) vetorDados.get(linha);
         switch (coluna) {
             case INDEX_CODIGO:
-                return registroCidade.getCodigo();
+                return registroEspaco.getCodigo();
             case INDEX_NOME:
-                return registroCidade.getNome();
-            case INDEX_ESTADO:
-                return registroCidade.getEsporte();
+                return registroEspaco.getNome();
+            case INDEX_ESPORTE:
+                return registroEspaco.getEsporte().getNome();
+            case INDEX_DATAINI:
+                return registroEspaco.getDataInicioReserva();
+            case INDEX_DATAFIM:
+                return registroEspaco.getDataFimReserva();
+            case INDEX_ESTATUS:
+                return registroEspaco.getEnumStatus();
+            case INDEX_VALOR:
+                return registroEspaco.getValor();
             default:
                 return new Object();
         }
