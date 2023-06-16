@@ -88,7 +88,7 @@ public class ReservaDAO {
                 return false;
             }
         }
-        JOptionPane.showMessageDialog(null, "Material disponível para o dia especificado.");
+
         return true;
     }
 
@@ -132,7 +132,7 @@ public class ReservaDAO {
                 return false;
             }
         }
-        JOptionPane.showMessageDialog(null, "Espaco disponível para o dia especificado.");
+
         return true;
     }
 
