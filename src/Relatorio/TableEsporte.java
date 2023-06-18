@@ -19,9 +19,15 @@ public class TableEsporte extends AbstractTableModel {
     protected String[] nomeColunas;
     protected Vector<Esporte> vetorDados;
 
-    public TableEsporte(String[] nomeColunas, Vector<Esporte> vetorDados) {
-        this.nomeColunas = nomeColunas;
+    public TableEsporte(String[] columnNames, Vector<Esporte> vetorDados) {
+        this.nomeColunas = columnNames;
         this.vetorDados = vetorDados;
+    }
+
+
+    @Override
+    public String getColumnName(int column) {
+        return nomeColunas[column];
     }
 
 
@@ -34,10 +40,6 @@ public class TableEsporte extends AbstractTableModel {
         }
     }
 
-    @Override
-    public String getColumnName(int column) {
-        return nomeColunas[column];
-    }
 
     @Override
     public Object getValueAt(int linha, int coluna) {

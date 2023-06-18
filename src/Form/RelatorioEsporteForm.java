@@ -48,6 +48,7 @@ public class RelatorioEsporteForm extends JPanel {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             JFrame frame = new JFrame("Relatorio - Esporte");
+
             frame.addWindowFocusListener(new WindowAdapter() {
                 @Override
                 public void windowClosing(WindowEvent evt) {
@@ -68,7 +69,6 @@ public class RelatorioEsporteForm extends JPanel {
          e.printStackTrace();
         }
     }
-
 
 }
 

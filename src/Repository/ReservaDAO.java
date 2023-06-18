@@ -64,7 +64,7 @@ public class ReservaDAO {
                 return false;
             }
         }
-        JOptionPane.showMessageDialog(null, "Reserva realizada com sucesso.");
+        //2703JOptionPane.showMessageDialog(null, "Reserva realizada com sucesso.");
         return true;
     }
 
