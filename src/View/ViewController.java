@@ -1,10 +1,6 @@
 package View;
 
-import Form.RelatorioCidadeForm;
-import Form.RelatorioClienteForm;
-import Form.RelatorioEspacoForm;
-import Form.RelatorioPaisForm;
-import Form.RelatorioReservaForm;
+import Form.*;
 import Model.*;
 import Repository.*;
 
@@ -81,6 +77,12 @@ public class ViewController extends View {
 
     public static void cadastroEstado() {
         try {
+
+            if (PaisDAO.getPaises().size() == 0){
+                JOptionPane.showMessageDialog(null, "Nenhum país cadastrado!"+"\n"+ "Por favor cadastre um país.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                chamaMenuPrincipal();
+            }
+
             Integer codigoEstado = CalcularCodigo.calculaCodigo(EstadoDAO.getEstados());
             String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado");
             verificaRegistroNullo(nomeEstado);
@@ -105,6 +107,12 @@ public class ViewController extends View {
 
     public static void cadastroCidade() {
         try {
+
+            if (EstadoDAO.getEstados().size() == 0) {
+                JOptionPane.showMessageDialog(null, "Nenhum estado cadastrado!" + "\n" + "Por favor cadastre um estado.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                chamaMenuPrincipal();
+            }
+
             Integer codigoCidade = CalcularCodigo.calculaCodigo(CidadeDAO.getCidades());
             String nomeCidade = JOptionPane.showInputDialog(null, "Digite o nome da cidade");
             verificaRegistroNullo(nomeCidade);
@@ -158,6 +166,12 @@ public class ViewController extends View {
 
     public static void cadastroEspaco() {
         try {
+
+            if (EsporteDAO.getEsportes().size() == 0){
+                JOptionPane.showMessageDialog(null, "Nenhum esporte cadastrado!"+"\n"+ "Por favor cadastre um esporte.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                chamaMenuPrincipal();
+            }
+
             Integer codigo = CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos());
             String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaco");
             verificaRegistroNullo(nomeEspaco);
@@ -617,10 +631,10 @@ public class ViewController extends View {
                     RelatorioClienteForm.emitirRelatorio(ClienteDAO.buscaTodos());
                     break;
                 case "Esporte":
-                    emitirRelatorio(EsporteDAO.buscaTodos());
+                    RelatorioEsporteForm.emitirRelatorio(EsporteDAO.buscaTodos());
                     break;
                 case "Material":
-                    emitirRelatorio(MaterialDAO.buscaTodos());
+                    RelatorioMaterialForm.emitirRelatorio(MaterialDAO.buscaTodos());
                     break;
                 case "Pais":
                     RelatorioPaisForm.emitirRelatorio(PaisDAO.buscaTodos());
