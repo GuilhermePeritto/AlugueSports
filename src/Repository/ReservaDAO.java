@@ -64,7 +64,6 @@ public class ReservaDAO {
                 return false;
             }
         }
-        //2703JOptionPane.showMessageDialog(null, "Reserva realizada com sucesso.");
         return true;
     }
 
