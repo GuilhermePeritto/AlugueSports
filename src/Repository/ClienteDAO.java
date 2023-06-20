@@ -1,5 +1,6 @@
 package Repository;
 import Model.Cliente;
+import Model.VerificaRegistroNullo;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.List;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
-public class ClienteDAO {
+public class ClienteDAO extends VerificaRegistroNullo {
     static List<Cliente> clientes = new ArrayList<>();
     public static void salvar(Cliente cliente) {
         clientes.add(cliente);

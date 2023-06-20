@@ -2,6 +2,7 @@ package Repository;
 
 import Model.Cidade;
 import Model.Esporte;
+import Model.VerificaRegistroNullo;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
-public class EsporteDAO {
+public class EsporteDAO extends VerificaRegistroNullo {
     static List<Esporte> esportes= new ArrayList<>();
     public static void salvar(Esporte esporte) {
         esportes.add(esporte);

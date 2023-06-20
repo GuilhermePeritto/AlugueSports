@@ -8,7 +8,7 @@ import java.util.List;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
-public class CidadeDAO {
+public class CidadeDAO extends VerificaRegistroNullo{
     static List<Cidade> cidades = new ArrayList<>();
     public static void salvar(Cidade cidade) {
         cidades.add(cidade);

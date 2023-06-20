@@ -2,6 +2,7 @@ package Repository;
 
 import Model.Cidade;
 import Model.Estado;
+import Model.VerificaRegistroNullo;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
-public class EstadoDAO {
+public class EstadoDAO extends VerificaRegistroNullo {
     public static List<Estado> buscaEstados;
     static List<Estado> estados = new ArrayList<>();
     public static void salvar (Estado estado){

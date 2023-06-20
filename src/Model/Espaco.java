@@ -6,17 +6,13 @@ public class Espaco {
     private Integer codigo;
     private String nome;
     private Esporte esporte;
-    private LocalDate dataInicioReserva;
-    private LocalDate dataFimReserva;
     private EnumStatusEspaco enumStatus;
     private Double valor;
 
-    public Espaco(Integer codigo, String nome, Esporte esporte, LocalDate dataInicioReserva, LocalDate dataFimReserva, EnumStatusEspaco enumStatus, Double valor) {
+    public Espaco(Integer codigo, String nome, Esporte esporte, EnumStatusEspaco enumStatus, Double valor) {
         this.codigo = codigo;
         this.nome = nome;
         this.esporte = esporte;
-        this.dataInicioReserva = dataInicioReserva;
-        this.dataFimReserva = dataFimReserva;
         this.enumStatus = enumStatus;
         this.valor = valor;
     }
@@ -45,22 +41,6 @@ public class Espaco {
         this.esporte = esporte;
     }
 
-    public LocalDate getDataInicioReserva() {
-        return dataInicioReserva;
-    }
-
-    public void setDataInicioReserva(LocalDate dataInicioReserva) {
-        this.dataInicioReserva = dataInicioReserva;
-    }
-
-    public LocalDate getDataFimReserva() {
-        return dataFimReserva;
-    }
-
-    public void setDataFimReserva(LocalDate dataFimReserva) {
-        this.dataFimReserva = dataFimReserva;
-    }
-
     public EnumStatusEspaco getEnumStatus() {
         return enumStatus;
     }
@@ -82,8 +62,6 @@ public class Espaco {
                 "codigoEspaco=" + codigo +
                 ", nomeEspaco='" + nome + '\'' +
                 ", esporte=" + esporte +
-                ", dataInicioReserva=" + dataInicioReserva +
-                ", dataFimReserva=" + dataFimReserva +
                 ", enumStatusEspaco=" + enumStatus +
                 ", valorEspaco=" + valor +
                 '}';

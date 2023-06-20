@@ -38,15 +38,15 @@ public class CarregarValoresIniciais {
     }
 
     public static void StartEspaco() {
-        Espaco Campo1 = new Espaco(CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos()), "Campo 1", EsporteDAO.getEsportes().get(0),LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL, 1000.0);
+        Espaco Campo1 = new Espaco(CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos()), "Campo 1", EsporteDAO.getEsportes().get(0), EnumStatusEspaco.DISPONIVEL, 1000.0);
         EspacoDAO.salvar(Campo1);
-        Espaco Campo2 = new Espaco(CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos()), "Campo 2", EsporteDAO.getEsportes().get(0) ,LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL, 1000.0);
+        Espaco Campo2 = new Espaco(CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos()), "Campo 2", EsporteDAO.getEsportes().get(0) , EnumStatusEspaco.DISPONIVEL, 1000.0);
         EspacoDAO.salvar(Campo2);
-        Espaco Campo3 = new Espaco(CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos()), "Campo 3", EsporteDAO.getEsportes().get(3), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL, 1000.0);
+        Espaco Campo3 = new Espaco(CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos()), "Campo 3", EsporteDAO.getEsportes().get(3), EnumStatusEspaco.DISPONIVEL, 1000.0);
         EspacoDAO.salvar(Campo3);
-        Espaco Campo4 = new Espaco(CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos()), "Campo 4", EsporteDAO.getEsportes().get(3), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL, 1000.0);
+        Espaco Campo4 = new Espaco(CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos()), "Campo 4", EsporteDAO.getEsportes().get(3), EnumStatusEspaco.DISPONIVEL, 1000.0);
         EspacoDAO.salvar(Campo4);
-        Espaco Campo5 = new Espaco(CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos()), "Campo 5", EsporteDAO.getEsportes().get(4), LocalDate.now(),LocalDate.now(), EnumStatusEspaco.DISPONIVEL, 1000.0);
+        Espaco Campo5 = new Espaco(CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos()), "Campo 5", EsporteDAO.getEsportes().get(4), EnumStatusEspaco.DISPONIVEL, 1000.0);
         EspacoDAO.salvar(Campo5);
     }
 

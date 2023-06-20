@@ -1,6 +1,7 @@
 
 package Repository;
         import Model.Pais;
+        import Model.VerificaRegistroNullo;
 
         import javax.swing.*;
         import java.util.ArrayList;
@@ -8,7 +9,7 @@ package Repository;
 
         import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
-public class PaisDAO {
+public class PaisDAO extends VerificaRegistroNullo {
     static List<Pais> paises = new ArrayList<>();
     public static void salvar(Pais pais) {
         paises.add(pais);
