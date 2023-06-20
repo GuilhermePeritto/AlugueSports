@@ -39,16 +39,12 @@ public class TableReserva extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int linha, int coluna) {
-        if (coluna == INDEX_ESCONDIDO) {
-            return false;
-        } else {
-            return true;
-        }
+        return coluna != INDEX_ESCONDIDO;
     }
 
     @Override
     public Object getValueAt(int linha, int coluna) {
-        Reserva registroReserva = (Reserva) vetorDados.get(linha);
+        Reserva registroReserva = vetorDados.get(linha);
         switch (coluna) {
             case INDEX_CODIGO:
                 return registroReserva.getCodigo();

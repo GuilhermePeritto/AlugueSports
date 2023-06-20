@@ -33,17 +33,13 @@ public class TableEsporte extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int linha, int coluna) {
-        if (coluna == INDEX_ESCONDIDO){
-            return false;
-        }else {
-            return true;
-        }
+        return coluna != INDEX_ESCONDIDO;
     }
 
 
     @Override
     public Object getValueAt(int linha, int coluna) {
-        Esporte registroEsporte = (Esporte) vetorDados.get(linha);
+        Esporte registroEsporte = vetorDados.get(linha);
         switch (coluna){
             case INDEX_CODIGO:
                 return registroEsporte.getCodigo();

@@ -23,10 +23,10 @@ public class CidadeDAO {
     }
 
     public static void alterar(Cidade cidade) {
-        String nome = JOptionPane.showInputDialog(null, "Digite o nome");
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome", cidade.getNome());
         verificaRegistroNullo(nome);
         Object[] selectionValuesEstado = EstadoDAO.findEstadoInArray();
-        String initialSelectionEstado = (String) selectionValuesEstado[0];
+        String initialSelectionEstado = cidade.getEstado().getNome();
         Object selectionEstado = JOptionPane.showInputDialog(null, "Selecione o estado",
                 "Lista de Estados", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEstado, initialSelectionEstado);
         List<Estado> estado = EstadoDAO.buscarPorNome(selectionEstado.toString());

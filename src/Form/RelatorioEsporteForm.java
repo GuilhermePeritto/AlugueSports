@@ -38,7 +38,7 @@ public class RelatorioEsporteForm extends JPanel {
 
         TableColumn colunaEscondida = table.getColumnModel().getColumn(TableEsporte.INDEX_ESCONDIDO);
         colunaEscondida.setMinWidth(2);
-        ((javax.swing.table.TableColumn) colunaEscondida).setPreferredWidth(2);
+        colunaEscondida.setPreferredWidth(2);
         colunaEscondida.setMaxWidth(2);
         setLayout(new BorderLayout());
         add(scroller, BorderLayout.CENTER);

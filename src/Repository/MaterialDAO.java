@@ -29,12 +29,12 @@ public class MaterialDAO extends VerificaRegistroNullo{
 
 
     public static void alterar(Material material){
-        String nome = JOptionPane.showInputDialog(null," Informe o nome do material.");
+        String nome = JOptionPane.showInputDialog(null," Informe o nome do material.", material.getNome());
         verificaRegistroNullo(nome);
         material.setNome(nome);
 
         Object[] selectionStatusMaterial = {"ALUGADO", "DISPONIVEL", "CONSERTO", "INATIVADO"};
-        String initialSelectionStatusMaterial = (String) selectionStatusMaterial[0];
+        String initialSelectionStatusMaterial = material.getEnumStatus().toString();
         Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status do material.",
                 "Lista de Status", JOptionPane.QUESTION_MESSAGE, null, selectionStatusMaterial, initialSelectionStatusMaterial);
         EnumStatusMaterial statusMaterial = EnumStatusMaterial.DISPONIVEL;
@@ -50,7 +50,7 @@ public class MaterialDAO extends VerificaRegistroNullo{
         }
         material.setEnumStatus(statusMaterial);
 
-        String valor = JOptionPane.showInputDialog(null, "Digite o valor do material");
+        String valor = JOptionPane.showInputDialog(null, "Digite o valor do material", material.getValor());
         material.setValor(Double.parseDouble(valor));
         JOptionPane.showMessageDialog(null, "Material alterado com sucesso!");
     }

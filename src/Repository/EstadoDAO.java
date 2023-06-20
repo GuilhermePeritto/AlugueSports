@@ -42,7 +42,7 @@ public class EstadoDAO extends VerificaRegistroNullo {
     }
 
     public static void alterar(Estado estado) {
-        String nome = JOptionPane.showInputDialog(null, "Digite o nome do estado");
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome do estado", estado.getNome());
         verificaRegistroNullo(nome);
         estado.setNome(nome);
     }

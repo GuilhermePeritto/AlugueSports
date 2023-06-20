@@ -29,16 +29,12 @@ public class TableCidade extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int linha, int coluna) {
-        if (coluna == INDEX_ESCONDIDO) {
-            return false;
-        } else {
-            return true;
-        }
+        return coluna != INDEX_ESCONDIDO;
     }
 
     @Override
     public Object getValueAt(int linha, int coluna) {
-        Cidade registroCidade = (Cidade) vetorDados.get(linha);
+        Cidade registroCidade = vetorDados.get(linha);
         switch (coluna) {
             case INDEX_CODIGO:
                 return registroCidade.getCodigo();
