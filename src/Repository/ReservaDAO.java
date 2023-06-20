@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
+import static View.View.chamaMenuPrincipal;
 
 public class ReservaDAO {
     static List<Reserva> usuarioReserva = new ArrayList<>();
@@ -91,10 +92,12 @@ public class ReservaDAO {
         return true;
     }
 
+
     public static boolean reservarEspaco(Espaco espaco, LocalDate dataInicio, LocalDate dataFim) {
         // Verifica se o material está disponível
         if (espaco.getEnumStatus() != EnumStatusEspaco.DISPONIVEL) {
             JOptionPane.showMessageDialog(null, "Espaco não disponível para reserva.");
+            chamaMenuPrincipal();
             return false;
         }
 
@@ -107,7 +110,6 @@ public class ReservaDAO {
                 return false;
             }
         }
-        JOptionPane.showMessageDialog(null, "Reserva realizada com sucesso.");
         return true;
     }
 
@@ -119,6 +121,7 @@ public class ReservaDAO {
                             (datainicio.isAfter(reserva.getDataAlocacaoInicio()) && datainicio.isBefore(reserva.getDataAlocacaoFim())) ||
                             datainicio.isEqual(reserva.getDataAlocacaoFim()))) {
                 JOptionPane.showMessageDialog(null, "Espaco não disponível nessa data.");
+                chamaMenuPrincipal();
                 return false;
             }
         }
@@ -128,10 +131,11 @@ public class ReservaDAO {
                             (datafim.isAfter(reserva.getDataAlocacaoInicio()) && datafim.isBefore(reserva.getDataAlocacaoFim())) ||
                             datafim.isEqual(reserva.getDataAlocacaoFim()))) {
                 JOptionPane.showMessageDialog(null, "Espaco não disponível nessa data.");
+                chamaMenuPrincipal();
                 return false;
             }
         }
-
+        JOptionPane.showMessageDialog(null, "Espaço disponivel nesta data!");
         return true;
     }
 
@@ -141,11 +145,10 @@ public class ReservaDAO {
 
     public static Double calcularDias(LocalDate dataInicio, LocalDate dataFim) {
         LocalDateTime dataInicialTempoZero = dataInicio.atStartOfDay();
-        LocalDateTime dataFinalTempoZero = dataInicio.atStartOfDay();
+        LocalDateTime dataFinalTempoZero = dataFim.atStartOfDay();
 
         long diferencaEmSegundos = ChronoUnit.SECONDS.between(dataInicialTempoZero, dataFinalTempoZero);
         double diferencaEmDias = diferencaEmSegundos / (24.0 * 60 * 60);
-
         return diferencaEmDias;
     }
 
@@ -155,7 +158,7 @@ public class ReservaDAO {
 
     public static void verificarCliente(Cliente cliente) {
         if (usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoFim().isBefore(LocalDate.now())) {
-            JOptionPane.showMessageDialog(null, "Cliente Malandro!");
+            JOptionPane.showMessageDialog(null, "Cliente Devedor!");
         }
         else if (usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoFim().isAfter(LocalDate.now())) {
             JOptionPane.showMessageDialog(null, "Cliente ja tem reservas nos dias " + usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoInicio() + " a " + usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoFim());

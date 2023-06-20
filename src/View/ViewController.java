@@ -259,10 +259,6 @@ public class ViewController extends View {
                         "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesUsuarioCliente, initialSelectionUsuarioCliente);
                 List<Cliente> cliente = ClienteDAO.buscarPorNome((String) selectionUsuarioCliente);
                 verificaRegistroNullo(selectionUsuarioCliente);
-                Object[] selectionStatusReserva = {"ABERTO", "CANCELADO", "FINALIZADO"};
-                String initialSelectionStatusReserva = (String) selectionStatusReserva[0];
-                Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva",
-                        "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
                 EnumStatusReserva statusReserva = EnumStatusReserva.ABERTO;
                 if (selectionStatus.equals("CANCELADO")) {
                     statusReserva = EnumStatusReserva.CANCELADO;
@@ -286,11 +282,10 @@ public class ViewController extends View {
                 verificaRegistroNullo(selectionMaterial);
                 verificarDisponibilidadeMaterial(material.get(0), dataReservaInicio, dataReservaFim);
                 reservarMaterial(material.get(0), dataReservaInicio, dataReservaFim);
-
-                if (!verificarDisponibilidadeMaterial(material.get(0), dataReservaInicio, dataReservaFim)) {
-                    listBoxCadastros();
-                }
                 Double diasReserva = calcularDias(dataReservaInicio, dataReservaFim);
+                if(diasReserva == 0.0){
+                    diasReserva = 1.0;
+                }
                 Double valorReserva = calcularValor(material.get(0), espaco.get(0), diasReserva);
                 Reserva reserva = new Reserva(codigoReserva, titulo, LocalDate.now(), dataReservaInicio, dataReservaFim, cliente.get(0), statusReserva, material.get(0), espaco.get(0), valorReserva);
                 salvar(reserva);
