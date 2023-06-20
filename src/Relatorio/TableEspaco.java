@@ -16,11 +16,9 @@ public class TableEspaco extends AbstractTableModel {
     public static final int INDEX_CODIGO = 0;
     public static final int INDEX_NOME = 1;
     public static final int INDEX_ESPORTE = 2;
-    public static final int INDEX_DATAINI = 3;
-    public static final int INDEX_DATAFIM = 4;
-    public static final int INDEX_ESTATUS = 5;
-    public static final int INDEX_VALOR = 6;
-    public static final int INDEX_ESCONDIDO = 7;
+    public static final int INDEX_ESTATUS = 3;
+    public static final int INDEX_VALOR = 4;
+    public static final int INDEX_ESCONDIDO = 5;
 
     protected String[] nomeColunas;
     protected Vector<Espaco> vetorDados;
@@ -54,10 +52,6 @@ public class TableEspaco extends AbstractTableModel {
                 return registroEspaco.getNome();
             case INDEX_ESPORTE:
                 return registroEspaco.getEsporte().getNome();
-            case INDEX_DATAINI:
-                return registroEspaco.getDataInicioReserva();
-            case INDEX_DATAFIM:
-                return registroEspaco.getDataFimReserva();
             case INDEX_ESTATUS:
                 return registroEspaco.getEnumStatus();
             case INDEX_VALOR:
