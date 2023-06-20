@@ -263,7 +263,6 @@ public class ViewController extends View {
                 String initialSelectionStatusReserva = (String) selectionStatusReserva[0];
                 Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva",
                         "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
-
                 EnumStatusReserva statusReserva = EnumStatusReserva.ABERTO;
                 if (selectionStatus.equals("CANCELADO")) {
                     statusReserva = EnumStatusReserva.CANCELADO;
