@@ -181,17 +181,7 @@ public class ViewController extends View {
                     "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
             List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
             verificaRegistroNullo(selectionEsporte);
-            Object[] selectionStatusEspaco = {"ALUGADO", "DISPONIVEL"};
-            String initialSelectionStatusEspaco = (String) selectionStatusEspaco[0];
-            Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status do espaco!",
-                    "Lista de Status", JOptionPane.QUESTION_MESSAGE, null, selectionStatusEspaco, initialSelectionStatusEspaco);
             EnumStatusEspaco statusEspaco = EnumStatusEspaco.DISPONIVEL;
-            if (selectionStatus.equals("ALUGADO")) {
-                statusEspaco = EnumStatusEspaco.ALUGADO;
-            } else if (selectionStatus.equals("DISPONIVEL")) {
-                statusEspaco = EnumStatusEspaco.DISPONIVEL;
-            }
-            verificaRegistroNullo(selectionStatus);
             Double valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor do espaco"));
             verificaRegistroNullo(valor);
             Espaco espaco = new Espaco(codigo, nomeEspaco, esporte.get(0), statusEspaco, valor);
