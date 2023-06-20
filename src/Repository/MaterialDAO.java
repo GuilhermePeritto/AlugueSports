@@ -8,7 +8,7 @@ import java.util.List;
 
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
-public class MaterialDAO {
+public class MaterialDAO extends VerificaRegistroNullo{
     static List<Material> materialList = new ArrayList<>();
     public static void salvar(Material material) {
         materialList.add(material);

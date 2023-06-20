@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
-public class EspacoDAO {
+public class EspacoDAO extends VerificaRegistroNullo{
     static List<Espaco> espacos = new ArrayList<>();
 
     public static void salvar (Espaco espaco){
@@ -54,26 +54,6 @@ public class EspacoDAO {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do espaço");
         verificaRegistroNullo(nome);
         espaco.setNome(nome);
-
-        LocalDate dataInicioReserva = LocalDate.now();
-        String inputDataInicioReserva = JOptionPane.showInputDialog(null, "Informe a data de início desejada");
-        try {
-            dataInicioReserva = LocalDate.parse(inputDataInicioReserva, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
-        }
-        verificaRegistroNullo(dataInicioReserva);
-        espaco.setDataInicioReserva(dataInicioReserva);
-
-        LocalDate dataFimReserva = LocalDate.now();
-        String inputDataFimReserva = JOptionPane.showInputDialog(null, "Informe a data de início desejada");
-        try {
-            dataFimReserva = LocalDate.parse(inputDataFimReserva, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
-        }
-        verificaRegistroNullo(dataFimReserva);
-        espaco.setDataFimReserva(dataFimReserva);
 
         Object[] selectionStatusEspaco = {"ALUGADO", "DISPONIVEL"};
         String initialSelectionStatusEspaco = (String) selectionStatusEspaco[0];

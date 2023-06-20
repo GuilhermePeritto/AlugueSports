@@ -87,7 +87,7 @@ public class ReservaDAO {
                 return false;
             }
         }
-
+        JOptionPane.showMessageDialog(null, "Material disponível nessa data.");
         return true;
     }
 
@@ -107,7 +107,6 @@ public class ReservaDAO {
                 return false;
             }
         }
-        JOptionPane.showMessageDialog(null, "Reserva realizada com sucesso.");
         return true;
     }
 
@@ -131,7 +130,7 @@ public class ReservaDAO {
                 return false;
             }
         }
-
+        JOptionPane.showMessageDialog(null, "Espaco disponível nessa data.");
         return true;
     }
 
@@ -155,7 +154,7 @@ public class ReservaDAO {
 
     public static void verificarCliente(Cliente cliente) {
         if (usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoFim().isBefore(LocalDate.now())) {
-            JOptionPane.showMessageDialog(null, "Cliente Malandro!");
+            JOptionPane.showMessageDialog(null, "Cliente Devedor!");
         }
         else if (usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoFim().isAfter(LocalDate.now())) {
             JOptionPane.showMessageDialog(null, "Cliente ja tem reservas nos dias " + usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoInicio() + " a " + usuarioReserva.get(cliente.getCodigo()).getDataAlocacaoFim());
