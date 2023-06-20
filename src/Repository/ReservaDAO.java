@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Model.DataFormatada.formatarData;
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
 public class ReservaDAO {
@@ -90,14 +91,12 @@ public class ReservaDAO {
         JOptionPane.showMessageDialog(null, "Material disponível nessa data.");
         return true;
     }
-
     public static boolean reservarEspaco(Espaco espaco, LocalDate dataInicio, LocalDate dataFim) {
         // Verifica se o material está disponível
         if (espaco.getEnumStatus() != EnumStatusEspaco.DISPONIVEL) {
             JOptionPane.showMessageDialog(null, "Espaco não disponível para reserva.");
             return false;
         }
-
         // Verifica se o material já está reservado para algum dia dentro do período
         for (Reserva reserva : usuarioReserva) {
             if (reserva.getEspaco() == espaco &&
@@ -109,7 +108,6 @@ public class ReservaDAO {
         }
         return true;
     }
-
     public static boolean verificarDisponibilidadeEspaco(Espaco espaco, LocalDate datainicio, LocalDate datafim) {
         // Verifica se o material está disponível para o dia especificado
         for (Reserva reserva : usuarioReserva) {
@@ -133,7 +131,6 @@ public class ReservaDAO {
         JOptionPane.showMessageDialog(null, "Espaco disponível nessa data.");
         return true;
     }
-
     public static List<Reserva> getUsuarioReserva() {
         return usuarioReserva;
     }
@@ -165,33 +162,32 @@ public class ReservaDAO {
     }
     public static void alterarDadosReserva(Reserva reserva) {
         //Altera titulo da reserva
-        String tituloReserva = JOptionPane.showInputDialog(null, "Digite o titulo");
+        String tituloReserva = JOptionPane.showInputDialog(null, "Digite o titulo", reserva.getTitulo());
         verificaRegistroNullo(tituloReserva);
         reserva.setTitulo(tituloReserva);
-
         //Altera data inicio
         LocalDate dataAlocacaoInicio = LocalDate.now();
-        String inputDataAlocacaoInicio = JOptionPane.showInputDialog(null, "Informe a data de início desejada");
+        String inputDataAlocacaoInicio = JOptionPane.showInputDialog(null, "Informe a data de início desejada", formatarData(reserva.getDataAlocacaoInicio()));
         try {
             dataAlocacaoInicio = LocalDate.parse(inputDataAlocacaoInicio, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
         }
         verificaRegistroNullo(dataAlocacaoInicio);
-
+        reserva.setDataAlocacaoInicio(dataAlocacaoInicio);
         //Altera data fim
         LocalDate dataAlocacaoFim = LocalDate.now();
-        String inputDataAlocacaoFim = JOptionPane.showInputDialog(null, "Informe a data fim desejada");
+        String inputDataAlocacaoFim = JOptionPane.showInputDialog(null, "Informe a data fim desejada", formatarData(reserva.getDataAlocacaoFim()));
         try {
             dataAlocacaoFim = LocalDate.parse(inputDataAlocacaoFim, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
         }
         verificaRegistroNullo(dataAlocacaoFim);
-
+        reserva.setDataAlocacaoFim(dataAlocacaoFim);
         //altera status da reserva
         Object[] selectionStatusReserva = {"CANCELADO", "ABERTO"};
-        String initialSelectionStatusReserva = (String) selectionStatusReserva[0];
+        String initialSelectionStatusReserva = reserva.getEnumStatus().toString();
         Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status da reserva!",
                 "Lista de Status", JOptionPane.QUESTION_MESSAGE, null, selectionStatusReserva, initialSelectionStatusReserva);
         EnumStatusReserva statusReserva = EnumStatusReserva.ABERTO;
@@ -201,10 +197,10 @@ public class ReservaDAO {
             statusReserva = EnumStatusReserva.CANCELADO;
         }
         verificaRegistroNullo(statusReserva);
-
+        reserva.setEnumStatus(statusReserva);
         //altera material selecionado na reserva
         Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
-        String initialSelectionMaterial = (String) selectionValuesMaterial[0];
+        String initialSelectionMaterial = reserva.getMaterial().getNome();
         Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material",
                 "Alterar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
         List<Material> material = MaterialDAO.buscarPorNome((String) selectionMaterial);
@@ -212,10 +208,10 @@ public class ReservaDAO {
         verificarDisponibilidadeMaterial(material.get(0), dataAlocacaoInicio, dataAlocacaoFim);
         reservarMaterial(material.get(0), dataAlocacaoInicio, dataAlocacaoFim);
         verificaRegistroNullo(material);
-
+        reserva.setMaterial(material.get(0));
         //altera espaco selecionado na reserva
         Object[] selectionValuesEspaco = EspacoDAO.findEspacoInArray();
-        String initialSelectionEspaco = (String) selectionValuesEspaco[0];
+        String initialSelectionEspaco = (String) reserva.getEspaco().getNome();
         Object selectionEspaco = JOptionPane.showInputDialog(null, "Selecione o Espaco",
                 "Alterar Espaço", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEspaco, initialSelectionEspaco);
         List<Espaco> espaco = EspacoDAO.buscarPorNome((String) selectionEspaco);
@@ -223,6 +219,7 @@ public class ReservaDAO {
         verificarDisponibilidadeEspaco(espaco.get(0), dataAlocacaoInicio, dataAlocacaoFim);
         reservarEspaco(espaco.get(0), dataAlocacaoInicio, dataAlocacaoFim);
         verificaRegistroNullo(espaco);
+        reserva.setEspaco(espaco.get(0));
     }
 
     public static void excluir(Reserva reserva) {

@@ -32,16 +32,12 @@ public class TableCliente extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int linha, int coluna) {
-        if (coluna == INDEX_ESCONDIDO) {
-            return false;
-        } else {
-            return true;
-        }
+        return coluna != INDEX_ESCONDIDO;
     }
 
     @Override
     public Object getValueAt(int linha, int coluna) {
-        Cliente registroPessoa = (Cliente) vetorDados.get(linha);
+        Cliente registroPessoa = vetorDados.get(linha);
         switch (coluna) {
             case INDEX_CODIGO:
                 return registroPessoa.getCodigo();

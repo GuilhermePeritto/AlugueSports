@@ -24,7 +24,7 @@ public class EsporteDAO {
     }
 
     public static void alterar(Esporte esporte) {
-        String nome = JOptionPane.showInputDialog(null, "Digite o nome");
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome", esporte.getNome());
         verificaRegistroNullo(nome);
         esporte.setNome(nome);
         JOptionPane.showMessageDialog(null,"Cadastro alterado com sucesso");

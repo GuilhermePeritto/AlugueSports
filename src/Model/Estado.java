@@ -3,7 +3,7 @@ package Model;
 public class Estado {
     private Integer codigo;
     private String nome;
-    private String sigla;
+    private final String sigla;
     private Pais pais;
 
     public Estado(Integer codigo, String nome, String sigla, Pais pais) {

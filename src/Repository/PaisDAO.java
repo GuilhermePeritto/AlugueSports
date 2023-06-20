@@ -33,7 +33,7 @@ public class PaisDAO extends VerificaRegistroNullo {
     }
 
     public static void alterardadospais(Pais pais) {
-        String nome = JOptionPane.showInputDialog(null, "Digite o nome");
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome", pais.getNome());
         verificaRegistroNullo(nome);
         pais.setNome(nome);
     }

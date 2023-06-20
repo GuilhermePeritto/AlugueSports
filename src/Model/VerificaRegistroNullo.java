@@ -9,6 +9,6 @@ public class VerificaRegistroNullo {
         if (obj == null || obj.toString().isEmpty()) {
        JOptionPane.showMessageDialog(null, "O campo não pode ser vazio!");
             chamaMenuPrincipal();
-        };
+        }
     }
 }

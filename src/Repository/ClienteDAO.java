@@ -22,16 +22,16 @@ public class ClienteDAO {
     }
 
     public static void alterar(Cliente cliente) {
-        String nome = JOptionPane.showInputDialog(null, "Digite o nome");
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome", cliente.getNome());
         verificaRegistroNullo(nome);
         cliente.setNome(nome);
-        String telefone = JOptionPane.showInputDialog(null, "Digite o telefone");
+        String telefone = JOptionPane.showInputDialog(null, "Digite o telefone", cliente.getTelefone());
         verificaRegistroNullo(telefone);
         cliente.setTelefone(telefone);
-        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf");
+        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf", cliente.getCpf());
         verificaRegistroNullo(cpf);
         cliente.setCpf(cpf);
-        String rg = JOptionPane.showInputDialog(null, "Digite o rg");
+        String rg = JOptionPane.showInputDialog(null, "Digite o rg", cliente.getRg());
         verificaRegistroNullo(rg);
         cliente.setRg(rg);
 

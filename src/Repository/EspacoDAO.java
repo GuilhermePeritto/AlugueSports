@@ -51,12 +51,12 @@ public class EspacoDAO extends VerificaRegistroNullo{
     }
 
     public static void alterar(Espaco espaco) {
-        String nome = JOptionPane.showInputDialog(null, "Digite o nome do espaço");
+        String nome = JOptionPane.showInputDialog(null, "Digite o nome do espaço", espaco.getNome());
         verificaRegistroNullo(nome);
         espaco.setNome(nome);
 
         Object[] selectionStatusEspaco = {"ALUGADO", "DISPONIVEL"};
-        String initialSelectionStatusEspaco = (String) selectionStatusEspaco[0];
+        String initialSelectionStatusEspaco = espaco.getEnumStatus().toString();
         Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status do espaço!",
                 "Lista de Status", JOptionPane.QUESTION_MESSAGE, null, selectionStatusEspaco, initialSelectionStatusEspaco);
         EnumStatusEspaco status = EnumStatusEspaco.ALUGADO;
@@ -69,14 +69,14 @@ public class EspacoDAO extends VerificaRegistroNullo{
         espaco.setEnumStatus(status);
 
         Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
-        String initialSelectionEsporte = (String) selectionValuesEsporte[0];
+        String initialSelectionEsporte = espaco.getEsporte().getNome();
         Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione o Esporte",
                 "Alterar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
         List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
         verificaRegistroNullo(selectionEsporte);
         espaco.setEsporte(esporte.get(0));
 
-        Double valor= Double.valueOf(JOptionPane.showInputDialog(null, "Digite o valor"));
+        Double valor= Double.valueOf(JOptionPane.showInputDialog(null, "Digite o valor", espaco.getValor()));
         verificaRegistroNullo(valor);
         espaco.setValor(valor);
     }
