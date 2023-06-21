@@ -24,17 +24,16 @@ public class ClienteDAO {
     public static void alterar(Cliente cliente) {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome", cliente.getNome());
         verificaRegistroNullo(nome);
-        cliente.setNome(nome);
         String telefone = JOptionPane.showInputDialog(null, "Digite o telefone", cliente.getTelefone());
         verificaRegistroNullo(telefone);
-        cliente.setTelefone(telefone);
         String cpf = JOptionPane.showInputDialog(null, "Digite o cpf", cliente.getCpf());
         verificaRegistroNullo(cpf);
-        cliente.setCpf(cpf);
         String rg = JOptionPane.showInputDialog(null, "Digite o rg", cliente.getRg());
         verificaRegistroNullo(rg);
+        cliente.setNome(nome);
+        cliente.setTelefone(telefone);
+        cliente.setCpf(cpf);
         cliente.setRg(rg);
-
     }
 
 

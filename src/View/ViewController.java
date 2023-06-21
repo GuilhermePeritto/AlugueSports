@@ -22,7 +22,7 @@ public class ViewController extends View {
             Integer codigo = CalcularCodigo.calculaCodigo(ClienteDAO.getClientes());
             String nome = JOptionPane.showInputDialog(null, "Digite o nome");
             verificaRegistroNullo(nome);
-            LocalDate nascimento = LocalDate.now();
+            LocalDate nascimento = null;
             String imputnascimento = JOptionPane.showInputDialog(null, "Digite a data de nascimento");
             try {
                 nascimento = LocalDate.parse(imputnascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -137,21 +137,8 @@ public class ViewController extends View {
             Integer codigoMaterial = CalcularCodigo.calculaCodigo(MaterialDAO.getMaterialList());
             String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
             verificaRegistroNullo(nomeMaterial);
-            Object[] selectionStatusMaterial = {"ALUGADO", "DISPONIVEL", "CONSERTO", "INATIVO"};
-            String initialSelectionStatusMaterial = (String) selectionStatusMaterial[0];
-            Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status do material",
-                    "Lista de Status", JOptionPane.QUESTION_MESSAGE, null, selectionStatusMaterial, initialSelectionStatusMaterial);
             EnumStatusMaterial statusMaterial = EnumStatusMaterial.DISPONIVEL;
-            if (selectionStatus.equals("ALUGADO")) {
-                statusMaterial = EnumStatusMaterial.ALUGADO;
-            } else if (selectionStatus.equals("DISPONIVEL")) {
-                statusMaterial = EnumStatusMaterial.DISPONIVEL;
-            } else if (selectionStatus.equals("CONSERTO")) {
-                statusMaterial = EnumStatusMaterial.CONSERTO;
-            } else if (selectionStatus.equals("INATIVO")) {
-                statusMaterial = EnumStatusMaterial.INATIVADO;
-            }
-            verificaRegistroNullo(selectionStatus);
+            verificaRegistroNullo(statusMaterial);
             Double valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor do material"));
             verificaRegistroNullo(valor);
             Material material = new Material(codigoMaterial, nomeMaterial, statusMaterial, valor);
@@ -173,11 +160,11 @@ public class ViewController extends View {
             }
 
             Integer codigo = CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos());
-            String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaco");
+            String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaço");
             verificaRegistroNullo(nomeEspaco);
             Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
             String initialSelectionEsporte = (String) selectionValuesEsporte[0];
-            Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione tipo de esporte?",
+            Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione tipo de esporte",
                     "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
             List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
             verificaRegistroNullo(selectionEsporte);
@@ -259,7 +246,6 @@ public class ViewController extends View {
                 salvar(reserva);
                 JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                 chamaMenuPrincipal();
-            //}//CHAVES DO IF DO TESTE
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);

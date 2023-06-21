@@ -53,8 +53,6 @@ public class EspacoDAO extends VerificaRegistroNullo{
     public static void alterar(Espaco espaco) {
         String nome = JOptionPane.showInputDialog(null, "Digite o nome do espaço", espaco.getNome());
         verificaRegistroNullo(nome);
-        espaco.setNome(nome);
-
         Object[] selectionStatusEspaco = {"ALUGADO", "DISPONIVEL"};
         String initialSelectionStatusEspaco = espaco.getEnumStatus().toString();
         Object selectionStatus = JOptionPane.showInputDialog(null, "Selecione o status do espaço!",
@@ -66,18 +64,17 @@ public class EspacoDAO extends VerificaRegistroNullo{
             status = EnumStatusEspaco.DISPONIVEL;
         }
         verificaRegistroNullo(status);
-        espaco.setEnumStatus(status);
-
         Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
         String initialSelectionEsporte = espaco.getEsporte().getNome();
         Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione o Esporte",
                 "Alterar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
         List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
         verificaRegistroNullo(selectionEsporte);
-        espaco.setEsporte(esporte.get(0));
-
         Double valor= Double.valueOf(JOptionPane.showInputDialog(null, "Digite o valor", espaco.getValor()));
         verificaRegistroNullo(valor);
+        espaco.setNome(nome);
+        espaco.setEnumStatus(status);
+        espaco.setEsporte(esporte.get(0));
         espaco.setValor(valor);
     }
 

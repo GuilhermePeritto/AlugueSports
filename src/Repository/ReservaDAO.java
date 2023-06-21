@@ -164,7 +164,6 @@ public class ReservaDAO {
         //Altera titulo da reserva
         String tituloReserva = JOptionPane.showInputDialog(null, "Digite o titulo", reserva.getTitulo());
         verificaRegistroNullo(tituloReserva);
-        reserva.setTitulo(tituloReserva);
         //Altera data inicio
         LocalDate dataAlocacaoInicio = LocalDate.now();
         String inputDataAlocacaoInicio = JOptionPane.showInputDialog(null, "Informe a data de início desejada", formatarData(reserva.getDataAlocacaoInicio()));
@@ -174,7 +173,6 @@ public class ReservaDAO {
             JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
         }
         verificaRegistroNullo(dataAlocacaoInicio);
-        reserva.setDataAlocacaoInicio(dataAlocacaoInicio);
         //Altera data fim
         LocalDate dataAlocacaoFim = LocalDate.now();
         String inputDataAlocacaoFim = JOptionPane.showInputDialog(null, "Informe a data fim desejada", formatarData(reserva.getDataAlocacaoFim()));
@@ -184,7 +182,6 @@ public class ReservaDAO {
             JOptionPane.showMessageDialog(null, "Data invalida, tente no formato dd/MM/yyyy");
         }
         verificaRegistroNullo(dataAlocacaoFim);
-        reserva.setDataAlocacaoFim(dataAlocacaoFim);
         //altera status da reserva
         Object[] selectionStatusReserva = {"CANCELADO", "ABERTO"};
         String initialSelectionStatusReserva = reserva.getEnumStatus().toString();
@@ -197,7 +194,6 @@ public class ReservaDAO {
             statusReserva = EnumStatusReserva.CANCELADO;
         }
         verificaRegistroNullo(statusReserva);
-        reserva.setEnumStatus(statusReserva);
         //altera material selecionado na reserva
         Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
         String initialSelectionMaterial = reserva.getMaterial().getNome();
@@ -208,7 +204,6 @@ public class ReservaDAO {
         verificarDisponibilidadeMaterial(material.get(0), dataAlocacaoInicio, dataAlocacaoFim);
         reservarMaterial(material.get(0), dataAlocacaoInicio, dataAlocacaoFim);
         verificaRegistroNullo(material);
-        reserva.setMaterial(material.get(0));
         //altera espaco selecionado na reserva
         Object[] selectionValuesEspaco = EspacoDAO.findEspacoInArray();
         String initialSelectionEspaco = (String) reserva.getEspaco().getNome();
@@ -219,6 +214,11 @@ public class ReservaDAO {
         verificarDisponibilidadeEspaco(espaco.get(0), dataAlocacaoInicio, dataAlocacaoFim);
         reservarEspaco(espaco.get(0), dataAlocacaoInicio, dataAlocacaoFim);
         verificaRegistroNullo(espaco);
+        reserva.setTitulo(tituloReserva);
+        reserva.setDataAlocacaoInicio(dataAlocacaoInicio);
+        reserva.setDataAlocacaoFim(dataAlocacaoFim);
+        reserva.setEnumStatus(statusReserva);
+        reserva.setMaterial(material.get(0));
         reserva.setEspaco(espaco.get(0));
     }
 
