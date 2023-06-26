@@ -1,0 +1,17 @@
+
+^
+java:S1192"HDefine a constant instead of duplicating this literal "EspaÃ§o" 6 times.(ý”Œõ
+^
+java:S1192"HDefine a constant instead of duplicating this literal "Reserva" 6 times.(ý”Œõ
+_
+java:S1192"IDefine a constant instead of duplicating this literal "Material" 6 times.(ý”Œõ
+^
+java:S1192"HDefine a constant instead of duplicating this literal "Cliente" 6 times.(ý”Œõ
+]
+java:S1192"GDefine a constant instead of duplicating this literal "Cidade" 6 times.(ý”Œõ
+]
+java:S1192"GDefine a constant instead of duplicating this literal "Estado" 6 times.(ý”Œõ
+^
+java:S1192"HDefine a constant instead of duplicating this literal "Esporte" 6 times.(ý”Œõ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(º›°Î
+f	java:S128]"LEnd this switch case with an unconditional break, return or throw statement.(Èâø¢ûÿÿÿÿ
