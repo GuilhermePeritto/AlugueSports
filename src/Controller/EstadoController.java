@@ -7,7 +7,7 @@ import java.util.List;
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
 
 public class EstadoController {
-    public static void processoEstado() {
+    public static void processoEstado() throws ClassNotFoundException {
 
         Object[] selectionValues = EstadoDAO.findEstadoInArray();
         String initialSelection = (String) selectionValues[0];

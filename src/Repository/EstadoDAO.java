@@ -36,10 +36,18 @@ public class EstadoDAO extends VerificaRegistroNullo {
         return estadosFiltrados;
     }
 
-    public static void alterar(Estado estado) {
-        String nome = JOptionPane.showInputDialog(null, "Digite o nome do estado", estado.getNome());
-        verificaRegistroNullo(nome);
-        estado.setNome(nome);
+    public static void alterar(Estado estado) throws ClassNotFoundException {
+        String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado", estado.getNome());
+        verificaRegistroNullo(nomeEstado);
+        String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado", estado.getSigla());
+        verificaRegistroNullo(sigla);
+        Object[] selectionValuesPais = PaisDAO.findPaisInArray();
+        String initialSelectionPais = (String) estado.getPais().getNome();
+        Object selectionPais = JOptionPane.showInputDialog(null, "Selecione o país",
+                "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
+        List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
+        verificaRegistroNullo(selectionPais);
+        ConexaoBD.update("estado",new String[]{"CODIGO","NOME","SIGLA","PAIS"},new String[]{estado.getCodigo().toString(),nomeEstado,sigla,pais.get(0).getCodigo().toString()},estado.getCodigo().toString());
     }
 
     public static void excluir(Estado estado) {
@@ -70,8 +78,7 @@ public class EstadoDAO extends VerificaRegistroNullo {
                     "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
             List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
             verificaRegistroNullo(selectionPais);
-            ConexaoBD.update("estado",new String[]{"CODIGO","NOME","SIGLA","PAIS"},new String[]{codigoEstado.toString(),nomeEstado,sigla,pais.get(0).getCodigo().toString()},codigoEstado.toString());
-            ConexaoBD.insert("estado",codigoEstado.toString(),nomeEstado,sigla,pais.get(0).getCodigo().toString());
+            ConexaoBD.insert("estado",codigoEstado.toString(),nomeEstado.toString(),sigla.toString(),pais.get(0).getCodigo().toString());
             Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
             EstadoDAO.salvar(estado);
             JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
