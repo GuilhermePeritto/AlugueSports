@@ -1,12 +1,10 @@
 package Repository;
 import Model.*;
 import Model.Material;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static Model.VerificaRegistroNullo.verificaRegistroNullo;
+import static Model.View.chamaMenuPrincipal;
 
 public class MaterialDAO extends VerificaRegistroNullo{
     static List<Material> materialList = new ArrayList<>();
@@ -82,5 +80,47 @@ public class MaterialDAO extends VerificaRegistroNullo{
 
     public static List<Material> getMaterialList() {
         return materialList;
+    }
+
+    public static void cadastroMaterial() {
+        try {
+            Integer codigoMaterial = CalcularCodigo.calculaCodigo(MaterialDAO.getMaterialList());
+            String nomeMaterial = JOptionPane.showInputDialog(null, "Digite o nome do material");
+            verificaRegistroNullo(nomeMaterial);
+            EnumStatusMaterial statusMaterial = EnumStatusMaterial.DISPONIVEL;
+            verificaRegistroNullo(statusMaterial);
+            Double valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor do material"));
+            verificaRegistroNullo(valor);
+            Material material = new Material(codigoMaterial, nomeMaterial, statusMaterial, valor);
+            MaterialDAO.salvar(material);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            chamaMenuPrincipal();
+        }
+    }
+    public static void alugarMaterial() {
+        Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
+        String initialSelectionMaterial = (String) selectionValuesMaterial[0];
+        Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material",
+                "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
+        List<Material> alugarMaterial = MaterialDAO.buscarPorNome((String) selectionMaterial);
+        verificaRegistroNullo(selectionMaterial);
+        MaterialDAO.alugar(alugarMaterial.get(0));
+        JOptionPane.showMessageDialog(null, "Material alugado com sucesso!", "Alugado", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
+    }
+
+    public static void cancelarAluguelMaterial() {
+        Object[] selectionValuesMaterial = MaterialDAO.findMaterialInArray();
+        String initialSelectionMaterial = (String) selectionValuesMaterial[0];
+        Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o Material",
+                "Alugar Material", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
+        List<Material> alugarMaterial = MaterialDAO.buscarPorNome((String) selectionMaterial);
+        verificaRegistroNullo(selectionMaterial);
+        MaterialDAO.cancelarAluguel(alugarMaterial.get(0));
+        JOptionPane.showMessageDialog(null, "Aluguel de material cancelado com sucesso!", "Alugado", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, MaterialDAO.buscaTodos());
     }
 }

@@ -2,7 +2,7 @@ package Model;
 
 import javax.swing.*;
 
-import static View.View.chamaMenuPrincipal;
+import static Model.View.chamaMenuPrincipal;
 
 public abstract class VerificaRegistroNullo {
     public static void verificaRegistroNullo(Object obj) {

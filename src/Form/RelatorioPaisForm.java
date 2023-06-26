@@ -1,8 +1,6 @@
 package Form;
 
-import Model.Cliente;
 import Model.Pais;
-import Relatorio.TableCliente;
 import Relatorio.TablePais;
 
 import javax.swing.*;
@@ -13,7 +11,7 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Vector;
 
-import static View.ViewController.chamaMenuRelatorios;
+import static Controller.ViewController.chamaMenuRelatorios;
 
 public class RelatorioPaisForm extends JPanel {
 

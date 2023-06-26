@@ -1,13 +1,11 @@
 package Repository;
-
-import Model.Cidade;
+import Model.CalcularCodigo;
 import Model.Esporte;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import static Model.VerificaRegistroNullo.verificaRegistroNullo;
+import static Model.View.chamaMenuPrincipal;
 
 public class EsporteDAO {
     static List<Esporte> esportes= new ArrayList<>();
@@ -55,5 +53,19 @@ public class EsporteDAO {
 
     public static List<Esporte> getEsportes() {
         return esportes;
+    }
+
+    public static void cadastroEsporte() {
+        try {
+            Integer codigo = CalcularCodigo.calculaCodigo(EsporteDAO.getEsportes());
+            String nomeEsporte = JOptionPane.showInputDialog(null, "Digite o nome do esporte");
+            Esporte esporte = new Esporte(codigo, nomeEsporte);
+            EsporteDAO.salvar(esporte);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            chamaMenuPrincipal();
+        }
     }
 }

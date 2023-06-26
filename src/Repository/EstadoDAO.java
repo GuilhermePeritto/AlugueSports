@@ -1,14 +1,9 @@
 package Repository;
-
-import Model.Cidade;
-import Model.Estado;
-import Model.VerificaRegistroNullo;
-
+import Model.*;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static Model.VerificaRegistroNullo.verificaRegistroNullo;
+import static Model.View.chamaMenuPrincipal;
 
 public class EstadoDAO extends VerificaRegistroNullo {
     public static List<Estado> buscaEstados;
@@ -54,5 +49,35 @@ public class EstadoDAO extends VerificaRegistroNullo {
 
     public static List<Estado> getEstados() {
         return estados;
+    }
+
+    public static void cadastroEstado() {
+        try {
+
+            if (PaisDAO.getPaises().size() == 0){
+                JOptionPane.showMessageDialog(null, "Nenhum país cadastrado!"+"\n"+ "Por favor cadastre um país.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                chamaMenuPrincipal();
+            }
+
+            Integer codigoEstado = CalcularCodigo.calculaCodigo(EstadoDAO.getEstados());
+            String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado");
+            verificaRegistroNullo(nomeEstado);
+            String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado");
+            verificaRegistroNullo(sigla);
+            Object[] selectionValuesPais = PaisDAO.findPaisInArray();
+            String initialSelectionPais = (String) selectionValuesPais[0];
+            Object selectionPais = JOptionPane.showInputDialog(null, "Selecione o país",
+                    "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
+            List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
+            verificaRegistroNullo(selectionPais);
+
+            Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
+            EstadoDAO.salvar(estado);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            chamaMenuPrincipal();
+        }
     }
 }
