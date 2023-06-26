@@ -1,4 +1,5 @@
 package Model;
+
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,10 +21,11 @@ public class ConexaoBD {
         }
         return connection;
     }
-    public static void update(String tabela, String coluna, String valor, String codigo ,String codigoColuna) throws ClassNotFoundException {
+
+    public static void update(String tabela, String[] colunas, String[] valores, String codigoColuna) throws ClassNotFoundException {
         Connection connection = getConnection();
         try {
-            String sql = "UPDATE ? SET ? = ? WHERE ? = ?";
+            String sql = "UPDATE " + tabela + " SET (" + String.join(",", colunas)  + ") = (" + String.join(",", valores) + ") WHERE CODIGO = " + codigoColuna;
             connection.prepareStatement(sql);
             connection.createStatement().executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso.");
@@ -32,15 +34,16 @@ public class ConexaoBD {
         } finally {
             try {
                 connection.close();
-            } catch (SQLException e) {
-              JOptionPane.showMessageDialog(null, "Erro ao fechar conexão com o banco de dados.");
+            }catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão com o banco de dados.");
             }
         }
     }
+
     public static void delete(String tabela, String codigo, String codigoColuna) throws ClassNotFoundException {
         Connection connection = getConnection();
         try {
-            String sql = "DELETE FROM ? WHERE ? = ?";
+            String sql = "DELETE FROM " + tabela + " WHERE " + codigo + " = " + codigoColuna;
             connection.prepareStatement(sql);
             connection.createStatement().executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Dados deletados com sucesso.");
@@ -50,15 +53,15 @@ public class ConexaoBD {
             try {
                 connection.close();
             } catch (SQLException e) {
-              JOptionPane.showMessageDialog(null, "Erro ao fechar conexão com o banco de dados.");
+                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão com o banco de dados.");
             }
         }
     }
 
-    public static void insert(String tabela, String colunas, String valores) throws ClassNotFoundException {
+    public static void insert(String tabela, String... valores) throws ClassNotFoundException {
         Connection connection = getConnection();
         try {
-            String sql = "INSERT INTO ? (?) VALUES (?)";
+            String sql = "INSERT INTO " + tabela + " VALUES (" + String.join(",", valores) + ")";
             connection.prepareStatement(sql);
             connection.createStatement().executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso.");
@@ -68,7 +71,7 @@ public class ConexaoBD {
             try {
                 connection.close();
             } catch (SQLException e) {
-              JOptionPane.showMessageDialog(null, "Erro ao fechar conexão com o banco de dados.");
+                JOptionPane.showMessageDialog(null, "Erro ao fechar conexão com o banco de dados.");
             }
         }
     }

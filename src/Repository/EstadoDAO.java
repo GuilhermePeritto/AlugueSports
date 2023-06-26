@@ -70,7 +70,8 @@ public class EstadoDAO extends VerificaRegistroNullo {
                     "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
             List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
             verificaRegistroNullo(selectionPais);
-
+            ConexaoBD.update("estado",new String[]{"CODIGO","NOME","SIGLA","PAIS"},new String[]{codigoEstado.toString(),nomeEstado,sigla,pais.get(0).getCodigo().toString()},codigoEstado.toString());
+            ConexaoBD.insert("estado",codigoEstado.toString(),nomeEstado,sigla,pais.get(0).getCodigo().toString());
             Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
             EstadoDAO.salvar(estado);
             JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
