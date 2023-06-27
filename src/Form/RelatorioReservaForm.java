@@ -2,18 +2,16 @@ package Form;
 
 import Model.*;
 import Relatorio.TableReserva;
-import Relatorio.TableReserva;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Vector;
 
-import static View.ViewController.chamaMenuRelatorios;
+import static Controller.ViewController.chamaMenuRelatorios;
 
 public class RelatorioReservaForm extends JPanel {
 

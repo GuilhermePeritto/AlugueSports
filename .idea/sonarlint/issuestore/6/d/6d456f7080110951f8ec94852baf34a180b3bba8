@@ -1,0 +1,7 @@
+
+P
+java:S1141"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(á–Ì“
+U
+java:S1118":Add a private constructor to hide the implicit public one.(ˆ¯¬Ðÿÿÿÿÿ
+<	java:S131""Add a default case to this switch.(†²·¹úÿÿÿÿ

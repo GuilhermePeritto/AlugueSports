@@ -1,13 +1,9 @@
 package Repository;
-
 import Model.*;
-
 import javax.swing.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import static Model.VerificaRegistroNullo.verificaRegistroNullo;
+import static Model.View.chamaMenuPrincipal;
 
 public class EspacoDAO extends VerificaRegistroNullo{
     static List<Espaco> espacos = new ArrayList<>();
@@ -80,5 +76,35 @@ public class EspacoDAO extends VerificaRegistroNullo{
 
     public static List<Espaco> getEspacos() {
         return espacos;
+    }
+
+    public static void cadastroEspaco() {
+        try {
+
+            if (EsporteDAO.getEsportes().size() == 0){
+                JOptionPane.showMessageDialog(null, "Nenhum esporte cadastrado!"+"\n"+ "Por favor cadastre um esporte.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                chamaMenuPrincipal();
+            }
+
+            Integer codigo = CalcularCodigo.calculaCodigo(EspacoDAO.getEspacos());
+            String nomeEspaco = JOptionPane.showInputDialog(null, "Digite o nome do espaço");
+            verificaRegistroNullo(nomeEspaco);
+            Object[] selectionValuesEsporte = EsporteDAO.findEsportesInArray();
+            String initialSelectionEsporte = (String) selectionValuesEsporte[0];
+            Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione tipo de esporte",
+                    "VendasApp", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
+            List<Esporte> esporte = EsporteDAO.buscarPorNome((String) selectionEsporte);
+            verificaRegistroNullo(selectionEsporte);
+            EnumStatusEspaco statusEspaco = EnumStatusEspaco.DISPONIVEL;
+            Double valor = Double.parseDouble(JOptionPane.showInputDialog(null, "Digite o valor do espaco"));
+            verificaRegistroNullo(valor);
+            Espaco espaco = new Espaco(codigo, nomeEspaco, esporte.get(0), statusEspaco, valor);
+            EspacoDAO.salvar(espaco);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            chamaMenuPrincipal();
+        }
     }
 }

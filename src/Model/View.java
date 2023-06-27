@@ -1,14 +1,7 @@
-package View;
-
-import Repository.ClienteDAO;
-
+package Model;
 import javax.swing.*;
-
 import IniciadorDeValores.*;
-import Repository.EsporteDAO;
-import Repository.MaterialDAO;
-
-import static View.ViewController.*;
+import static Controller.ViewController.*;
 
 public class View {
     public static void chamaMenuPrincipal() {

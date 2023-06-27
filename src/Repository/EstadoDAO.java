@@ -1,14 +1,9 @@
 package Repository;
-
-import Model.Cidade;
-import Model.Estado;
-import Model.VerificaRegistroNullo;
-
+import Model.*;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import static Model.VerificaRegistroNullo.verificaRegistroNullo;
+import static Model.View.chamaMenuPrincipal;
 
 public class EstadoDAO extends VerificaRegistroNullo {
     public static List<Estado> buscaEstados;
@@ -41,10 +36,22 @@ public class EstadoDAO extends VerificaRegistroNullo {
         return estadosFiltrados;
     }
 
-    public static void alterar(Estado estado) {
-        String nome = JOptionPane.showInputDialog(null, "Digite o nome do estado", estado.getNome());
-        verificaRegistroNullo(nome);
-        estado.setNome(nome);
+    public static void alterar(Estado estado) throws ClassNotFoundException {
+        String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado", estado.getNome());
+        verificaRegistroNullo(nomeEstado);
+        String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado", estado.getSigla());
+        verificaRegistroNullo(sigla);
+        Object[] selectionValuesPais = PaisDAO.findPaisInArray();
+        String initialSelectionPais = (String) estado.getPais().getNome();
+        Object selectionPais = JOptionPane.showInputDialog(null, "Selecione o país",
+                "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
+        List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
+        verificaRegistroNullo(selectionPais);
+        // Classe de conexao com o banco, favor nao mexer, sujeito a demissão! ConexaoBD.update("estado",new String[]{"CODIGO","NOME","SIGLA","PAIS"},new String[]{estado.getCodigo().toString(),nomeEstado,sigla,pais.get(0).getCodigo().toString()},estado.getCodigo().toString());
+        estado.setNome(nomeEstado);
+        estado.setSigla(sigla);
+        estado.setPais(pais.get(0));
+        JOptionPane.showMessageDialog(null, "Estado alterado com sucesso!");
     }
 
     public static void excluir(Estado estado) {
@@ -54,5 +61,35 @@ public class EstadoDAO extends VerificaRegistroNullo {
 
     public static List<Estado> getEstados() {
         return estados;
+    }
+
+    public static void cadastroEstado() {
+        try {
+
+            if (PaisDAO.getPaises().size() == 0){
+                JOptionPane.showMessageDialog(null, "Nenhum país cadastrado!"+"\n"+ "Por favor cadastre um país.", "Atenção", JOptionPane.WARNING_MESSAGE);
+                chamaMenuPrincipal();
+            }
+
+            Integer codigoEstado = CalcularCodigo.calculaCodigo(EstadoDAO.getEstados());
+            String nomeEstado = JOptionPane.showInputDialog(null, "Digite o nome do estado");
+            verificaRegistroNullo(nomeEstado);
+            String sigla = JOptionPane.showInputDialog(null, "Digite a sigla do estado");
+            verificaRegistroNullo(sigla);
+            Object[] selectionValuesPais = PaisDAO.findPaisInArray();
+            String initialSelectionPais = (String) selectionValuesPais[0];
+            Object selectionPais = JOptionPane.showInputDialog(null, "Selecione o país",
+                    "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
+            List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
+            verificaRegistroNullo(selectionPais);
+            // Classe de conexao com o banco, favor nao mexer, sujeito a demissão! ConexaoBD.insert("estado",codigoEstado.toString(),nomeEstado.toString(),sigla.toString(),pais.get(0).getCodigo().toString());
+            Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
+            EstadoDAO.salvar(estado);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            chamaMenuPrincipal();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Cadastro Invalido, favor tentar novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
+            chamaMenuPrincipal();
+        }
     }
 }
