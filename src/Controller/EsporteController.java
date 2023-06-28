@@ -14,7 +14,7 @@ public class EsporteController {
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
         List<Esporte> esportes = EsporteDAO.buscarPorNome((String) selection);
         verificaRegistroNullo(selection);
-        Object[] selectionValuesEsporte = {"Alterar Dados - Esporte", "Excluir Cadastro - Esporte"};
+        Object[] selectionValuesEsporte = {"Alterar Dados", "Excluir Cadastro"};
         String initialSelectionEsporte = (String) selectionValues[0];
         Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione o processo!",
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);

@@ -14,7 +14,7 @@ public class MaterialController {
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
         List<Material> material = MaterialDAO.buscarPorNome((String) selection);
         verificaRegistroNullo(selection);
-        Object[] selectionValuesMaterial = {"Alterar Dados - Material", "Excluir Cadastro - Mataerial"};
+        Object[] selectionValuesMaterial = {"Alterar Dados", "Excluir Cadastro"};
         String initialSelectionMaterial = (String) selectionValues[0];
         Object selectionMaterial = JOptionPane.showInputDialog(null, "Selecione o processo!",
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValuesMaterial, initialSelectionMaterial);
