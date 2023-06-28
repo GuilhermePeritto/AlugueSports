@@ -14,21 +14,17 @@ public class EsporteController {
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
         List<Esporte> esportes = EsporteDAO.buscarPorNome((String) selection);
         verificaRegistroNullo(selection);
-        Object[] selectionValuesEsporte = {"Alterar Dados - Esporte", "Excluir Cadastro - Esporte", "Busca por nome - Esporte"};
+        Object[] selectionValuesEsporte = {"Alterar Dados", "Excluir Cadastro"};
         String initialSelectionEsporte = (String) selectionValues[0];
         Object selectionEsporte = JOptionPane.showInputDialog(null, "Selecione o processo!",
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValuesEsporte, initialSelectionEsporte);
         verificaRegistroNullo(selectionEsporte);
         switch ((String) selectionEsporte) {
-            case "Alterar Dados - Esporte":
+            case "Alterar Dados":
                 EsporteDAO.alterar(esportes.get(0));
                 break;
-            case "Excluir Cadastro - Esporte":
+            case "Excluir Cadastro":
                 EsporteDAO.excluir(esportes.get(0));
-                break;
-            case "Busca por nome - Esporte":
-                String nomeBusca = JOptionPane.showInputDialog(null, "Informe o nome para busca.");
-                EsporteDAO.buscarPorNome(nomeBusca);
                 break;
         }
     }

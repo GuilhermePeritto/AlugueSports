@@ -77,5 +77,7 @@ public class Cliente {
                 ", cpf='" + cpf + '\'' +
                 ", rg='" + rg + '\'' +
                 '}';
+
+
     }
 }

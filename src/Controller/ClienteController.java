@@ -16,7 +16,7 @@ public class ClienteController {
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValues, initialSelection);
         List<Cliente> cliente = ClienteDAO.buscarPorNome((String) selection);
         verificaRegistroNullo(selection);
-        Object[] selectionValuesCliente = {"Alterar Dados", "Excluir Cadastro", "Busca por nome"};
+        Object[] selectionValuesCliente = {"Alterar Dados", "Excluir Cadastro"};
         String initialSelectionCliente = (String) selectionValues[0];
         Object selectionCliente = JOptionPane.showInputDialog(null, "Selecione o processo!",
                 "Processo", JOptionPane.QUESTION_MESSAGE, null, selectionValuesCliente, initialSelectionCliente);
@@ -27,10 +27,6 @@ public class ClienteController {
                 break;
             case "Excluir Cadastro":
                 ClienteDAO.excluir(cliente.get(0));
-                break;
-            case "Busca por nome":
-                String nomeBusca = JOptionPane.showInputDialog(null, "Informe o nome para busca.");
-                ClienteDAO.buscarPorNome(nomeBusca);
                 break;
         }
     }
