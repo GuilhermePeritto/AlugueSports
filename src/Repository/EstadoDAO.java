@@ -47,7 +47,6 @@ public class EstadoDAO extends VerificaRegistroNullo {
                 "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
         List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
         verificaRegistroNullo(selectionPais);
-        // Classe de conexao com o banco, favor nao mexer, sujeito a demissão! ConexaoBD.update("estado",new String[]{"CODIGO","NOME","SIGLA","PAIS"},new String[]{estado.getCodigo().toString(),nomeEstado,sigla,pais.get(0).getCodigo().toString()},estado.getCodigo().toString());
         estado.setNome(nomeEstado);
         estado.setSigla(sigla);
         estado.setPais(pais.get(0));
@@ -82,7 +81,6 @@ public class EstadoDAO extends VerificaRegistroNullo {
                     "Lista de Países", JOptionPane.QUESTION_MESSAGE, null, selectionValuesPais, initialSelectionPais);
             List<Pais> pais = PaisDAO.buscarPorNome((String) selectionPais);
             verificaRegistroNullo(selectionPais);
-            // Classe de conexao com o banco, favor nao mexer, sujeito a demissão! ConexaoBD.insert("estado",codigoEstado.toString(),nomeEstado.toString(),sigla.toString(),pais.get(0).getCodigo().toString());
             Estado estado = new Estado(codigoEstado, nomeEstado, sigla, pais.get(0));
             EstadoDAO.salvar(estado);
             JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);

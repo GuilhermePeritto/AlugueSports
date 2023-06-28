@@ -49,8 +49,7 @@ public class RelatorioEsporteForm extends JPanel {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             JFrame frame = new JFrame("Relatorio - Esporte");
 
-            frame.addWindowFocusListener(new WindowAdapter() {
-                @Override
+            frame.addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent evt) {
                     frame.setVisible(false);
                     chamaMenuRelatorios();
